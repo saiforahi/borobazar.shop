@@ -10,4 +10,9 @@ class PagesController extends Controller
     {
         return view('blood-service.blood-donation');
     }
+
+    public function bloodRequest()
+    {
+        return view('blood-service.blood_request');
+    }
 }

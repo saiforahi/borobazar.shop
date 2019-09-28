@@ -15,5 +15,6 @@
 
 Auth::routes();
 
-#Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/blood-donation','PagesController@bloodDonation')->name('blood-donation')->middleware('auth');
+Route::get('/blood_request','PagesController@bloodRequest')->name('blood_request');
