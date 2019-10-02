@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/blood-donation';
+    protected $redirectTo = '/';
     public function username()
     {
         return 'cell';
@@ -49,7 +49,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed...
-            return view('blood-service.blood-donation')->with('success','You are successfully logged in');
+            return redirect()->intended('/');
         }
         else
         {

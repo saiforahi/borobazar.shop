@@ -10,8 +10,10 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
+        "laracasts/utilities": "^3.0",
         "laravel/framework": "^6.0",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "illuminate/support": "^5.0|^6.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

@@ -1,3 +1,4 @@
+@include('layouts.login-modal')
 <section class="bnavigationbar">
     <div class="container-fluid pt-2 pb-1">
         <div class="container">
@@ -19,29 +20,20 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="middle navbar-nav mr-auto">
                             <li>
-                                <a href="blood-donation.html" class="whyborobazar">হোম</a>
+                                <a href="{{ route('home') }}" class="whyborobazar">হোম</a>
                             </li>
                             <li>
-                                <a href="essentialinfo.html" class="whyborobazar">প্রয়োজনীয় তথ্য</a>
+                                <a href="#" class="whyborobazar">প্রয়োজনীয় তথ্য</a>
                             </li>                                
                             <li>
-                                <a href="blood-request.html" target="_blank" class="whyborobazar">গ্রহীতার অনুরোধ</a>
+                                <a href="{{ route('blood_request') }}" target="_blank" class="whyborobazar">গ্রহীতার অনুরোধ</a>
                             </li>
                             <li>
-                                <a href="blood-filter.html" class="whyborobazar"> অনুরোধের তালিকা</a>
+                                <a href="#" class="whyborobazar"> অনুরোধের তালিকা</a>
                             </li>
-                            <!--li>
-                                <i class="bsquare fa fa-user-o"></i>
-                                <a href="#" class="text-uppercase whyborobazar" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">লগইন</a> / <a href="blood-registration.html" class="whyborobazar">নিবন্ধন</a>
-                            </li-->
                             <li>
                                 <i class="bsquare fa fa-user"></i>
                                 <!-- Authentication Links -->
-                                @guest
-                                <li>
-                                    <a class="text-uppercase whyborobazar" href="{{ route('login') }}">লগইন</a> / <a class="text-uppercase whyborobazar" href="{{ route('register') }}">নিবন্ধন</a> 
-                                </li>
-                                @endif
                                 @auth
                                 <li>
                                     <a id="navbarDropdown" class="text-uppercase whyborobazar" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -56,6 +48,18 @@
                                     </div>
                                 </li>
                                 @endauth
+                                @guest
+                                    @if(Request::path() == 'login')
+                                    <li>
+                                        <a class="text-uppercase whyborobazar" href="{{ route('register') }}">নিবন্ধন</a> 
+                                    </li>
+                                    @else
+                                    <li>
+                                        <a class="text-uppercase whyborobazar" href="#" onclick="document.getElementById('loginModalBlade').style.display='block'">লগইন</a> / 
+                                        <a class="text-uppercase whyborobazar" href="{{ route('register') }}">নিবন্ধন</a> 
+                                    </li>
+                                    @endif
+                                @endguest
                             </li>
                         </ul>
                     </div>

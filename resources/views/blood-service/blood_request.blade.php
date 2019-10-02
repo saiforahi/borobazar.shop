@@ -20,27 +20,27 @@
            <div class="bloodreq-form-area pt-5 pb-5">
                <h4>নিচের তথ্যাবলি পূরণ করুন</h4>
                <div class="blood-form-inner">
-                   <form class="bloodreq-form row" action="" method="post" id="bloodReqform">
+                   <form class="bloodreq-form row" action="{{ route('blood_request_submit') }}" method="post" id="bloodReqform">
                        @csrf
                        <div class="form-group col-lg-4">
-                           <lebel for="text">অনুরোধকারীর নাম *</lebel>
+                           <lebel for="name">অনুরোধকারীর নাম *</lebel>
                            <input type="text" class="form-control2" id="name" name="name" placeholder="">
                        </div>
                        <div class="form-group col-lg-4">
                            <lebel for="text">রোগীর সাথে সম্পর্ক *</lebel>
-                           <select class="form-control2 search-blood">
+                           <select class="form-control2 search-blood" name="relation">
                                <option selected="select"value="0">ফ্যামিলি</option>
                                <option value="1">আত্নীয়</option>
                                <option value="1">বন্ধু</option>
                            </select>
                        </div>
                        <div class="form-group col-lg-4">
-                           <lebel for="text">ইমেইল / মোবাইল *</lebel>
-                           <input type="text" class="form-control2" id="text" name="text" placeholder="">
+                           <lebel for="cell">ইমেইল / মোবাইল *</lebel>
+                           <input type="text" class="form-control2" id="cell" name="cell" placeholder="">
                        </div>
                        <div class="form-group col-lg-4">
-                           <lebel for="text">রোগীর রক্তের গ্রুপ</lebel>
-                           <select class="form-control2 search-blood">
+                           <lebel for="bloodGroup">রোগীর রক্তের গ্রুপ</lebel>
+                           <select class="form-control2 search-blood" name="bloodGroup">
                                <option selected="select"value="0">এ+ (পজিটিভ)</option>
                                <option value="1">এ- (নেগেটিভ)</option>
                                <option value="1">বি+ (পজিটিভ)</option>
@@ -52,16 +52,16 @@
                            </select>
                        </div>
                        <div class="form-group col-lg-4">
-                           <lebel for="text">পরিমাণ (ইউনিট/ব্যাগ) *</lebel>
-                           <input type="text" class="form-control2" id="text" name="text" placeholder="">
+                           <lebel for="quantity">পরিমাণ (ইউনিট/ব্যাগ) *</lebel>
+                           <input type="text" class="form-control2" id="quantity" name="quantity" placeholder="">
                        </div>
                        <div class="form-group col-lg-4">
-                           <lebel for="text">রোগীর বয়স</lebel>
-                           <input type="text" class="form-control2" id="text" name="text" placeholder="">
+                           <lebel for="patientAge">রোগীর বয়স</lebel>
+                           <input type="text" class="form-control2" id="patientAge" name="patientAge" placeholder="">
                        </div>
                        <div class="form-group col-lg-4">
-                           <lebel for="text">রোগীর বর্তমান জেলা *</lebel>
-                           <input type="text" class="form-control2" id="text" name="text" placeholder="">
+                           <lebel for="presentDistrict">রোগীর বর্তমান জেলা *</lebel>
+                           <input type="text" class="form-control2" id="presentDistrict" name="presentDistrict" placeholder="">
                        </div>
                        <div class="form-group col-lg-4">
                            <lebel for="text">রক্ত গ্রহনের স্থান *</lebel>
