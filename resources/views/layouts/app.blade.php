@@ -22,7 +22,7 @@
       <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
-<body>
+<body >
         @include('layouts.topNav')
         <!--Navigator area -->
         @include('layouts.navbar')

@@ -17,11 +17,12 @@
 <section class="bloodreq-area pt-5 pb-5">
     <div class="container-fluid">
        <div class="container">
-           <div class="bloodreq-form-area pt-5 pb-5">
+           <div class="bloodreq-form-area pt-5 pb-5" id="bloodRequestDiv">
                <h4>নিচের তথ্যাবলি পূরণ করুন</h4>
                <div class="blood-form-inner">
-                   <form class="bloodreq-form row" action="{{ route('blood_request_submit') }}" method="post" id="bloodReqform">
+                   <form class="bloodreq-form row" action="{{ route('blood_request_submit',$blood_request_id) }}" method="post" id="bloodReqform">
                        @csrf
+                       <p name="blood_request_id">Blood request id {{ $blood_request_id }}</p>
                        <div class="form-group col-lg-4">
                            <lebel for="name">অনুরোধকারীর নাম *</lebel>
                            <input type="text" class="form-control2" id="name" name="name" placeholder="">
@@ -35,7 +36,7 @@
                            </select>
                        </div>
                        <div class="form-group col-lg-4">
-                           <lebel for="cell">ইমেইল / মোবাইল *</lebel>
+                           <lebel for="cell">মোবাইল *</lebel>
                            <input type="text" class="form-control2" id="cell" name="cell" placeholder="">
                        </div>
                        <div class="form-group col-lg-4">
@@ -64,15 +65,15 @@
                            <input type="text" class="form-control2" id="presentDistrict" name="presentDistrict" placeholder="">
                        </div>
                        <div class="form-group col-lg-4">
-                           <lebel for="text">রক্ত গ্রহনের স্থান *</lebel>
-                           <input type="text" class="form-control2" id="text" name="text" placeholder="">
+                           <lebel for="donationPlace">রক্ত গ্রহনের স্থান *</lebel>
+                           <input type="text" class="form-control2" id="text" name="donationPlace" placeholder="">
                        </div>
                        <div class="form-group col-lg-4">
-                           <lebel for="text">রক্ত গ্রহনের তারিখ *</lebel>
-                           <input type="date" class="form-control2" id="text" name="text" placeholder="">
+                           <lebel for="donationDate">রক্ত গ্রহনের তারিখ *</lebel>
+                           <input type="date" class="form-control2" id="text" name="donationDate" placeholder="">
                        </div>
                        <div class="form-group col-lg-12">
-                           <textarea class="form-control2" id="message" name="message" placeholder="রোগীর সমস্যা সম্পর্কে সংক্ষিপ্ত লিখুন..."></textarea>
+                           <textarea class="form-control2" id="message" name="patientDetails" placeholder="রোগীর সমস্যা সম্পর্কে সংক্ষিপ্ত লিখুন..."></textarea>
                        </div>
                        <div class="form-group col-lg-12">
                        <button type="submit" class="btn-getinvite" id="subMit">অনুরোধ পাঠান</button>

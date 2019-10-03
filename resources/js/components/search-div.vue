@@ -12,7 +12,7 @@
                 <option value="1">এবি+ (পজিটিভ)</option>
                 <option value="1">এবি- (নেগেটিভ)</option>
             </select>
-            <select class="form-control0 search-blood" id="presentDistrict" name="presentDistrict" v-model="selectedDistrict" @change="onChange($event)">
+            <select class="form-control0 search-blood" id="presentDistrict" name="presentDistrict" v-model="selectedDistrict" @change="onChangeDistrict($event)">
                 <option value="" selected>জেলা নির্বাচন</option>
                 <option v-for="district in districts" v-bind:key="district.name" >{{ district.name }}</option>
             </select>
@@ -37,6 +37,7 @@ export default {
             subdistricts:[]
         }
     },
+    
     mounted() {
             console.log('Component mounted.')
             axios.get('api/districts').then(response=>{
@@ -44,13 +45,18 @@ export default {
             })
     },
     methods: {
-        onChange(event) {
+        onChangeDistrict(event) {
             console.log(event.target.value)
-            axios.get('api/subdistricts/'+event.target.value).then(response => {
+            axios.get('api/subdistricts/'+event.target.value)
+            .then(response => {
                 this.subdistricts = response.data;
                 this.selectedSubdistrict='';
+            }).catch(function (error) {
+            // handle error
+            console.log(error);
             });
         }
+
     }
 }
 </script>

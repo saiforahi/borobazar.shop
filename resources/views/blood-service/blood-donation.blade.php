@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="row text-center" >
-                    <div class="col-lg-12" id="app">
+                    <div class="col-lg-12" id="searchDiv">
                         <search-div></search-div>
                     </div>
                 </div>

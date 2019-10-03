@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('search-div', require('./components/search-div.vue').default);
+Vue.component('blood-request-div', require('./components/bloodRequestView.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,11 +30,9 @@ Vue.component('search-div', require('./components/search-div.vue').default);
  */
 
 const search = new Vue({
-    el: '#app',
-    data: {
-        selectedDistrict:'জেলা নির্বাচন',
-        districts:[],
-        selectedSubdistrict:'থানা/উপজেলা',
-        subdistricts:[]
-    }
+    el: '#searchDiv'
+});
+
+const bloodRequest = new Vue({
+    el: '#bloodRequestDiv'
 });

@@ -14,7 +14,7 @@ class CreateBloodRequestsTable extends Migration
     public function up()
     {
         Schema::create('blood_requests', function (Blueprint $table) {
-            $table->string('blood_request_id');
+            $table->string('blood_request_id')->unique();
             $table->string('name');
             $table->string('relation');
             $table->string('cell');

@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -70,7 +70,6 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-            #'email' => $data['email'],
             'cell'=> $data['cell'],
             'blood_group' => $data['bloodGroup'],
             'district' => $data['presentDistrict'],
@@ -103,7 +102,7 @@ class RegisterController extends Controller
             $user = $this->create($request->all());
             $user->save();
             Auth::login($user); 
-            return redirect('/blood-donation')->with(['message'=>'Account Successfully Created.']);
+            return redirect('/')->with(['message'=>'Account Successfully Created.']);
         }
    }
 }

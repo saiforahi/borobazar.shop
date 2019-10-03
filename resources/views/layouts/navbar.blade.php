@@ -7,7 +7,7 @@
                   <div class="row">
                       <!--brand-logo area -->
                       <div class="col-md-3">
-                          <a class="logo" href="home.html">
+                          <a class="logo" href="{{ route('home') }}">
                           <img width="50" height="auto" class="pulse" src="img/logo.png" alt="borobazar">
                           <img width="160" height="auto" class="pdr-12" src="img/borobazar.png" alt="borobazar">
                           </a>
