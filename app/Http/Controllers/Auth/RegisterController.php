@@ -83,7 +83,8 @@ class RegisterController extends Controller
         $messages = [
             'name.required' => 'We need to know your name',
             'cell.unique' => 'This phone number is already registered!',
-            'confirmed' => ':attribute does not match'
+            'confirmed' => ':attribute does not match',
+            'lastDonationDate.before' => 'wrong date input'
         ];
 
         $rules=[
@@ -91,16 +92,15 @@ class RegisterController extends Controller
             'cell' => 'required|string|max:11|unique:users',
             'bloodGroup' =>'required|string',
             'presentDistrict' => 'required|string',
-            'lastDonationDate'=>'required|string',
+            'lastDonationDate'=>'required|date|before:tomorrow',
             'password' =>'required|string|min:8|confirmed'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         if ($validator->fails())  {
-            return redirect()->back()->withErrors($validator)->withInput();;
+            return redirect()->back()->withErrors($validator)->withInput();
         }
         else{
             $user = $this->create($request->all());
-            $user->save();
             Auth::login($user); 
             return redirect('/')->with(['message'=>'Account Successfully Created.']);
         }

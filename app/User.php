@@ -10,6 +10,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     protected  $primaryKey = 'cell';
+    protected $dates = ['last_donation_date'];
     public $incrementing = false;
     /**
      * The attributes that are mass assignable.

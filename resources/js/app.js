@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+import BootstrapVue from 'bootstrap-vue' //Importing
+Vue.use(BootstrapVue); // Telling Vue to use this in whole application
 
 window.Vue = require('vue');
 
@@ -20,8 +22,12 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('search-app-root-component', require('./components/search-app-root.vue').default);
 Vue.component('search-div', require('./components/search-div.vue').default);
-Vue.component('blood-request-div', require('./components/bloodRequestView.vue').default);
+Vue.component('donators-view-div', require('./components/donators-view.vue').default);
+Vue.component('donators-view-row', require('./components/donators-row.vue').default);
+Vue.component('donator-view', require('./components/donator-view.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,10 +35,13 @@ Vue.component('blood-request-div', require('./components/bloodRequestView.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const search = new Vue({
-    el: '#searchDiv'
+const searchAppRoot = new Vue({
+    el: '#search-app-root',
+    data : {
+        selectedBloodGroup:'',
+        selectedDistrict:'',
+        selectedSubdistrict:''
+    },
+
 });
 
-const bloodRequest = new Vue({
-    el: '#bloodRequestDiv'
-});

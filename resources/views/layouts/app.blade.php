@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>বড়বাজার অনলাইন শপিং মাকের্টপ্লেস</title>
+    <link rel="shortcut icon" href="{{ asset('img/logo.png') }}">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">

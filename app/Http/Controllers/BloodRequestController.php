@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BloodRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BloodRequestController extends Controller
 {
@@ -47,8 +48,33 @@ class BloodRequestController extends Controller
      */
     public function store(Request $request,$blood_request_id)
     {
-        $newRequest=$this->create($request->all(),$blood_request_id);
-        dd($newRequest->about_patient);
+        $message = [
+            'name.required' => 'We need to know your name',
+            'donationDate.after' => 'Given date is passed!'
+        ];
+
+        $rules=[
+            'name' => 'required|string|max:255',
+            'relation' => 'required|string',
+            'cell' => 'required|string|max:11',
+            'bloodGroup' =>'required|string',
+            'quantity' => 'required|string',
+            'patientAge'=> 'required|string',
+            'presentDistrict' => 'required|string',
+            'donationPlace'=> 'required|string',
+            'donationDate'=>'required|date|after:yesterday'
+        ];
+        $validator = Validator::make($request->all(),$rules,$message);
+        if($validator->fails())
+        {
+            return back()->withErrors($validator)->withInput();
+        }
+        else
+        {
+            $newRequest=$this->create($request->all(),$blood_request_id);
+            return redirect('/')->with('success','request successfully submitted');
+        }
+        
     }
 
     /**

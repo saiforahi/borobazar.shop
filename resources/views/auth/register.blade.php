@@ -52,14 +52,14 @@
                            <div class="form-group col-lg-6">
                                    <label for="bloodGroup">রক্তের গ্রুপ *</label>
                                    <select class="form-control2 search-blood @error('bloodGroup') is-invalid @enderror" id="bloodGroup" name="bloodGroup" required>
-                                       <option selected="select"value="A+">এ+ (পজিটিভ)</option>
-                                       <option value="1">এ- (নেগেটিভ)</option>
-                                       <option value="1">বি+ (পজিটিভ)</option>
-                                       <option value="1">বি- (নেগেটিভ)</option>
-                                       <option value="1">ও+ (পজিটিভ)</option>
-                                       <option value="1">ও- (নেগেটিভ)</option>
-                                       <option value="1">এবি+ (পজিটিভ)</option>
-                                       <option value="1">এবি- (নেগেটিভ)</option>
+                                       <option selected="select"value="এ+">এ+ (পজিটিভ)</option>
+                                       <option value="এ-">এ- (নেগেটিভ)</option>
+                                       <option value="বি+">বি+ (পজিটিভ)</option>
+                                       <option value="বি-">বি- (নেগেটিভ)</option>
+                                       <option value="ও+">ও+ (পজিটিভ)</option>
+                                       <option value="ও-">ও- (নেগেটিভ)</option>
+                                       <option value="এবি+">এবি+ (পজিটিভ)</option>
+                                       <option value="এবি-">এবি- (নেগেটিভ)</option>
                                    </select>
                                    @error('bloodGroup')
                                     <span class="invalid-feedback" role="alert">

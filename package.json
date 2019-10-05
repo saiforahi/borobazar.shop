@@ -26,6 +26,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "bootstrap-vue": "^2.0.2",
         "vue-resource": "^1.5.1",
         "vue-select": "^3.2.0"
     }

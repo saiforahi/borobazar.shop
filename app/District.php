@@ -14,4 +14,9 @@ class District extends Model
     {
         return $this->hasMany('App\SubDistrict');
     }
+
+    public function users()
+    {
+        return $this->hasMany('App\User','district','name');
+    }
 }

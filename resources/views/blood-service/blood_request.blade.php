@@ -20,12 +20,21 @@
            <div class="bloodreq-form-area pt-5 pb-5" id="bloodRequestDiv">
                <h4>নিচের তথ্যাবলি পূরণ করুন</h4>
                <div class="blood-form-inner">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                    <form class="bloodreq-form row" action="{{ route('blood_request_submit',$blood_request_id) }}" method="post" id="bloodReqform">
                        @csrf
-                       <p name="blood_request_id">Blood request id {{ $blood_request_id }}</p>
+                       <p name="blood_request_id">অনুরোধ নং: <strong> {{ $blood_request_id}}</strong></p>
                        <div class="form-group col-lg-4">
                            <lebel for="name">অনুরোধকারীর নাম *</lebel>
-                           <input type="text" class="form-control2" id="name" name="name" placeholder="">
+                           <input type="text" class="form-control2" id="name" name="name" placeholder="" required value="{{ old('name') }}">
                        </div>
                        <div class="form-group col-lg-4">
                            <lebel for="text">রোগীর সাথে সম্পর্ক *</lebel>
@@ -70,7 +79,13 @@
                        </div>
                        <div class="form-group col-lg-4">
                            <lebel for="donationDate">রক্ত গ্রহনের তারিখ *</lebel>
-                           <input type="date" class="form-control2" id="text" name="donationDate" placeholder="">
+                           <input type="date" class="form-control2" id="text" name="donationDate" placeholder="" value="{{ old('donationDate') }}" autocomplete="">
+                           @if ($errors->has('donationDate')) 
+                            @foreach ($errors->get('donationDate') as $message)
+                                <p>{{ $message }}</p>
+                            @endforeach
+                            @endif
+                           
                        </div>
                        <div class="form-group col-lg-12">
                            <textarea class="form-control2" id="message" name="patientDetails" placeholder="রোগীর সমস্যা সম্পর্কে সংক্ষিপ্ত লিখুন..."></textarea>

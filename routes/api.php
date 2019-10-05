@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('districts','DonationController@getdistricts');
 Route::get('subdistricts/{district}','DonationController@getsubdistricts');
+Route::get('donators/{district}/{bloodGroup}','DonationController@getDonators');
