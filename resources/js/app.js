@@ -23,9 +23,9 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('search-app-root-component', require('./components/search-app-root.vue').default);
-Vue.component('search-div', require('./components/search-div.vue').default);
-Vue.component('donators-view-div', require('./components/donators-view.vue').default);
-Vue.component('donators-view-row', require('./components/donators-row.vue').default);
+Vue.component('searchDiv', require('./components/searchDiv.vue').default);
+Vue.component('donatorsView', require('./components/donatorsView.vue').default);
+Vue.component('donatorsRow', require('./components/donatorsRow.vue').default);
 Vue.component('donator-view', require('./components/donator-view.vue').default);
 
 
@@ -37,11 +37,4 @@ Vue.component('donator-view', require('./components/donator-view.vue').default);
 
 const searchAppRoot = new Vue({
     el: '#search-app-root',
-    data : {
-        selectedBloodGroup:'',
-        selectedDistrict:'',
-        selectedSubdistrict:''
-    },
-
 });
-

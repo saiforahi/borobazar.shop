@@ -1,12 +1,11 @@
 <template>
     <div class="bogra-area pt-5">
-        <p>{{ items }}</p>
-        <donators-view-row :items="items"></donators-view-row>       
+        <donatorsRow :items="items"></donatorsRow>       
     </div>
 </template>
 
 <script>
-    import donatorsRow from './donators-row'
+    import donatorsRow from './donatorsRow'
     export default {
         name:'donatorsView',
         data(){
@@ -19,7 +18,7 @@
             donatorsRow
         },
         mounted() {
-            console.log('Component mounted.')
+            console.log('donators-view mounted.');
         }
     }
 </script>

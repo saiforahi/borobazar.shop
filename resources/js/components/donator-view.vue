@@ -5,9 +5,9 @@
                 <img width="80" height="auto" src="img/login-avatar.png">
             </div>
             <div class="name">
-                <h5 class="title">{{ donatorName }}</h5>
-                <h6 class="cart-title"><span>সদস্যঃ</span> {{ groupName }}</h6>
-                <h6>শেষবার রক্ত দান : <i class="fa fa-calendar"></i><span>  {{ lastDonationDate }}</span></h6>
+                <h5 class="title">{{ donator.name }}</h5>
+                <h6 class="cart-title"><span>সদস্যঃ</span> {{ donator.blood_organization }}</h6>
+                <h6>শেষবার রক্ত দান : <i class="fa fa-calendar"></i><span>  {{ donator.last_donation_date }}</span></h6>
             </div>
                 
             <div class="col-lg-12">
@@ -28,11 +28,12 @@ export default {
     name:'donatorView',
     data(){
         return{
-            donatorName:donator.name,
-            groupName:'group',
-            lastDonationDate:'last_donation_date'
+            
         }
     },
-    props: ['donator']
+    props: ['donator'],
+    mounted() {
+        console.log('donator-view mounted');
+    }
 }
 </script>

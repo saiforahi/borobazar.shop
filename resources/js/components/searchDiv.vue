@@ -10,7 +10,6 @@
         <div class="row text-center" >
             <div class="col-lg-12">
                 <div class="blood-srch" >
-                    <form id="searchForm" v-on:submit.prevent="sendToParent" method="POST">
                         <select class="form-control0 search-blood" name="bloodGroup" v-model="bloodGroup" @change="setBloodGroup($event)">
                             <option selected value="">রক্তের গ্রুপ</option>
                             <option value="এ+">এ+ (পজিটিভ)</option>
@@ -30,10 +29,10 @@
                             <option value="" selected>থানা/উপজেলা</option>
                             <option v-for="subdistrict in subdistricts" v-bind:key="subdistrict.sub_district_name" >{{ subdistrict.sub_district_name }}</option>
                         </select>
-                        <button class="search-btn" type="submit" >
+                        <button class="search-btn" v-on:click="getDonators">
                             <i id="demo" class="fa fa-search"></i>
                         </button>
-                    </form>
+                    
                 </div>
             </div>
         </div>
@@ -51,10 +50,11 @@ export default {
             selectedSubdistrict:'',
             subdistricts:[],
             bloodGroup:'',
-            allowed:'yes'
+            allowed:'yes',
+            selectedDonators:[]
         }
     },
-    props:['checkNallowed'],
+    props:['checkNallowed','donators'],
     
     mounted() {
             console.log('search div mounted.')
@@ -77,12 +77,23 @@ export default {
         setBloodGroup(event){
             this.bloodGroup=event.target.value;
         },
-        sendToParent()
+        getDonators()
         {
-            this.$emit('checkNallowed',this.allowed);
-            console.log('working');
+            
+            console.log(this.selectedDistrict);
+            console.log(this.bloodGroup);
+            axios.get('api/donators/'+this.selectedDistrict+'/'+this.bloodGroup).then(response=>{
+                this.selectedDonators=response.data;
+                this.$emit('checkNallowed','yes');
+                this.$emit('donators',this.selectedDonators);
+                console.log(this.selectedDonators);
+            })
+            .catch(function (error) {
+            console.log(error);
+            });
         }
 
     }
+    
 }
 </script>

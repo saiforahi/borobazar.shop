@@ -18,7 +18,7 @@
             donatorView
         },
         mounted() {
-            console.log('Total rows '+ this.donators.length/3)
+            console.log('donatorsRow mounted')
         },
         computed: {
             rows() {

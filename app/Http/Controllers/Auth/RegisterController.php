@@ -73,6 +73,7 @@ class RegisterController extends Controller
             'cell'=> $data['cell'],
             'blood_group' => $data['bloodGroup'],
             'district' => $data['presentDistrict'],
+            'blood_organization' =>$data['organizationName'],
             'last_donation_date' => $data['lastDonationDate'],
             'password' => Hash::make($data['password']),
         ]);

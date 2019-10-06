@@ -17,7 +17,7 @@
 <section class="bloodreq-area pt-5 pb-5">
     <div class="container-fluid">
        <div class="container">
-           <div class="bloodreq-form-area pt-5 pb-5" id="bloodRequestDiv">
+           <div class="bloodreq-form-area pt-5 pb-5">
                <h4>নিচের তথ্যাবলি পূরণ করুন</h4>
                <div class="blood-form-inner">
                     @if ($errors->any())
@@ -29,7 +29,7 @@
                         </ul>
                     </div>
                     @endif
-                   <form class="bloodreq-form row" action="{{ route('blood_request_submit',$blood_request_id) }}" method="post" id="bloodReqform">
+                   <form class="bloodreq-form row" action="{{ route('blood_request_submit',$blood_request_id) }}" method="POST" id="bloodReqform">
                        @csrf
                        <p name="blood_request_id">অনুরোধ নং: <strong> {{ $blood_request_id}}</strong></p>
                        <div class="form-group col-lg-4">
