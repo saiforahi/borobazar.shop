@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'cell','blood_group','district','blood_organization','last_donation_date', 'password',
+        'name', 'cell','blood_group','district','blood_organization','last_donation_date', 'password','api_token',
     ];
     
     /**
@@ -36,6 +36,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime'
+        'email_verified_at' => 'datetime',
+        'last_donation_date' =>'date:d-m-y'
     ];
+
 }

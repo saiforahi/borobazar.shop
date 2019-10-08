@@ -26,16 +26,9 @@ class DonationController extends Controller
 
     public function getDonators( $district,$bloodGroup)
     {
-        if(Auth::check())
-        {
-            return null;
-        }
-        else
-        {
-            $lastDonationDate = Carbon::now()->subDays(10);
-            $donators=User::where('district',$district)->where('blood_group',$bloodGroup)->get();
-            return $donators;
-            #$donators=District::find($district)->users->where('last_donation_date','<=',);
-        }
+        $lastDonationDate = Carbon::now()->subDays(10);
+        $donators=User::where('district',$district)->where('blood_group',$bloodGroup)->paginate(2);
+        return $donators;
+        #$donators=District::find($district)->users->where('last_donation_date','<=',);
     }
 }

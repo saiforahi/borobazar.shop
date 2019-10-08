@@ -6,9 +6,11 @@
 
 require('./bootstrap');
 import BootstrapVue from 'bootstrap-vue' //Importing
-Vue.use(BootstrapVue); // Telling Vue to use this in whole application
+import VueRouter from 'vue-router'
 
 window.Vue = require('vue');
+Vue.use(BootstrapVue); // Telling Vue to use this in whole application
+Vue.use(VueRouter);
 
 /**
  * The following block of code may be used to automatically register your
@@ -27,6 +29,10 @@ Vue.component('searchDiv', require('./components/searchDiv.vue').default);
 Vue.component('donatorsView', require('./components/donatorsView.vue').default);
 Vue.component('donatorsRow', require('./components/donatorsRow.vue').default);
 Vue.component('donator-view', require('./components/donator-view.vue').default);
+//paginator registration using laravel-vue-pagination
+//Vue.component('pagination',require('laravel-vue-pagination'));
+
+
 
 
 /**
@@ -34,7 +40,15 @@ Vue.component('donator-view', require('./components/donator-view.vue').default);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-const searchAppRoot = new Vue({
-    el: '#search-app-root',
+const router = new VueRouter({
+    routes: [
+        {
+            path: '/',
+            name: 'home'
+        },
+    ]
 });
+const searchAppRoot = new Vue({
+    el: '#search-app-root'
+});
+

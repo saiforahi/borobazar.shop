@@ -11,7 +11,7 @@
 |
 */
 
-
+use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
@@ -19,3 +19,7 @@ Route::get('/', 'PagesController@bloodDonation')->name('home');
 Route::post('/','PagesController@donatorSearch')->name('blood-donation')->middleware('auth');
 Route::get('/blood_request','PagesController@bloodRequest')->name('blood_request');
 Route::post('/blood_request/{blood_request_id}','BloodRequestController@store')->name('blood_request_submit');
+Route::get('/getUser',function(){
+        return request()->user();
+});
+

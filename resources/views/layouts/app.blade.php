@@ -29,7 +29,9 @@
         @include('layouts.navbar')
         @yield('content')
       @include('layouts.footer')
-
+      <script>
+        window.auth_user = {!! json_encode(Auth::user()); !!};  //retrieving auth user in a global script variable, it can be accessed any vue component's script tag
+      </script>
       <!-- Optional JavaScript -->
       <script src="{{ asset('js/app.js') }}" defer></script>
       <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>

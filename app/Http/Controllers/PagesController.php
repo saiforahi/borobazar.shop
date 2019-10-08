@@ -11,7 +11,7 @@ class PagesController extends Controller
 {
     public function bloodDonation()
     {
-        return view('blood-service.blood-donation');
+        return view('blood-service.blood-donation')->with('auth_user',Auth::user());
     }
 
     public function bloodRequest()
