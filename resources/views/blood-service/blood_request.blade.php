@@ -39,9 +39,9 @@
                        <div class="form-group col-lg-4">
                            <lebel for="text">রোগীর সাথে সম্পর্ক *</lebel>
                            <select class="form-control2 search-blood" name="relation">
-                               <option selected="select"value="0">ফ্যামিলি</option>
-                               <option value="1">আত্নীয়</option>
-                               <option value="1">বন্ধু</option>
+                               <option selected="select"value="ফ্যামিলি">ফ্যামিলি</option>
+                               <option value="আত্নীয়">আত্নীয়</option>
+                               <option value="বন্ধু">বন্ধু</option>
                            </select>
                        </div>
                        <div class="form-group col-lg-4">
@@ -51,14 +51,14 @@
                        <div class="form-group col-lg-4">
                            <lebel for="bloodGroup">রোগীর রক্তের গ্রুপ</lebel>
                            <select class="form-control2 search-blood" name="bloodGroup">
-                               <option selected="select"value="0">এ+ (পজিটিভ)</option>
-                               <option value="1">এ- (নেগেটিভ)</option>
-                               <option value="1">বি+ (পজিটিভ)</option>
-                               <option value="1">বি- (নেগেটিভ)</option>
-                               <option value="1">ও+ (পজিটিভ)</option>
-                               <option value="1">ও- (নেগেটিভ)</option>
-                               <option value="1">এবি+ (পজিটিভ)</option>
-                               <option value="1">এবি- (নেগেটিভ)</option>
+                               <option selected="select"value="এ+">এ+ (পজিটিভ)</option>
+                               <option value="এ-">এ- (নেগেটিভ)</option>
+                               <option value="বি+">বি+ (পজিটিভ)</option>
+                               <option value="বি-">বি- (নেগেটিভ)</option>
+                               <option value="ও+">ও+ (পজিটিভ)</option>
+                               <option value="ও-">ও- (নেগেটিভ)</option>
+                               <option value="এবি+">এবি+ (পজিটিভ)</option>
+                               <option value="এবি-">এবি- (নেগেটিভ)</option>
                            </select>
                        </div>
                        <div class="form-group col-lg-4">

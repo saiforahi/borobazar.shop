@@ -33,6 +33,7 @@
         "laravel-vue-pagination": "^2.3.1",
         "vue-resource": "^1.5.1",
         "vue-select": "^3.2.0",
+        "vue-session": "^1.0.0",
         "vuejs-paginator": "^2.0.2"
     }
 }

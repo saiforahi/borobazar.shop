@@ -11,7 +11,8 @@ class BloodRequest extends Model
     public $incrementing = false;
     protected $fillable = ['blood_request_id','name', 'relation','cell','blood_group','quantity','patient_age','district','donation_place','donation_date','about_patient'];
     protected $casts = [
-        'created_at' => 'date:d-m-Y',
-        'updated_at' => 'datet:d-m-Y'
+        'created_at' => 'date:d-M-Y',
+        'updated_at' => 'date:d-M-Y',
+        'donation_date' => 'date:d-M-Y'
     ];
 }

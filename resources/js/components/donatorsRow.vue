@@ -18,7 +18,7 @@
             donatorView
         },
         mounted() {
-            console.log('donatorsRow mounted')
+            //console.log('donatorsRow mounted')
         },
         computed: {
             rows() {

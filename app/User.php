@@ -2,13 +2,13 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens,Notifiable;
     protected  $primaryKey = 'cell';
     protected $dates = ['last_donation_date'];
     public $incrementing = false;
@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'cell','blood_group','district','blood_organization','last_donation_date', 'password','api_token',
+        'name','email', 'cell','blood_group','district','blood_organization','last_donation_date', 'password',
     ];
     
     /**
@@ -37,7 +37,11 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'last_donation_date' =>'date:d-m-y'
+        'last_donation_date' =>'date:d-M-Y'
     ];
+
+    public function findForPassport($username) {
+        return $this->where('cell', $username)->first(); //customizing username field for passport
+    }
 
 }

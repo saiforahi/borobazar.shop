@@ -17,9 +17,8 @@ Auth::routes();
 
 Route::get('/', 'PagesController@bloodDonation')->name('home');
 Route::post('/','PagesController@donatorSearch')->name('blood-donation')->middleware('auth');
-Route::get('/blood_request','PagesController@bloodRequest')->name('blood_request');
+Route::get('/blood_request','PagesController@bloodRequestSubmit')->name('blood_request');
 Route::post('/blood_request/{blood_request_id}','BloodRequestController@store')->name('blood_request_submit');
-Route::get('/getUser',function(){
-        return request()->user();
-});
+Route::get('/blood_requests','PagesController@bloodRequests')->name('blood_requests')->middleware('auth');
+Route::get('/blood_donation/info','PagesController@essentialInfo')->name('essentialInfo'); //blood donation essential information page's route
 

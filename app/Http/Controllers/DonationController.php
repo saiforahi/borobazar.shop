@@ -26,8 +26,8 @@ class DonationController extends Controller
 
     public function getDonators( $district,$bloodGroup)
     {
-        $lastDonationDate = Carbon::now()->subDays(10);
-        $donators=User::where('district',$district)->where('blood_group',$bloodGroup)->paginate(2);
+        $lastDonationDate = date('Y-m-d', strtotime('-3 month'));
+        $donators=User::where('district',$district)->where('blood_group',$bloodGroup)->where('last_donation_date','<=',$lastDonationDate)->paginate(8);
         return $donators;
         #$donators=District::find($district)->users->where('last_donation_date','<=',);
     }

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\BloodRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -13,9 +12,10 @@ class BloodRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getRequests($district,$blood_group,$cell)
     {
-        //
+        $requests=BloodRequest::where('blood_group',$blood_group)->where('donation_place',$district)->where('cell','!=',$cell)->paginate(6);  //fetching blood requests with same blood group and donation place 
+        return $requests;
     }
 
     /**
@@ -62,7 +62,7 @@ class BloodRequestController extends Controller
             'patientAge'=> 'required|string',
             'presentDistrict' => 'required|string',
             'donationPlace'=> 'required|string',
-            'donationDate'=>'required|date|after:yesterday'
+            'donationDate'=>'required|date|after:today'
         ];
         $validator = Validator::make($request->all(),$rules,$message);
         if($validator->fails())

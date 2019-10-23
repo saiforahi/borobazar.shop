@@ -1,54 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\User;
 use Illuminate\Http\Request;
-use Auth;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
+use App\User;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Auth;
 
-class RegisterController extends Controller
+class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
+    public $successStatus = 200;
+    /** 
+     * login api 
+     * 
+     * @return \Illuminate\Http\Response 
+     */ 
+    public function login(){ 
+        if(Auth::attempt(['cell' => request('cell'), 'password' => request('password')])){ 
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('accessToken')-> accessToken; 
+            $success['name'] =  $user->name;
+            #dd($success['token']);
+            return redirect('/')->with(['success'=>$success], $this-> successStatus);
+        } 
+        else{ 
+            return redirect()->back()->with(['error'=>'অনুগ্রহ করে সঠিক তথ্য দিন']);
+        } 
     }
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
+    //
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -61,12 +41,6 @@ class RegisterController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
     protected function create(array $data)
     {
         return User::create([
@@ -74,14 +48,13 @@ class RegisterController extends Controller
             'cell'=> $data['cell'],
             'blood_group' => $data['bloodGroup'],
             'district' => $data['presentDistrict'],
-            'blood_organization' =>$data['organizationName'],
+            'blood_organization' =>$data['organizationName'] ?? '',
             'last_donation_date' => $data['lastDonationDate'],
             'password' => Hash::make($data['password'])
         ]);
     }
-
-    public function register(Request $request)
-   {
+    public function register(Request $request) 
+    { 
         $messages = [
             'name.required' => 'We need to know your name',
             'cell.unique' => 'This phone number is already registered!',
@@ -98,13 +71,22 @@ class RegisterController extends Controller
             'password' =>'required|string|min:8|confirmed'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
-        if ($validator->fails())  {
+        if ($validator->fails()) { 
             return redirect()->back()->withErrors($validator)->withInput();
+            #return response()->json(['error'=>$validator->errors()], 401);            
         }
-        else{
-            $user = $this->create($request->all());
-            Auth::login($user); 
-            return redirect('/')->with(['message'=>'Account Successfully Created.']);
-        }
-   }
+         
+        $user = $this->create($request->all()); 
+        $success['token'] =  $user->createToken('accessToken')-> accessToken; 
+        $success['name'] =  $user->name;
+        Auth::login($user);
+        return view('blood-service.blood-donation')->with('success',$success);
+        #return response()->json(['success'=>$success], $this-> successStatus); 
+    }
+
+    public function details() 
+    { 
+        $user = Auth::user(); 
+        return response()->json(['success' => $user], $this-> successStatus); 
+    } 
 }

@@ -9,8 +9,13 @@ import BootstrapVue from 'bootstrap-vue' //Importing
 import VueRouter from 'vue-router'
 
 window.Vue = require('vue');
+window.axios = require('axios');
 Vue.use(BootstrapVue); // Telling Vue to use this in whole application
 Vue.use(VueRouter);
+
+//vue session importing
+import VueSession from 'vue-session'
+Vue.use(VueSession);
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,8 +34,27 @@ Vue.component('searchDiv', require('./components/searchDiv.vue').default);
 Vue.component('donatorsView', require('./components/donatorsView.vue').default);
 Vue.component('donatorsRow', require('./components/donatorsRow.vue').default);
 Vue.component('donator-view', require('./components/donator-view.vue').default);
+Vue.component('request-list', require('./components/RequestList.vue').default);
+Vue.component('request-view', require('./components/Request.vue').default);
+
 //paginator registration using laravel-vue-pagination
 //Vue.component('pagination',require('laravel-vue-pagination'));
+//passport components
+
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue').default
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue').default
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue').default
+);
 
 
 
@@ -40,15 +64,10 @@ Vue.component('donator-view', require('./components/donator-view.vue').default);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-const router = new VueRouter({
-    routes: [
-        {
-            path: '/',
-            name: 'home'
-        },
-    ]
-});
 const searchAppRoot = new Vue({
     el: '#search-app-root'
 });
 
+const requestList = new Vue({
+    el: '#request-list-root'
+});

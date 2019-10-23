@@ -2,12 +2,12 @@
 
 @section('content')
 <section class="register-area pt-5 pb-5">
-    <div class="container-fluid">
+    <div class="container-fluid" id="loginRoot">
         <div class="container">
             <div class="register-inner">
                <form class="track-form row" method="POST" action="{{ route('login') }}">
                     @if ($errors->any())
-                        <div class="alert alert-danger">
+                        <div class="alert">
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>

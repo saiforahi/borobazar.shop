@@ -33,7 +33,7 @@ export default {
     },
     props: ['donator'],
     mounted() {
-        console.log('donator-view mounted');
+        
     }
 }
 </script>
