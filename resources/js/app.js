@@ -36,6 +36,7 @@ Vue.component('donatorsRow', require('./components/donatorsRow.vue').default);
 Vue.component('donator-view', require('./components/donator-view.vue').default);
 Vue.component('request-list', require('./components/RequestList.vue').default);
 Vue.component('request-view', require('./components/Request.vue').default);
+Vue.component('donator-modal', require('./components/donator-modal.vue').default);
 
 //paginator registration using laravel-vue-pagination
 //Vue.component('pagination',require('laravel-vue-pagination'));

@@ -69,7 +69,7 @@
                                 @else
                                 <li>
                                     <i class="bsquare fa fa-user"></i>
-                                    <a class="text-uppercase whyborobazar" href="#" onclick="document.getElementById('id01').style.display='block'">লগইন</a> / 
+                                    <a class="text-uppercase whyborobazar" href="#" onclick="document.getElementById('loginModalBlade').style.display='block'">লগইন</a> / 
                                     <a class="text-uppercase whyborobazar" href="{{ route('register') }}">নিবন্ধন</a> 
                                 </li>
                                 @endif

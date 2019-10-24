@@ -41,7 +41,7 @@
         </div>
         <div class="bogra-area pt-5" id="viewDiv">
             <div class="row text-center">
-                <donator-view v-for="item in laravelData.data" v-bind:donator="item" v-bind:key="item.cell"></donator-view>
+                <donator-view @modal-data="setModal" v-for="item in laravelData.data" v-bind:donator="item" v-bind:key="item.cell"></donator-view>
             </div>       
         </div>
         <div class="overflow-auto">
@@ -70,7 +70,7 @@
                 </template>
             </b-pagination>
         </div>
-        
+        <donator-modal :donator="modalData" ></donator-modal>
     </div>
 </template>
 
@@ -92,7 +92,8 @@
                 allowed:'no',
                 currentPage:'',
                 rows:'',
-                per_page:''
+                per_page:'',
+                modalData:[],
             }
         },
         mounted() {
@@ -119,9 +120,17 @@
                 this.selectedSubdistrict='';
                 this.per_page='';
                 this.rows='';
+            },
+            //
+            modalData: function(){
+                document.getElementById('donator-modal').style.display='block';
             }
         },
         methods:{
+            //
+            setModal(data){
+                this.modalData=data;
+            },
             // whenever district changes, this function will run
             onChangeDistrict(event) {
                 axios.get('api/subdistricts/'+event.target.value)

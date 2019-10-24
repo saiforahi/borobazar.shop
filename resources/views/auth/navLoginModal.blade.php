@@ -1,5 +1,5 @@
 <div class="login-from">
-        <div id="id01" class="modal">
+        <div id="loginModalBlade" class="modal">
             <form class="modal-content animate" action="{{ route('login') }}" method="POST">
                 @csrf
                 <div class="row">
@@ -37,7 +37,7 @@
                            <small class="newbb"> বড়বাজারে নতুন?</small><a class="reg" href="{{ route('register') }}"> সাইনআপ করুন</a>
                         </div>
                     </div>
-                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    <span onclick="document.getElementById('loginModalBlade').style.display='none'" class="close" title="Close Modal">&times;</span>
                 </div>
             </form>
             

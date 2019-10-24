@@ -26,6 +26,11 @@
                 }
             }); 	
         </script>          
-        <!--end auto modal-->     
+        <!--end auto modal--> 
+        <script>
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            })
+        </script>   
             
 @endsection

@@ -2030,6 +2030,97 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/donator-modal.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/donator-modal.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['donator'],
+  methods: {
+    hidemodal: function hidemodal() {
+      document.getElementById('donator-modal').style.display = 'none';
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/donator-view.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/donator-view.vue?vue&type=script&lang=js& ***!
@@ -2067,10 +2158,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'donatorView',
   data: function data() {
-    return {};
+    return {
+      name: ''
+    };
   },
   props: ['donator'],
-  mounted: function mounted() {}
+  mounted: function mounted() {},
+  methods: {
+    showmodal: function showmodal(donator) {
+      this.$emit('modal-data', donator);
+    }
+  }
 });
 
 /***/ }),
@@ -3025,7 +3123,8 @@ __webpack_require__.r(__webpack_exports__);
       allowed: 'no',
       currentPage: '',
       rows: '',
-      per_page: ''
+      per_page: '',
+      modalData: []
     };
   },
   mounted: function mounted() {
@@ -3054,9 +3153,17 @@ __webpack_require__.r(__webpack_exports__);
       this.selectedSubdistrict = '';
       this.per_page = '';
       this.rows = '';
+    },
+    //
+    modalData: function modalData() {
+      document.getElementById('donator-modal').style.display = 'block';
     }
   },
   methods: {
+    //
+    setModal: function setModal(data) {
+      this.modalData = data;
+    },
     // whenever district changes, this function will run
     onChangeDistrict: function onChangeDistrict(event) {
       var _this3 = this;
@@ -68158,6 +68265,180 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/donator-modal.vue?vue&type=template&id=9d685784&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/donator-modal.vue?vue&type=template&id=9d685784& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "modal", attrs: { id: "donator-modal" } }, [
+    _c("form", { staticClass: "modal-content animate" }, [
+      _c("div", { staticClass: "imgcontainer" }, [
+        _c(
+          "span",
+          {
+            staticClass: "close",
+            attrs: { title: "Close Modal" },
+            on: { click: _vm.hidemodal }
+          },
+          [_vm._v("×")]
+        ),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "avatar",
+          attrs: { src: "img/login-avatar.png", alt: "Avatar" }
+        }),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1)
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container pb-5" }, [
+        _c("table", { staticClass: "bldreq-list" }, [
+          _c("tr", [
+            _c("th", [_vm._v("নামঃ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.donator.name))])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", [_vm._v("মোবাইলঃ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.donator.cell))])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", [_vm._v("রক্তের গ্রুপঃ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.donator.blood_group))])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", [_vm._v("শেষবার রক্ত দানের তারিখঃ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.donator.last_donation_date))])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", [_vm._v("বসবাসরত এরিয়াঃ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.donator.district))])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", [_vm._v("সংগঠনের নামঃ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.donator.organization_name))])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(2)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "status" }, [
+      _c("h5", { staticClass: "title" }, [_vm._v("রক্ত দিব বাচঁবে প্রাণ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-12" }, [
+      _c("div", { staticClass: "rating" }, [
+        _c("i", { staticClass: "fa fa-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fa fa-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fa fa-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fa fa-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fa fa-star-o" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "connect-area" }, [
+          _c("div", { staticClass: "form-popup", attrs: { id: "myForm" } }, [
+            _c(
+              "form",
+              { staticClass: "form-container", attrs: { action: "" } },
+              [
+                _c("textarea", {
+                  staticClass: "form-control2",
+                  attrs: { type: "text", placeholder: "", name: "text" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  { staticClass: "btn-getinvite1", attrs: { type: "submit" } },
+                  [_vm._v("পাঠান")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  { staticClass: "btn-getinvite1", attrs: { type: "cancle" } },
+                  [_c("i", { staticClass: "fa fa-close" })]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("button", { staticClass: "btn-getinvite1" }, [
+            _c("i", { staticClass: "fa fa-envelope-o" }),
+            _vm._v(" টেক্স করুন")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "connect-area" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn-getinvite1",
+              attrs: {
+                type: "button",
+                "data-toggle": "popover",
+                title: "মোবাইল নাম্বার",
+                "data-placement": "bottom"
+              }
+            },
+            [_c("i", { staticClass: "fa fa-phone" }), _vm._v(" কল করুন")]
+          )
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/donator-view.vue?vue&type=template&id=48c2ba24&":
 /*!***************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/donator-view.vue?vue&type=template&id=48c2ba24& ***!
@@ -68174,26 +68455,39 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-lg-3" }, [
-    _c("div", { staticClass: "donar-inner" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "name" }, [
-        _c("h5", { staticClass: "title" }, [_vm._v(_vm._s(_vm.donator.name))]),
+    _c(
+      "div",
+      {
+        staticClass: "donar-inner",
+        on: {
+          click: function($event) {
+            return _vm.showmodal(_vm.donator)
+          }
+        }
+      },
+      [
+        _vm._m(0),
         _vm._v(" "),
-        _c("h6", { staticClass: "cart-title" }, [
-          _c("span", [_vm._v("সদস্যঃ")]),
-          _vm._v(" " + _vm._s(_vm.donator.blood_organization))
+        _c("div", { staticClass: "name" }, [
+          _c("h5", { staticClass: "title" }, [
+            _vm._v(_vm._s(_vm.donator.name))
+          ]),
+          _vm._v(" "),
+          _c("h6", { staticClass: "cart-title" }, [
+            _c("span", [_vm._v("সদস্যঃ")]),
+            _vm._v(" " + _vm._s(_vm.donator.blood_organization))
+          ]),
+          _vm._v(" "),
+          _c("h6", [
+            _vm._v("শেষবার রক্ত দান : "),
+            _c("i", { staticClass: "fa fa-calendar" }),
+            _c("span", [_vm._v("  " + _vm._s(_vm.donator.last_donation_date))])
+          ])
         ]),
         _vm._v(" "),
-        _c("h6", [
-          _vm._v("শেষবার রক্ত দান : "),
-          _c("i", { staticClass: "fa fa-calendar" }),
-          _c("span", [_vm._v("  " + _vm._s(_vm.donator.last_donation_date))])
-        ])
-      ]),
-      _vm._v(" "),
-      _vm._m(1)
-    ])
+        _vm._m(1)
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -69374,108 +69668,42 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container", attrs: { id: "mainDiv" } }, [
-    _c("div", { staticClass: "search-area" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "row text-center" }, [
-        _c("div", { staticClass: "col-lg-12" }, [
-          _c("div", { staticClass: "blood-srch" }, [
-            _c(
-              "form",
-              {
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.setData($event)
-                  }
-                }
-              },
-              [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.bloodGroup,
-                        expression: "bloodGroup"
-                      }
-                    ],
-                    staticClass: "form-control0 search-blood",
-                    attrs: { name: "bloodGroup" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.bloodGroup = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
+  return _c(
+    "div",
+    { staticClass: "container", attrs: { id: "mainDiv" } },
+    [
+      _c("div", { staticClass: "search-area" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "row text-center" }, [
+          _c("div", { staticClass: "col-lg-12" }, [
+            _c("div", { staticClass: "blood-srch" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.setData($event)
                     }
-                  },
-                  [
-                    _c("option", { attrs: { selected: "", value: "" } }, [
-                      _vm._v("রক্তের গ্রুপ")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "এ+" } }, [
-                      _vm._v("এ+ (পজিটিভ)")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "এ-" } }, [
-                      _vm._v("এ- (নেগেটিভ)")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "বি+" } }, [
-                      _vm._v("বি+ (পজিটিভ)")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "বি-" } }, [
-                      _vm._v("বি- (নেগেটিভ)")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "ও+" } }, [
-                      _vm._v("ও+ (পজিটিভ)")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "ও-" } }, [
-                      _vm._v("ও- (নেগেটিভ)")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "এবি+" } }, [
-                      _vm._v("এবি+ (পজিটিভ)")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "এবি-" } }, [
-                      _vm._v("এবি- (নেগেটিভ)")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.selectedDistrict,
-                        expression: "selectedDistrict"
-                      }
-                    ],
-                    staticClass: "form-control0 search-blood",
-                    attrs: { id: "presentDistrict", name: "presentDistrict" },
-                    on: {
-                      change: [
-                        function($event) {
+                  }
+                },
+                [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.bloodGroup,
+                          expression: "bloodGroup"
+                        }
+                      ],
+                      staticClass: "form-control0 search-blood",
+                      attrs: { name: "bloodGroup" },
+                      on: {
+                        change: function($event) {
                           var $$selectedVal = Array.prototype.filter
                             .call($event.target.options, function(o) {
                               return o.selected
@@ -69484,199 +69712,281 @@ var render = function() {
                               var val = "_value" in o ? o._value : o.value
                               return val
                             })
-                          _vm.selectedDistrict = $event.target.multiple
+                          _vm.bloodGroup = $event.target.multiple
                             ? $$selectedVal
                             : $$selectedVal[0]
-                        },
-                        function($event) {
-                          return _vm.onChangeDistrict($event)
                         }
-                      ]
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "", selected: "" } }, [
-                      _vm._v("জেলা নির্বাচন")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.districts, function(district) {
-                      return _c("option", { key: district.name }, [
-                        _vm._v(_vm._s(district.name))
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { selected: "", value: "" } }, [
+                        _vm._v("রক্তের গ্রুপ")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "এ+" } }, [
+                        _vm._v("এ+ (পজিটিভ)")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "এ-" } }, [
+                        _vm._v("এ- (নেগেটিভ)")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "বি+" } }, [
+                        _vm._v("বি+ (পজিটিভ)")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "বি-" } }, [
+                        _vm._v("বি- (নেগেটিভ)")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "ও+" } }, [
+                        _vm._v("ও+ (পজিটিভ)")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "ও-" } }, [
+                        _vm._v("ও- (নেগেটিভ)")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "এবি+" } }, [
+                        _vm._v("এবি+ (পজিটিভ)")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "এবি-" } }, [
+                        _vm._v("এবি- (নেগেটিভ)")
                       ])
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.selectedSubdistrict,
-                        expression: "selectedSubdistrict"
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectedDistrict,
+                          expression: "selectedDistrict"
+                        }
+                      ],
+                      staticClass: "form-control0 search-blood",
+                      attrs: { id: "presentDistrict", name: "presentDistrict" },
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.selectedDistrict = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                          function($event) {
+                            return _vm.onChangeDistrict($event)
+                          }
+                        ]
                       }
+                    },
+                    [
+                      _c("option", { attrs: { value: "", selected: "" } }, [
+                        _vm._v("জেলা নির্বাচন")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.districts, function(district) {
+                        return _c("option", { key: district.name }, [
+                          _vm._v(_vm._s(district.name))
+                        ])
+                      })
                     ],
-                    staticClass: "form-control0 search-blood",
-                    attrs: { id: "", name: "presentDistrict" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.selectedSubdistrict = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectedSubdistrict,
+                          expression: "selectedSubdistrict"
+                        }
+                      ],
+                      staticClass: "form-control0 search-blood",
+                      attrs: { id: "", name: "presentDistrict" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.selectedSubdistrict = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "", selected: "" } }, [
-                      _vm._v("থানা/উপজেলা")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.subdistricts, function(subdistrict) {
-                      return _c(
-                        "option",
-                        { key: subdistrict.sub_district_name },
-                        [_vm._v(_vm._s(subdistrict.sub_district_name))]
-                      )
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _vm._m(1)
-              ]
-            )
+                    },
+                    [
+                      _c("option", { attrs: { value: "", selected: "" } }, [
+                        _vm._v("থানা/উপজেলা")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.subdistricts, function(subdistrict) {
+                        return _c(
+                          "option",
+                          { key: subdistrict.sub_district_name },
+                          [_vm._v(_vm._s(subdistrict.sub_district_name))]
+                        )
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ]
+              )
+            ])
           ])
         ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "bogra-area pt-5", attrs: { id: "viewDiv" } }, [
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "bogra-area pt-5", attrs: { id: "viewDiv" } }, [
+        _c(
+          "div",
+          { staticClass: "row text-center" },
+          _vm._l(_vm.laravelData.data, function(item) {
+            return _c("donator-view", {
+              key: item.cell,
+              attrs: { donator: item },
+              on: { "modal-data": _vm.setModal }
+            })
+          }),
+          1
+        )
+      ]),
+      _vm._v(" "),
       _c(
         "div",
-        { staticClass: "row text-center" },
-        _vm._l(_vm.laravelData.data, function(item) {
-          return _c("donator-view", {
-            key: item.cell,
-            attrs: { donator: item }
-          })
-        }),
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "overflow-auto" },
-      [
-        _c("br"),
-        _vm._v(" "),
-        _vm.allowed === "yes"
-          ? _c("b-pagination", {
-              staticClass: "mt-4",
-              attrs: {
-                "total-rows": _vm.rows,
-                "per-page": _vm.per_page,
-                align: "center",
-                "aria-controls": "viewDiv"
-              },
-              scopedSlots: _vm._u(
-                [
-                  {
-                    key: "first-text",
-                    fn: function() {
-                      return [
-                        _c("span", { staticClass: "text-success" }, [
-                          _vm._v("⏮")
-                        ])
-                      ]
-                    },
-                    proxy: true
-                  },
-                  {
-                    key: "prev-text",
-                    fn: function() {
-                      return [
-                        _c("span", { staticClass: "text-danger" }, [
-                          _vm._v("⏪")
-                        ])
-                      ]
-                    },
-                    proxy: true
-                  },
-                  {
-                    key: "next-text",
-                    fn: function() {
-                      return [
-                        _c("span", { staticClass: "text-warning" }, [
-                          _vm._v("⏩")
-                        ])
-                      ]
-                    },
-                    proxy: true
-                  },
-                  {
-                    key: "last-text",
-                    fn: function() {
-                      return [
-                        _c("span", { staticClass: "text-info" }, [_vm._v("⏭")])
-                      ]
-                    },
-                    proxy: true
-                  },
-                  {
-                    key: "ellipsis-text",
-                    fn: function() {
-                      return [
-                        _c("b-spinner", { attrs: { small: "", type: "grow" } }),
-                        _vm._v(" "),
-                        _c("b-spinner", { attrs: { small: "", type: "grow" } }),
-                        _vm._v(" "),
-                        _c("b-spinner", { attrs: { small: "", type: "grow" } })
-                      ]
-                    },
-                    proxy: true
-                  },
-                  {
-                    key: "page",
-                    fn: function(ref) {
-                      var page = ref.page
-                      var active = ref.active
-                      return [
-                        active
-                          ? _c("b", [_vm._v(_vm._s(page))])
-                          : _c("b", [_vm._v(_vm._s(page))])
-                      ]
-                    }
-                  }
-                ],
-                null,
-                false,
-                3127093035
-              ),
-              model: {
-                value: _vm.currentPage,
-                callback: function($$v) {
-                  _vm.currentPage = $$v
+        { staticClass: "overflow-auto" },
+        [
+          _c("br"),
+          _vm._v(" "),
+          _vm.allowed === "yes"
+            ? _c("b-pagination", {
+                staticClass: "mt-4",
+                attrs: {
+                  "total-rows": _vm.rows,
+                  "per-page": _vm.per_page,
+                  align: "center",
+                  "aria-controls": "viewDiv"
                 },
-                expression: "currentPage"
-              }
-            })
-          : _vm._e()
-      ],
-      1
-    )
-  ])
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "first-text",
+                      fn: function() {
+                        return [
+                          _c("span", { staticClass: "text-success" }, [
+                            _vm._v("⏮")
+                          ])
+                        ]
+                      },
+                      proxy: true
+                    },
+                    {
+                      key: "prev-text",
+                      fn: function() {
+                        return [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v("⏪")
+                          ])
+                        ]
+                      },
+                      proxy: true
+                    },
+                    {
+                      key: "next-text",
+                      fn: function() {
+                        return [
+                          _c("span", { staticClass: "text-warning" }, [
+                            _vm._v("⏩")
+                          ])
+                        ]
+                      },
+                      proxy: true
+                    },
+                    {
+                      key: "last-text",
+                      fn: function() {
+                        return [
+                          _c("span", { staticClass: "text-info" }, [
+                            _vm._v("⏭")
+                          ])
+                        ]
+                      },
+                      proxy: true
+                    },
+                    {
+                      key: "ellipsis-text",
+                      fn: function() {
+                        return [
+                          _c("b-spinner", {
+                            attrs: { small: "", type: "grow" }
+                          }),
+                          _vm._v(" "),
+                          _c("b-spinner", {
+                            attrs: { small: "", type: "grow" }
+                          }),
+                          _vm._v(" "),
+                          _c("b-spinner", {
+                            attrs: { small: "", type: "grow" }
+                          })
+                        ]
+                      },
+                      proxy: true
+                    },
+                    {
+                      key: "page",
+                      fn: function(ref) {
+                        var page = ref.page
+                        var active = ref.active
+                        return [
+                          active
+                            ? _c("b", [_vm._v(_vm._s(page))])
+                            : _c("b", [_vm._v(_vm._s(page))])
+                        ]
+                      }
+                    }
+                  ],
+                  null,
+                  false,
+                  3127093035
+                ),
+                model: {
+                  value: _vm.currentPage,
+                  callback: function($$v) {
+                    _vm.currentPage = $$v
+                  },
+                  expression: "currentPage"
+                }
+              })
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("donator-modal", { attrs: { donator: _vm.modalData } })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -85124,7 +85434,8 @@ Vue.component('donatorsView', __webpack_require__(/*! ./components/donatorsView.
 Vue.component('donatorsRow', __webpack_require__(/*! ./components/donatorsRow.vue */ "./resources/js/components/donatorsRow.vue")["default"]);
 Vue.component('donator-view', __webpack_require__(/*! ./components/donator-view.vue */ "./resources/js/components/donator-view.vue")["default"]);
 Vue.component('request-list', __webpack_require__(/*! ./components/RequestList.vue */ "./resources/js/components/RequestList.vue")["default"]);
-Vue.component('request-view', __webpack_require__(/*! ./components/Request.vue */ "./resources/js/components/Request.vue")["default"]); //paginator registration using laravel-vue-pagination
+Vue.component('request-view', __webpack_require__(/*! ./components/Request.vue */ "./resources/js/components/Request.vue")["default"]);
+Vue.component('donator-modal', __webpack_require__(/*! ./components/donator-modal.vue */ "./resources/js/components/donator-modal.vue")["default"]); //paginator registration using laravel-vue-pagination
 //Vue.component('pagination',require('laravel-vue-pagination'));
 //passport components
 
@@ -85414,6 +85725,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequestList_vue_vue_type_template_id_55bcf79c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequestList_vue_vue_type_template_id_55bcf79c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/donator-modal.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/donator-modal.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _donator_modal_vue_vue_type_template_id_9d685784___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./donator-modal.vue?vue&type=template&id=9d685784& */ "./resources/js/components/donator-modal.vue?vue&type=template&id=9d685784&");
+/* harmony import */ var _donator_modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./donator-modal.vue?vue&type=script&lang=js& */ "./resources/js/components/donator-modal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _donator_modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _donator_modal_vue_vue_type_template_id_9d685784___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _donator_modal_vue_vue_type_template_id_9d685784___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/donator-modal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/donator-modal.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/donator-modal.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_donator_modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./donator-modal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/donator-modal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_donator_modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/donator-modal.vue?vue&type=template&id=9d685784&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/donator-modal.vue?vue&type=template&id=9d685784& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_donator_modal_vue_vue_type_template_id_9d685784___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./donator-modal.vue?vue&type=template&id=9d685784& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/donator-modal.vue?vue&type=template&id=9d685784&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_donator_modal_vue_vue_type_template_id_9d685784___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_donator_modal_vue_vue_type_template_id_9d685784___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

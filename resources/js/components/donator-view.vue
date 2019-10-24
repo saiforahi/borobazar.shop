@@ -1,6 +1,6 @@
 <template>
     <div class="col-lg-3">
-        <div class="donar-inner">
+        <div class="donar-inner" @click="showmodal(donator)">
             <div class="thumb">
                 <img width="80" height="auto" src="img/login-avatar.png">
             </div>
@@ -19,8 +19,8 @@
                     <i class="fa fa-star-o"></i>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>                 
+    </div>            
 </template>
 
 <script>
@@ -28,12 +28,18 @@ export default {
     name:'donatorView',
     data(){
         return{
-            
+            name:''
         }
     },
     props: ['donator'],
     mounted() {
         
-    }
+    },
+    methods: {
+        showmodal(donator){
+            this.$emit('modal-data',donator);
+        },
+      
+    },
 }
 </script>
