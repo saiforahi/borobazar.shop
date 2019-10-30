@@ -7,11 +7,13 @@
 require('./bootstrap');
 import BootstrapVue from 'bootstrap-vue' //Importing
 import VueRouter from 'vue-router'
+import Popover  from 'vue-js-popover'
 
 window.Vue = require('vue');
 window.axios = require('axios');
 Vue.use(BootstrapVue); // Telling Vue to use this in whole application
 Vue.use(VueRouter);
+Vue.use(Popover);
 
 //vue session importing
 import VueSession from 'vue-session'
@@ -37,6 +39,7 @@ Vue.component('donator-view', require('./components/donator-view.vue').default);
 Vue.component('request-list', require('./components/RequestList.vue').default);
 Vue.component('request-view', require('./components/Request.vue').default);
 Vue.component('donator-modal', require('./components/donator-modal.vue').default);
+Vue.component('notification-panel', require('./components/notification.vue').default);
 
 //paginator registration using laravel-vue-pagination
 //Vue.component('pagination',require('laravel-vue-pagination'));
@@ -71,4 +74,8 @@ const searchAppRoot = new Vue({
 
 const requestList = new Vue({
     el: '#request-list-root'
+});
+
+const notificationView = new Vue({
+    el: '#navbarSupportedContent'
 });

@@ -1,6 +1,6 @@
 <template>
-    <div class="col-lg-3">
-        <div class="donar-inner" @click="showmodal(donator)">
+    <div class="col-lg-3"  style="padding-bottom: 30px;">
+        <div class="donar-inner  product product-single" > <!-- on click event calls a method -->
             <div class="thumb">
                 <img width="80" height="auto" src="img/login-avatar.png">
             </div>
@@ -18,6 +18,9 @@
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star-o"></i>
                 </div>
+            </div>
+            <div @click="showmodal(donator)" style="width:auto;">
+                <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> কুইক ভিউ</button>
             </div>
         </div>                 
     </div>            
@@ -37,7 +40,8 @@ export default {
     },
     methods: {
         showmodal(donator){
-            this.$emit('modal-data',donator);
+            this.$emit('modal-data',donator); //emits donator's data to parent view
+            document.getElementById('donator-modal').style.display='block'; //opening modal
         },
       
     },

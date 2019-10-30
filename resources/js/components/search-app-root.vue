@@ -31,7 +31,7 @@
                                 <option value="" selected>থানা/উপজেলা</option>
                                 <option v-for="subdistrict in subdistricts" v-bind:key="subdistrict.sub_district_name" >{{ subdistrict.sub_district_name }}</option>
                             </select>
-                            <button class="search-btn" type="submit">
+                            <button class="search-btn" type="submit" href="#viewDiv">
                                 <i id="demo" class="fa fa-search"></i>
                             </button>
                         </form>
@@ -76,6 +76,7 @@
 
 <script>
     import axios from 'axios';
+    
     export default {
         name: 'search-app-root-component',
         
@@ -127,6 +128,7 @@
             }
         },
         methods:{
+           
             //
             setModal(data){
                 this.modalData=data;
@@ -156,7 +158,7 @@
                         this.allowed ='yes';
                     }
                     else{
-                        alert('দুঃখিত এই মুহূর্তে '+this.bloodGroup+' গ্রুপের কোন রক্তদানকারী '+this.selectedDistrict+'তে নেই');
+                        alert('দুঃখিত এই মুহূর্তে '+this.bloodGroup+' গ্রুপের কোন রক্তদানকারী '+this.selectedDistrict+' এ নেই');
                     }
                     })
                     .catch(function (error) {

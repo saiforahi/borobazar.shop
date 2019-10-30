@@ -94,7 +94,7 @@ class RegisterController extends Controller
             'cell' => 'required|string|max:11|unique:users',
             'bloodGroup' =>'required|string',
             'presentDistrict' => 'required|string',
-            'lastDonationDate'=>'required|date|before:today',
+            'lastDonationDate'=>'required|date|before:tomorrow',
             'password' =>'required|string|min:8|confirmed'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);

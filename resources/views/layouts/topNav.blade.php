@@ -7,11 +7,11 @@
                 </div>
                   <div class="col-lg-6">
                   <div class="top-header-middle">
-                      <a class="asdf" href="#">
+                      <a class="asdf" href="tel:01611975861">
                           <i class="fa fa-phone">  কল করুন :</i>
                           <span>+৮৮০ ১৬১১ ৯৭৫ ৮৬১</span>
                       </a>
-                      <a class="br1" href="#">
+                      <a class="br1" href="mailto:borobazar.shop@gmail.com?subject=Feedback&body=Message">
                           <i class="fa fa-envelope">  ইমেইল :</i>
                           <span>borobazar.shop@gmail.com</span>
                       </a>

@@ -44,17 +44,17 @@
       
 
       <script>
-          window.auth_user = {!! json_encode(Auth::user()); !!};  //retrieving auth user in a global script variable, it can be accessed any vue component's script tag
+          window.auth_user = {!! json_encode(Auth::user()); !!};  //retrieving auth user in a global script variable, it can be accessed in any vue component's script tag
       </script>
      
       
 
 
-      <script>
+      <!--script>
         $(function () {
           $('[data-toggle="popover"]').popover()
         })
-      </script>
+      </script-->
           
           
       <script type="text/javascript">

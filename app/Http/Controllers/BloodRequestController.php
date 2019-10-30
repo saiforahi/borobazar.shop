@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\BloodRequest;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -74,7 +75,6 @@ class BloodRequestController extends Controller
             $newRequest=$this->create($request->all(),$blood_request_id);
             return redirect('/')->with('success','request successfully submitted');
         }
-        
     }
 
     /**
@@ -120,5 +120,12 @@ class BloodRequestController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    //
+    public function getNotifications($cell){
+        $user=User::find($cell);
+        $requests=$user->BloodRequest()->get();
+        return $requests;
     }
 }

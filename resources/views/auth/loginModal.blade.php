@@ -13,12 +13,12 @@
                     </div>
     
                     <div class="form-a">
-                       <input class="input-text" type="text" placeholder="" name="uname" required>
+                       <input class="input-text" type="text" placeholder="" name="cell" required>
                         <span class="username">মোবাইল</span>
                     </div>
                     <br>
                    <div class="form-b">
-                       <input class="input-text" type="password" placeholder="" name="psw" required>
+                       <input class="input-text" type="password" placeholder="" name="password" required>
                          <span class="username">পাসওয়ার্ড</span>
                     </div>
     
@@ -34,7 +34,7 @@
                     </div>
     
                     <div class="form-c">
-                       <small class="newbb"> বড়বাজারে নতুন?</small><a class="reg" href="blood-registration.html"> সাইনআপ করুন</a>
+                       <small class="newbb"> বড়বাজারে নতুন?</small><a class="reg" href="{{ route('register') }}"> সাইনআপ করুন</a>
                     </div>
                 </div>
                 <button onclick="document.getElementById('automodal').style.display='none'" class="close" title="Close Modal" data-dismiss="modal">&times;</button>

@@ -2,7 +2,7 @@
     <div class="modal" id="donator-modal">
             <form class="modal-content animate">
                 <div class="imgcontainer">
-                    <span @click="hidemodal" class="close" title="Close Modal">&times;</span>
+                    <span @click="hidemodal" class="close" title="Close">&times;</span>
                     <img src="img/login-avatar.png" alt="Avatar" class="avatar">
                     <div class="status">
                         <h5 class="title">রক্ত দিব বাচঁবে প্রাণ</h5>
@@ -58,11 +58,21 @@
                                 <button class="btn-getinvite1" ><i class="fa fa-envelope-o"></i> টেক্স করুন</button>  
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <b-col class="col-md-6">
                             <div class="connect-area">
-                                <button type="button" class="btn-getinvite1" data-toggle="popover" title="মোবাইল নাম্বার" data-placement="bottom" ><i class="fa fa-phone"></i> কল করুন</button>
+                                <!--button type="button" class="btn-getinvite1" data-toggle="popover" title="মোবাইল নাম্বার" data-placement="bottom" data-content="`${donator.cell}`" ><i class="fa fa-phone"></i>কল করুন</button-->
+
+                                <b-button class="btn-getinvite1" style="width:auto" :id="'popover-cell'" variant="primary"><i class="fa fa-phone"></i> কল করুন</b-button>
+                                <b-popover
+                                    :target="`popover-cell`"
+                                    :placement="'bottom'"
+                                    title="মোবাইল নাম্বার"
+                                    triggers="click"
+                                    :content="`${donator.cell}`"
+                                ></b-popover>
                             </div>
-                        </div>
+                        </b-col>
+                        
                     </div>
                 </div>
             </form> 
@@ -70,7 +80,13 @@
 </template>
 
 <script>
+
 export default {
+    data(){
+        return{
+            cell:'123'
+        }
+    },
     props:['donator'],
     methods: {
         hidemodal() {

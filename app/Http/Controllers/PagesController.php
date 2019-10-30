@@ -11,7 +11,7 @@ use DB;
 
 class PagesController extends Controller
 {
-    public function bloodDonation(Request $request)
+    public function bloodDonation(Request $request) //function for route 'home' and '/'
     {
         if(Auth::check())
         {
@@ -41,7 +41,7 @@ class PagesController extends Controller
             $totalRequests=DB::table('blood_requests')->where('blood_group',$request->user()->blood_group)->where('donation_place',$request->user()->district)->where('cell','!=',$request->user()->cell)->count();
             return view('blood-service.blood_request')->with(['totalRequest'=>$totalRequests,'blood_request_id'=>$blood_request_id]);  //total requests number and unique blood request id value is being sent to the view
         }
-        return view('blood-service.blood_request')->with('blood_request_id',$blood_request_id);
+        return view('blood-service.blood_request')->with(['totalRequest'=>0,'blood_request_id'=>$blood_request_id]);
     }
     
     public function donatorSearch()
@@ -55,10 +55,15 @@ class PagesController extends Controller
             $totalRequests=DB::table('blood_requests')->where('blood_group',$request->user()->blood_group)->where('donation_place',$request->user()->district)->where('cell','!=',$request->user()->cell)->count();
             return view('blood-service.blood_requests_view')->with(['totalRequest'=>$totalRequests]);  //total requests number and unique blood request id value is being sent to the view
         }
-        return view('blood-service.blood_requests_view');
+        return view('blood-service.blood_requests_view')->with(['totalRequest'=>0]);
     }
 
-    public function essentialInfo(){
-        return view('blood-service.essential_info');
+    public function essentialInfo(Request $request){
+        if(Auth::check())
+        {
+            $totalRequests=DB::table('blood_requests')->where('blood_group',$request->user()->blood_group)->where('donation_place',$request->user()->district)->where('cell','!=',$request->user()->cell)->count();
+            return view('blood-service.essential_info')->with(['totalRequest'=>$totalRequests]);  //total requests number and unique blood request id value is being sent to the view
+        }
+        return view('blood-service.essential_info')->with(['totalRequest'=>0]);
     }
 }

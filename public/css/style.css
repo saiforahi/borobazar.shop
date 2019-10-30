@@ -879,7 +879,6 @@ html {
   
   
   
-  
   /*.header-btns-icon i {
       border: 1px solid #ededed;
       height: 40px;
@@ -907,7 +906,7 @@ html {
       float: left;
       padding: 8px;
       font-size: 14px;
-    }
+  }
   ul.middle2 li {
       list-style: none;
       /* float: left; */
@@ -964,6 +963,94 @@ html {
       cursor: pointer;
       transform: translateY(-10px);
   }
+  
+  /* start notify*/
+  .n_header {
+      background-clip: padding-box;
+      background-color: #fff;
+      border-bottom: solid 1px #ededed;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      padding: 8px 12px 6px;
+      position: relative;
+      z-index: 100;
+  }
+  .n_body {
+      max-height: 250px;
+      overflow-x: auto;
+  }
+  .n_body a {
+      padding: 1em 1em;
+  }
+  .n_body span {
+      color: forestgreen;
+  }
+  span.notify_title {
+      font-size: 11px;
+      color: forestgreen;
+      padding-right: 5.5em;
+  }
+  span.mark_all_read {
+      font-size: 11px;
+      color: #2e3192;
+  }
+  span.mark_all_read:hover {
+      color: forestgreen;
+      text-decoration: underline;
+  }
+  li.n_text_bb:hover{
+      background: #ededed;
+  }
+  li.n_text_bb:hover .notify_indi{
+      visibility: visible;
+      opacity: 1;
+  }
+  li.n_text_bb {
+      border-bottom: 1px solid #ededed;
+  }
+  .n_more {
+      text-align: center;
+      border-top: 1px solid #ededed;
+      padding: .5em;
+  }
+  .n_more span {
+      font-size: 11px;
+      color: forestgreen;
+  }
+  span.view_more:hover {
+      color: #2e3192;
+  }
+  .notify_indi {
+      opacity: 0;
+      visibility: hidden;
+      float: right;
+      position: relative;
+      top: 0;
+      right: 0;
+      transition: 0.3s all;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /* end notify*/
   
   .boxshwd2 {
       box-shadow: 0px 6px 30px 0px rgb(237, 237, 237);
@@ -1139,8 +1226,8 @@ html {
       top: 0;
       left: 0;
       z-index: 1;
-      width: 100vw;
-      height: 100vh;
+      width: 0;
+      height: 0;
       background-color: #000;
   }
   .modal-open {
@@ -1731,7 +1818,7 @@ html {
       display: none;
       position: absolute;
       background-color: #fff;
-      width: 250px;
+      width: 300px;
       box-shadow: 0 0px 5px 0px rgba(0,0,0,0.2);
       z-index: 9;
       height: auto;
@@ -2995,6 +3082,9 @@ html {
       height: 45px;
       vertical-align: top;
   }
+  button:focus {
+      outline: none;
+  }
   button.btn-getinvite1:hover{
       background: forestgreen;
       color: #fff;
@@ -4036,7 +4126,7 @@ html {
       border-bottom: 1px solid #DADADA;
   }
   .product.product-single {
-      margin-top: 15px;
+      /* margin-top: 15px; */
       margin-bottom: 15px;
       -webkit-transition: 0.3s all;
       transition: 0.3s all;
@@ -4208,6 +4298,11 @@ html {
       box-shadow: 0 30px 40px rgba(0, 0, 0, .4);
       cursor: pointer;
       transform: translateY(-10px);
+  }
+  .bogra-area .donar-inner:hover, .product.product-single:after {
+      visibility: visible;
+      opacity: .7;
+      transition: box-shadow .4s, transform .4s;
   }
   table.bldreq-list th {
       font-size: 14px;

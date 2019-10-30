@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="connect-area">
-                        <button type="button" class="btn-getinvite1" data-toggle="popover" title="মোবাইল নাম্বার" data-placement="bottom" data-content="০১৭৯৭৬০১০০৩"><i class="fa fa-phone"></i> কল করুন</button>
+                        <button type="button" class="btn-getinvite1" data-toggle="popover" title="মোবাইল নাম্বার" data-placement="bottom" data-content="123"><i class="fa fa-phone"></i> কল করুন</button>
                     </div>
                 </div>
             </div>

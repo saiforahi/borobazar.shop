@@ -44,4 +44,9 @@ class User extends Authenticatable
         return $this->where('cell', $username)->first(); //customizing username field for passport
     }
 
+    public function BloodRequest()
+    {
+        return $this->hasMany('App\BloodRequest','blood_group','blood_group'); //user has many blood requests
+    }
+
 }

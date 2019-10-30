@@ -1,5 +1,5 @@
 <template>
-    <div class="col-lg-6" v-if="allowed==='yes'">
+    <div class="col-lg-6" style="padding-bottom: 30px;" v-if="allowed==='yes'">
         <div class="donar-inner">
             <table class="bldreq-list">
                 <tr>
