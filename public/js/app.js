@@ -2184,9 +2184,13 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   methods: {
     showmodal: function showmodal(donator) {
-      this.$emit('modal-data', donator); //emits donator's data to parent view
+      if (window.auth_user != undefined) {
+        this.$emit('modal-data', donator); //emits donator's data to parent view
 
-      document.getElementById('donator-modal').style.display = 'block'; //opening modal
+        document.getElementById('donator-modal').style.display = 'block'; //opening modal 
+      } else {
+        alert('অনুগ্রহ করে লগইন করুন');
+      }
     }
   }
 });
@@ -2314,16 +2318,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      laravelData: []
+      laravelData: [],
+      per_page: 2
     };
   },
   props: ['requests'],
-  methods: {},
-  mounted: function mounted() {
-    var _this = this;
+  methods: {
+    showMore: function showMore() {
+      var _this = this;
 
-    axios.get('api/notifications/' + window.auth_user.cell).then(function (response) {
-      _this.laravelData = response.data;
+      this.per_page += 2;
+      axios.get('api/notifications/' + window.auth_user.cell + '/' + this.per_page).then(function (response) {
+        _this.laravelData = response.data;
+      })["catch"](function (error) {//console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    axios.get('api/notifications/' + window.auth_user.cell + '/' + this.per_page).then(function (response) {
+      _this2.laravelData = response.data;
     })["catch"](function (error) {//console.log(error);
     });
   }
@@ -3213,21 +3228,33 @@ __webpack_require__.r(__webpack_exports__);
       modalData: []
     };
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     var _this = this;
 
     //on mounting these statements will be executed
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/districts').then(function (response) {
-      _this.districts = response.data;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/randomdonars').then(function (response) {
+      _this.laravelData.data = response.data;
     });
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    //on mounting these statements will be executed
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/districts').then(function (response) {
+      _this2.districts = response.data;
+    });
+
+    if (window.login_errors != undefined) {
+      alert('অনুগ্রহ করে সঠিক তথ্য দিন');
+    }
   },
   watch: {
     // whenever currentPage changes, this function will run
     currentPage: function currentPage() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/donators/' + this.selectedDistrict + '/' + this.bloodGroup + '?page=' + this.currentPage).then(function (response) {
-        _this2.laravelData = response.data;
+        _this3.laravelData = response.data;
       })["catch"](function (error) {//console.log(error);
       });
     },
@@ -3252,30 +3279,30 @@ __webpack_require__.r(__webpack_exports__);
     },
     // whenever district changes, this function will run
     onChangeDistrict: function onChangeDistrict(event) {
-      var _this3 = this;
+      var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/subdistricts/' + event.target.value).then(function (response) {
-        _this3.subdistricts = response.data;
-        _this3.selectedSubdistrict = '';
+        _this4.subdistricts = response.data;
+        _this4.selectedSubdistrict = '';
       })["catch"](function (error) {// handle error
         //console.log(error);
       });
     },
     // whenever search button get pressed, this function will run
     setData: function setData() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (window.auth_user != null) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/donators/' + this.selectedDistrict + '/' + this.bloodGroup).then(function (response) {
-          _this4.laravelData = response.data;
-          _this4.currentPage = _this4.laravelData.current_page;
-          _this4.rows = _this4.laravelData.total;
-          _this4.per_page = _this4.laravelData.per_page;
+          _this5.laravelData = response.data;
+          _this5.currentPage = _this5.laravelData.current_page;
+          _this5.rows = _this5.laravelData.total;
+          _this5.per_page = _this5.laravelData.per_page;
 
           if (response.data.data.length > 0) {
-            _this4.allowed = 'yes';
+            _this5.allowed = 'yes';
           } else {
-            alert('দুঃখিত এই মুহূর্তে ' + _this4.bloodGroup + ' গ্রুপের কোন রক্তদানকারী ' + _this4.selectedDistrict + ' এ নেই');
+            alert('দুঃখিত এই মুহূর্তে ' + _this5.bloodGroup + ' গ্রুপের কোন রক্তদানকারী ' + _this5.selectedDistrict + ' এ নেই');
           }
         })["catch"](function (error) {//console.log(error);
         });
@@ -68414,12 +68441,6 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("tr", [
-            _c("th", [_vm._v("মোবাইলঃ")]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.donator.cell))])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
             _c("th", [_vm._v("রক্তের গ্রুপঃ")]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(_vm.donator.blood_group))])
@@ -68536,16 +68557,23 @@ var staticRenderFns = [
             _vm._v(" "),
             _c(
               "button",
-              { staticClass: "btn-getinvite1", attrs: { type: "cancle" } },
+              {
+                staticClass: "btn-getinvite1",
+                attrs: { type: "cancle", onclick: "closeForm()" }
+              },
               [_c("i", { staticClass: "fa fa-close" })]
             )
           ])
         ]),
         _vm._v(" "),
-        _c("button", { staticClass: "btn-getinvite1" }, [
-          _c("i", { staticClass: "fa fa-envelope-o" }),
-          _vm._v(" টেক্স করুন")
-        ])
+        _c(
+          "button",
+          { staticClass: "btn-getinvite1", attrs: { onclick: "openForm()" } },
+          [
+            _c("i", { staticClass: "fa fa-envelope-o" }),
+            _vm._v(" রিকুয়েস্ট করুন ")
+          ]
+        )
       ])
     ])
   }
@@ -68764,7 +68792,11 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(2)
+      _c("div", { staticClass: "n_more" }, [
+        _c("a", { attrs: { href: "#" }, on: { click: _vm.showMore } }, [
+          _c("span", { staticClass: "view_more" }, [_vm._v("আরো দেখুন")])
+        ])
+      ])
     ])
   ])
 }
@@ -68825,16 +68857,6 @@ var staticRenderFns = [
         _c("br"),
         _vm._v(" "),
         _c("li", [_c("i", { staticClass: "fa fa-circle" })])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "n_more" }, [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("span", { staticClass: "view_more" }, [_vm._v("আরো দেখুন")])
       ])
     ])
   }
@@ -70132,14 +70154,14 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "overflow-auto" },
-        [
-          _c("br"),
-          _vm._v(" "),
-          _vm.allowed === "yes"
-            ? _c("b-pagination", {
+      _vm.allowed === "yes"
+        ? _c(
+            "div",
+            { staticClass: "overflow-auto" },
+            [
+              _c("br"),
+              _vm._v(" "),
+              _c("b-pagination", {
                 staticClass: "mt-4",
                 attrs: {
                   "total-rows": _vm.rows,
@@ -70237,10 +70259,10 @@ var render = function() {
                   expression: "currentPage"
                 }
               })
-            : _vm._e()
-        ],
-        1
-      ),
+            ],
+            1
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("donator-modal", { attrs: { donator: _vm.modalData } })
     ],

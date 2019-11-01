@@ -30,7 +30,7 @@
             </div>
         </div>
 		<div class="n_more">
-            <a href="#"><span class="view_more">আরো দেখুন</span></a>
+            <a href="#" @click="showMore"><span class="view_more">আরো দেখুন</span></a>
         </div>
 	</div>
 </div>
@@ -39,15 +39,24 @@
 export default {
     data(){
         return{
-            laravelData:[]
+            laravelData:[],
+            per_page:2
         }
     },
     props:['requests'],
     methods: {
-        
+        showMore(){
+            this.per_page+=2;
+            axios.get('api/notifications/'+window.auth_user.cell+'/'+this.per_page).then(response=>{
+            this.laravelData=response.data;
+            })
+            .catch(function (error) {
+            //console.log(error);
+        });
+        }
     },
     mounted(){
-        axios.get('api/notifications/'+window.auth_user.cell).then(response=>{
+        axios.get('api/notifications/'+window.auth_user.cell+'/'+this.per_page).then(response=>{
             this.laravelData=response.data;
             })
             .catch(function (error) {

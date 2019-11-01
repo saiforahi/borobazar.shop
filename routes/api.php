@@ -23,7 +23,8 @@ Route::get('districts','DonationController@getdistricts');
 Route::get('subdistricts/{district}','DonationController@getsubdistricts');
 Route::get('donators/{district}/{bloodGroup}','DonationController@getDonators');
 Route::get('bloodrequests/{district}/{bloodGroup}/{cell}','BloodRequestController@getRequests');
-Route::get('notifications/{cell}','BloodRequestController@getNotifications');
+Route::get('notifications/{cell}/{size}','BloodRequestController@getNotifications');
+Route::get('randomdonars','DonationController@getRandomDonars');
 
 
 /*

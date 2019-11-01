@@ -24,10 +24,10 @@
                             <th>নামঃ</th>
                             <td>{{donator.name}}</td>
                         </tr>
-                        <tr>
+                        <!--tr>
                             <th>মোবাইলঃ</th>
                             <td>{{ donator.cell }}</td>
-                        </tr>
+                        </tr-->
                         <tr>
                             <th>রক্তের গ্রুপঃ</th>
                             <td>{{ donator.blood_group }}</td>
@@ -52,10 +52,10 @@
                                     <form action="" class="form-container">
                                         <textarea type="text" class="form-control2" placeholder="" name="text"></textarea>
                                         <button type="submit" class="btn-getinvite1">পাঠান</button>
-                                        <button type="cancle" class="btn-getinvite1"><i class="fa fa-close"></i></button>
+                                        <button type="cancle" class="btn-getinvite1" onclick="closeForm()"><i class="fa fa-close"></i></button>
                                     </form>
                                 </div>
-                                <button class="btn-getinvite1" ><i class="fa fa-envelope-o"></i> টেক্স করুন</button>  
+                                <button class="btn-getinvite1" onclick="openForm()" ><i class="fa fa-envelope-o"></i> রিকুয়েস্ট করুন </button>  
                             </div>
                         </div>
                         <b-col class="col-md-6">

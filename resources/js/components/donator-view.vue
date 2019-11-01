@@ -40,8 +40,14 @@ export default {
     },
     methods: {
         showmodal(donator){
-            this.$emit('modal-data',donator); //emits donator's data to parent view
-            document.getElementById('donator-modal').style.display='block'; //opening modal
+            if(window.auth_user!=undefined){
+                this.$emit('modal-data',donator); //emits donator's data to parent view
+                document.getElementById('donator-modal').style.display='block'; //opening modal 
+            }
+            else{
+                alert('অনুগ্রহ করে লগইন করুন');
+            }
+            
         },
       
     },

@@ -31,4 +31,13 @@ class DonationController extends Controller
         return $donators;
         #$donators=District::find($district)->users->where('last_donation_date','<=',);
     }
+
+    public function getRandomDonars(){
+        $lastDonationDate = date('Y-m-d', strtotime('-3 month'));
+        $totalUsers=User::all()->count();
+        if($totalUsers>=8){
+            return User::where('last_donation_date','<=',$lastDonationDate)->get()->random(8);
+        }
+        return User::where('last_donation_date','<=',$lastDonationDate)->get()->random(4);
+    }
 }

@@ -36,6 +36,7 @@
                             </button>
                         </form>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -44,10 +45,9 @@
                 <donator-view @modal-data="setModal" v-for="item in laravelData.data" v-bind:donator="item" v-bind:key="item.cell"></donator-view>
             </div>       
         </div>
-        <div class="overflow-auto">
+        <div class="overflow-auto" v-if="allowed==='yes'">
             <br>
             <b-pagination
-                v-if="allowed==='yes'"
                 v-model="currentPage"
                 :total-rows="rows"
                 :per-page="per_page"
@@ -97,11 +97,21 @@
                 modalData:[],
             }
         },
+        beforeMount(){
+            //on mounting these statements will be executed
+            axios.get('api/randomdonars').then(response=>{
+                this.laravelData.data=response.data;
+            });
+        },
         mounted() {
             //on mounting these statements will be executed
             axios.get('api/districts').then(response=>{
                 this.districts=response.data;
             });
+            
+            if(window.login_errors!=undefined){
+                alert('অনুগ্রহ করে সঠিক তথ্য দিন');
+            }
         },
         watch: {
             // whenever currentPage changes, this function will run

@@ -13,6 +13,8 @@ class PagesController extends Controller
 {
     public function bloodDonation(Request $request) //function for route 'home' and '/'
     {
+        $lastDonationDate = date('Y-m-d',strtotime("+1 day"));
+        BloodRequest::where('donation_date','<',$lastDonationDate)->delete();
         if(Auth::check())
         {
             $totalRequest=DB::table('blood_requests')->where('blood_group',$request->user()->blood_group)->where('donation_place',$request->user()->district)->where('cell','!=',$request->user()->cell)->count();

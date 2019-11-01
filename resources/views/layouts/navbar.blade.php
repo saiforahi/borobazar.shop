@@ -36,7 +36,7 @@
                             <li class="nav-item dropdown">
                                 <i class="bsquare fa fa-user"></i>
                                 <a id="navbarDropdown" class="text-uppercase whyborobazar dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Hi, {{ Auth::user()->name }} <span class="caret"></span>
+                                   {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>

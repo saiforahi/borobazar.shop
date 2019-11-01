@@ -5,6 +5,7 @@ use App\BloodRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use phpseclib\Crypt\Random;
 
 class BloodRequestController extends Controller
 {
@@ -51,7 +52,8 @@ class BloodRequestController extends Controller
     {
         $message = [
             'name.required' => 'We need to know your name',
-            'donationDate.after' => 'Given date is passed!'
+            'donationDate.after_or_equal' => 'সঠিক রক্ত গ্রহণের তারিখ দিন',
+            'cell.max'=>''
         ];
 
         $rules=[
@@ -63,7 +65,7 @@ class BloodRequestController extends Controller
             'patientAge'=> 'required|string',
             'presentDistrict' => 'required|string',
             'donationPlace'=> 'required|string',
-            'donationDate'=>'required|date|after:today'
+            'donationDate'=>'required|date|after_or_equal:today'
         ];
         $validator = Validator::make($request->all(),$rules,$message);
         if($validator->fails())
@@ -123,9 +125,11 @@ class BloodRequestController extends Controller
     }
 
     //
-    public function getNotifications($cell){
+    public function getNotifications($cell,$size){
         $user=User::find($cell);
-        $requests=$user->BloodRequest()->get();
+        $requests=BloodRequest::where('blood_group',$user->blood_group)->where('district',$user->district)->where('cell','!=',$user->cell)->orderBy('created_at', 'desc')->take($size)->get();
         return $requests;
     }
+
+    
 }

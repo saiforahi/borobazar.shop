@@ -1,8 +1,11 @@
 @extends('layouts.app')
 @section('content')
-@include('auth.loginModal')
+    @include('auth.loginModal')
         <section class="blood-donar-area">
             <div class="container-fluid pb-5 pt-5" id="search-app-root">
+                    @if ($errors->any())
+                    <script>window.login_errors={!! json_encode($errors) !!}</script>
+                    @endif
                 <search-app-root-component></search-app-root-component>
             </div>
         </section>
