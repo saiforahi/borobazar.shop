@@ -13,7 +13,7 @@ class PagesController extends Controller
 {
     public function bloodDonation(Request $request) //function for route 'home' and '/'
     {
-        $lastDonationDate = date('Y-m-d',strtotime("+1 day"));
+        $lastDonationDate = date('Y-m-d');
         BloodRequest::where('donation_date','<',$lastDonationDate)->delete();
         if(Auth::check())
         {

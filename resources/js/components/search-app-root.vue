@@ -76,7 +76,7 @@
 
 <script>
     import axios from 'axios';
-    
+    import swal from 'sweetalert'
     export default {
         name: 'search-app-root-component',
         
@@ -110,7 +110,7 @@
             });
             
             if(window.login_errors!=undefined){
-                alert('অনুগ্রহ করে সঠিক তথ্য দিন');
+                swal("",'অনুগ্রহ করে সঠিক তথ্য দিন','error');
             }
         },
         watch: {
@@ -177,7 +177,7 @@
                     
                 }
                 else{
-                    alert('অনুগ্রহ করে লগইন করুন');
+                    swal("",'অনুগ্রহ করে লগইন করুন','error');
                 }
             }
         }
