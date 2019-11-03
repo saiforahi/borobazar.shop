@@ -5,10 +5,25 @@ html {
     color: #fff;
     background: #2e3192;
   }
-  
   ::selection {
     color: #fff;
     background: #2e3192;
+  }
+   
+  body::-webkit-scrollbar {
+      background-color: #2e3192;
+  }
+  body::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  }
+  body::-webkit-scrollbar-thumb {
+      background-color: forestgreen;
+      outline: 1px solid forestgreen;
+      border-radius: 8px;
+  }
+  label {
+      font-size: 14px;
+      color: forestgreen;
   }
   /*page loader*/
   
@@ -453,7 +468,15 @@ html {
   }
   .whybb-career {
       padding: 100px 0;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, .1);
+      margin-top: 1em;
+      margin-bottom: 1em;
   }
+  /*.whybb-career:hover {
+      box-shadow: 0 30px 40px rgba(0, 0, 0, .4);
+      cursor: pointer;
+      transform: translateY(-10px);
+  }*/
   .box-activity {
       padding: 50px 35px;
       background-color: #fff;
@@ -463,7 +486,7 @@ html {
       position: relative;
       transition: box-shadow .4s, transform .4s;
       height: 100%;
-      width: 100%;
+      /* width: 100%; */
   }
   .box-activity:hover {
       box-shadow: 0 30px 40px rgba(0, 0, 0, .4);
@@ -496,7 +519,7 @@ html {
   }
   input.form-control {
       background-color: transparent;
-      border: 1px solid #2e3192;
+      border: 1px solid #ededed;
       border-radius: 0;
       font-size: 14px;
   }
@@ -941,6 +964,7 @@ html {
   h4.heading {
       font-size: 14px;
       margin-top: .5em;
+      margin-bottom: .5em;
       color: forestgreen;
   }
   p.heading-text {
@@ -1172,7 +1196,7 @@ html {
       margin-top: 35px;
   }
   .form-c {
-      padding: 1em 1em;
+      padding: .5em 0;
       float: right;
   }
   small.newbb {
@@ -1188,13 +1212,9 @@ html {
   }
   .form-btn {
       position: relative;
-      margin-top: 5em;
-      padding: .5em 0.9em .5em 0;
+      padding: .5em 0;
+      margin: 4em auto 0 auto;
   }
-  .rem {
-      padding: 0 .9em 0 0;
-  }
-  
   input.userrem {
       margin: 12px 10px 20px 0px;
       float: left;
@@ -1231,7 +1251,8 @@ html {
       background-color: #000;
   }
   .modal-open {
-  overflow: visible;
+      overflow: visible;
+      padding-right: 0 !important;
   }
   /* Set a style for all buttons */
   /*button {
@@ -1296,6 +1317,9 @@ html {
       color: #fff;
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
+      height: auto;
+      width: 300px;
+      margin: 0 auto;
   }
   .leftside h4 {
       font-size: 28px;
@@ -1311,10 +1335,12 @@ html {
   /* Modal Content/Box */
   .modal-content {
       background-color: #fff;
-      margin: 0 auto 15% auto;
+      margin: 6% auto 15% auto;
       width: 36%;
       position: relative;
       border: none;
+      min-width: 300px;
+      padding: 0 0.5em;
   }
   button.center.btn.btn-info:hover {
       background-color: #2e3192;
@@ -2173,12 +2199,19 @@ html {
   }
   .fillter-product-item .f-p-text h5 {
       font-size: 14px;
-      font-family: "Poppins", sans-serif;
       letter-spacing: .40px;
-      color: #0b1033;
+      color: forestgreen;
       font-weight: normal;
       padding-top: 16px;
       padding-bottom: 8px;
+  }
+  .fillter-product-item .f-p-text h4 {
+      font-size: 14px;
+      letter-spacing: .40px;
+      color: #2e3192;
+      font-weight: normal;
+      /* padding-top: 16px; */
+      /* padding-bottom: 8px; */
   }
   .owl-carousel.owl-loaded {
       display: block;
@@ -2537,6 +2570,9 @@ html {
       padding-bottom: .5em;
       font-weight: 600;
   }
+  ul>li.breadcrumb-item.active {
+      color: forestgreen;
+  }
   i.fs-14.fa.fa-angle-right {
       font-size: 14px;
   }
@@ -2775,7 +2811,7 @@ html {
   }
   input.form-control2 {
       padding: 7px;
-      border: 1px solid forestgreen;
+      border: 1px solid #ededed;
       background: transparent;
       height: 45px;
       width: 100%;
@@ -2793,15 +2829,15 @@ html {
   #second, #third, #fourth, #five {
       display: none;
   }
-  select.form-control2 {
-      border: 1px solid forestgreen;
+  /*select.form-control2 {
+      border: 1px solid #ededed;
       padding: 7px;
       height: 45px;
       width: 100%;
       font-size: 11px;
       background-color: transparent;
       margin-top: 1.5rem;
-  }
+  }*/
   /*confirmation area*/
   section.confirmation-area {
       padding: 100px;
@@ -2900,6 +2936,7 @@ html {
       color: #fff;
       width: 10%;
       text-align: center;
+      margin-bottom: .5em;
   }
   .product-details-inner h2 {
       font-size: 24px;
@@ -3212,7 +3249,7 @@ html {
   }
   /*input.form-control3 {
       padding: 7px;
-      border: 1px solid forestgreen;
+      border: 1px solid #ededed;
       background: transparent;
       height: 45px;
       width: 100%;
@@ -3221,7 +3258,7 @@ html {
   }*/
   textarea.form-control3 {
       padding: 7px;
-      border: 1px solid forestgreen;
+      border: 1px solid #ededed;
       background: transparent;
       height: 200px;
       width: 100%;
@@ -3773,8 +3810,8 @@ html {
       padding: 0px 11px;
       display: inline-block;
       position: absolute;
-      /* top: 18px; */
-      /* left: 18px; */
+      top: 18px;
+      left: 18px;
       font-size: 14px;
       text-transform: uppercase;
   }
@@ -4073,7 +4110,9 @@ html {
   .sort-filter select.input {
       width: 120px;
   }
-  
+  .store-filter:last-child {
+      padding-top: 5em;
+  }
   .icon-btn.main-btn, .icon-btn.primary-btn {
       width: 40px;
       height: 40px;
@@ -4255,8 +4294,17 @@ html {
   section.blood-donar-area {
       padding: 80px 0px;
   }
-  section.blood-donar-area .search-area {
+  /*section.blood-donar-area .search-area {
       height: 650px;
+  }*/
+  .blood-inner {
+      text-align: center;
+      margin-bottom: .5em;
+  }
+  .blood-srch {
+      width: 100%;
+      text-align: center;
+      padding-right: 2em;
   }
   .search-area img {
       margin-bottom: .5rem;
@@ -4264,6 +4312,11 @@ html {
   .search-area h4 {
       font-size: 18px;
       color: #2e3192;
+  }
+  .blood-srch .search-btn:hover {
+      color: #fff;
+      background: forestgreen;
+      transition: all .5s ease;
   }
   .blood-srch .search-btn {
       height: 40px;
@@ -4274,6 +4327,7 @@ html {
       color: #2e3192;
       background: #ededed;
       outline: none;
+      transition: all .5s ease;
   }
   select.form-control0.search-blood {
       height: 40px;
@@ -4286,6 +4340,7 @@ html {
       font-size: 14px;
       border-collapse: collapse;
       outline: none;
+      width: 100px;
   }
   .bogra-area .donar-inner {
       padding: 3em .5em;
@@ -4312,6 +4367,9 @@ html {
   table.bldreq-list td {
       font-size: 14px;
       color: forestgreen;
+  }
+  .bldreq-list tbody tr:nth-child(even) {
+      background-color: #ededed;
   }
   .bogra-area .donar-inner .thumb img {
       height: 33px;
@@ -4609,16 +4667,27 @@ html {
       height: 40px;
       width: 40px;
       border: 1px solid #ededed;
-      padding: 10px;
+      /* padding: 12px; */
       text-align: center;
       font-size: 14px;
+      line-height: 40px;
+      color: #2e3192;
   }
   .content-inner {
-      font-size: 14px;
-      color: #2e3192;
       display: inline-block;
       vertical-align: top;
-      padding-left: 1.5em;
+      padding-left: 1em;
+  }
+  .scal-link a, .scal-link span {
+      font-size: 14px;
+      color: #2e3192;
+  }
+  .content-inner h6 {
+      font-size: 14px;
+      color: #2e3192;
+  }
+  .content-inner small {
+      color: forestgreen;
   }
   .overview .area {
       padding: 1.5rem 0px;
@@ -4689,7 +4758,10 @@ html {
       cursor: pointer;
       float: right;
   }
-  .edit-tools .edit-btn {
+  .btn-finish {
+      float: right;
+  }
+  /*.edit-tools .edit-btn {
       border: none;
       background-color: transparent;
       color: forestgreen;
@@ -4697,7 +4769,7 @@ html {
       box-shadow: none;
       padding: 2px 2px;
       outline: none;
-  }
+  }*/
   
   /* Style the accordion panel. Note: hidden by default */
   .panel {
@@ -4724,9 +4796,9 @@ html {
     text-align: left;
   }
   
-  tr:nth-child(even) {
-    background-color: #f2f2f2
-  }
+  /*tr:nth-child(even) {
+      background-color: #ededed;
+  }*/
   .personal-address {
       padding: 25px 18px;
   }
@@ -4739,13 +4811,13 @@ html {
       box-shadow: 0px 1px 6px 0px rgb(0, 0, 0, 0.4);
   }
   select.form-control2 {
-      border: 1px solid forestgreen;
+      border: 1px solid #ededed;
       padding: 7px;
       height: 45px;
       width: 100%;
       font-size: 11px;
       background-color: transparent;
-      /* margin-top: 0; */
+      margin-top: 0;
       /* margin-bottom: 1rem; */
   }
   /*eduoccu area*/

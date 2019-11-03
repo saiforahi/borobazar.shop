@@ -2145,6 +2145,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2173,6 +2175,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'donatorView',
   data: function data() {
@@ -2189,7 +2192,7 @@ __webpack_require__.r(__webpack_exports__);
 
         document.getElementById('donator-modal').style.display = 'block'; //opening modal 
       } else {
-        alert('অনুগ্রহ করে লগইন করুন');
+        sweetalert__WEBPACK_IMPORTED_MODULE_0___default()("", 'অনুগ্রহ করে লগইন করুন', 'warning'); //
       }
     }
   }
@@ -3310,7 +3313,9 @@ __webpack_require__.r(__webpack_exports__);
         })["catch"](function (error) {//console.log(error);
         });
       } else {
-        sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("", 'অনুগ্রহ করে লগইন করুন', 'error');
+        sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("", 'অনুগ্রহ করে লগইন করুন', 'warning', {
+          button: "OK"
+        });
       }
     }
   }

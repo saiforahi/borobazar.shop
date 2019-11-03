@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert'
 export default {
     name:'donatorView',
     data(){
@@ -45,7 +46,8 @@ export default {
                 document.getElementById('donator-modal').style.display='block'; //opening modal 
             }
             else{
-                alert('অনুগ্রহ করে লগইন করুন');
+                swal("",'অনুগ্রহ করে লগইন করুন','warning'); //
+                
             }
             
         },
