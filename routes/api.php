@@ -19,8 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register','AuthController@register')->name('apiregister');
 Route::post('login','AuthController@login')->name('apilogin');
 
-Route::get('districts','DonationController@getdistricts');
-Route::get('subdistricts/{district}','DonationController@getsubdistricts');
+Route::get('districts/{division}','DonationController@getdistricts');
+Route::get('subdistricts/{district_id}','DonationController@getsubdistricts');
 Route::get('donators/{district}/{bloodGroup}','DonationController@getDonators');
 Route::get('bloodrequests/{district}/{bloodGroup}/{cell}','BloodRequestController@getRequests');
 Route::get('notifications/{cell}/{size}','BloodRequestController@getNotifications');

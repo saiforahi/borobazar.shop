@@ -3213,6 +3213,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3222,6 +3232,7 @@ __webpack_require__.r(__webpack_exports__);
       selectedDistrict: '',
       districts: [],
       selectedSubdistrict: '',
+      selectedDivision: '',
       subdistricts: [],
       bloodGroup: '',
       laravelData: {
@@ -3240,16 +3251,10 @@ __webpack_require__.r(__webpack_exports__);
     //on mounting these statements will be executed
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/randomdonars').then(function (response) {
       _this.laravelData.data = response.data;
+      console.log(_this.laravelData);
     });
   },
   mounted: function mounted() {
-    var _this2 = this;
-
-    //on mounting these statements will be executed
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/districts').then(function (response) {
-      _this2.districts = response.data;
-    });
-
     if (window.login_errors != undefined) {
       sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("", 'অনুগ্রহ করে সঠিক তথ্য দিন', 'error');
     }
@@ -3257,16 +3262,16 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     // whenever currentPage changes, this function will run
     currentPage: function currentPage() {
-      var _this3 = this;
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/donators/' + this.selectedDistrict + '/' + this.bloodGroup + '?page=' + this.currentPage).then(function (response) {
-        _this3.laravelData = response.data;
+        _this2.laravelData = response.data;
       })["catch"](function (error) {//console.log(error);
       });
     },
     // whenever bloodgroup changes, this function will run
     bloodGroup: function bloodGroup() {
-      this.laravelData = {};
+      //this.laravelData={};
       this.allowed = 'no';
       this.selectedDistrict = '';
       this.selectedSubdistrict = '';
@@ -3276,6 +3281,14 @@ __webpack_require__.r(__webpack_exports__);
     //
     modalData: function modalData() {
       document.getElementById('donator-modal').style.display = 'block';
+    },
+    selectedDivision: function selectedDivision() {
+      var _this3 = this;
+
+      //on changing division this statement will be executed
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/districts/' + this.selectedDivision).then(function (response) {
+        _this3.districts = response.data;
+      });
     }
   },
   methods: {
@@ -3304,6 +3317,7 @@ __webpack_require__.r(__webpack_exports__);
           _this5.currentPage = _this5.laravelData.current_page;
           _this5.rows = _this5.laravelData.total;
           _this5.per_page = _this5.laravelData.per_page;
+          console.log(_this5.laravelData);
 
           if (response.data.data.length > 0) {
             _this5.allowed = 'yes';
@@ -68475,7 +68489,7 @@ var render = function() {
           _c("tr", [
             _c("th", [_vm._v("বসবাসরত এরিয়াঃ")]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.donator.district))])
+            _c("td", [_vm._v(_vm._s(_vm.donator.district_name))])
           ]),
           _vm._v(" "),
           _c("tr", [
@@ -70065,6 +70079,70 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
+                          value: _vm.selectedDivision,
+                          expression: "selectedDivision"
+                        }
+                      ],
+                      staticClass: "form-control0 search-blood",
+                      attrs: { id: "division", name: "division" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.selectedDivision = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "", selected: "" } }, [
+                        _vm._v("বিভাগ নির্বাচন")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "বরিশাল" } }, [
+                        _vm._v("বরিশাল")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "চট্টগ্রাম" } }, [
+                        _vm._v("চট্টগ্রাম")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "ঢাকা" } }, [
+                        _vm._v("ঢাকা")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "ময়মনসিংহ" } }, [
+                        _vm._v("ময়মনসিংহ")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "রাজশাহী" } }, [
+                        _vm._v("রাজশাহী")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "রংপুর" } }, [
+                        _vm._v("রংপুর")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "সিলেট" } }, [
+                        _vm._v("সিলেট")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
                           value: _vm.selectedDistrict,
                           expression: "selectedDistrict"
                         }
@@ -70098,9 +70176,14 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _vm._l(_vm.districts, function(district) {
-                        return _c("option", { key: district.name }, [
-                          _vm._v(_vm._s(district.name))
-                        ])
+                        return _c(
+                          "option",
+                          {
+                            key: district.id,
+                            domProps: { value: district.id }
+                          },
+                          [_vm._v(_vm._s(district.bengali_name))]
+                        )
                       })
                     ],
                     2
@@ -70118,7 +70201,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control0 search-blood",
-                      attrs: { id: "", name: "presentDistrict" },
+                      attrs: { id: "", name: "" },
                       on: {
                         change: function($event) {
                           var $$selectedVal = Array.prototype.filter
@@ -70141,11 +70224,9 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _vm._l(_vm.subdistricts, function(subdistrict) {
-                        return _c(
-                          "option",
-                          { key: subdistrict.sub_district_name },
-                          [_vm._v(_vm._s(subdistrict.sub_district_name))]
-                        )
+                        return _c("option", { key: subdistrict }, [
+                          _vm._v(_vm._s(subdistrict))
+                        ])
                       })
                     ],
                     2

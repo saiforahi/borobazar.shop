@@ -70,76 +70,76 @@
                            <div class="col-lg-6 form-group">
                                <label for="presentDistrict">বসবাসরত এরিয়া *</label>
                                <select class="form-control2 search-blood" id="presentDistrict" name="presentDistrict" required>
-                                       <option value='ব্রাক্ষ্মণবাড়িয়া'>ব্রাক্ষ্মণবাড়িয়া</option>
-                                       <option value='বাগেরহাট'>বাগেরহাট</option>
-                                       <option value='বান্দরবান'>বান্দরবান</option>
-                                       <option value='বরিশাল'>বরিশাল</option>
-                                       <option value='ভোলা'>ভোলা</option>
-                                       <option value='বগুড়া' Selected>বগুড়া</option>
-                                       <option value='বরগুনা'>বরগুনা</option>
-                                       <option value='চাঁদপুর'>চাঁদপুর</option>
-                                       <option value='চাঁপাই নবাবগঞ্জ'>চাঁপাই নবাবগঞ্জ</option>
-                                       <option value='চট্টগ্রাম'>চট্টগ্রাম</option>
-                                       <option value='চুয়াডাঙ্গা'>চুয়াডাঙ্গা</option>
-                                       <option value='কুমিল্লা'>কুমিল্লা</option>
-                                       <option value='কক্সবাজার'>কক্সবাজার</option>
-                                       <option value='ঢাকা'>ঢাকা</option>
-                                       <option value='দিনাজপুর'>দিনাজপুর</option>
-                                       <option value='ফরিদপুর'>ফরিদপুর</option>
-                                       <option value='ফেনী'>ফেনী</option>
-                                       <option value='গাইবান্ধা'>গাইবান্ধা</option>
-                                       <option value='গাজীপুর'>গাজীপুর</option>
-                                       <option value='গোপালগঞ্জ'>গোপালগঞ্জ</option>
-                                       <option value='হবিগঞ্জ'>হবিগঞ্জ</option>
-                                       <option value='জামালপুর'>জামালপুর</option>
-                                       <option value='যশোর'>যশোর</option>
-                                       <option value='ঝালকাঠী'>ঝালকাঠী</option>
-                                       <option value='ঝিনাইদহ'>ঝিনাইদহ</option>
-                                       <option value='জয়পুরহাট'>জয়পুরহাট</option>
-                                       <option value='খাগড়াছড়ি'>খাগড়াছড়ি</option>
-                                       <option value='খুলনা'>খুলনা</option>
-                                       <option value='কিশোরগঞ্জ'>কিশোরগঞ্জ</option>
-                                       <option value='কুড়িগ্রাম'>কুড়িগ্রাম</option>
-                                       <option value='কুষ্টিয়া'>কুষ্টিয়া</option>
-                                       <option value='লালমনিরহাট'>লালমনিরহাট</option>
-                                       <option value='লক্ষ্মীপুর'>লক্ষ্মীপুর</option>
-                                       <option value='মাদারীপুর'>মাদারীপুর</option>
-                                       <option value='মাগুরা'>মাগুরা</option>
-                                       <option value='মানিকগঞ্জ'>মানিকগঞ্জ</option>
-                                       <option value='মেহেরপুর'>মেহেরপুর</option>
-                                       <option value='মৌলভীবাজার'>মৌলভীবাজার</option>
-                                       <option value='মুন্সীগঞ্জ'>মুন্সীগঞ্জ</option>
-                                       <option value='ময়মনসিংহ'>ময়মনসিংহ</option>
-                                       <option value='নওগাঁ'>নওগাঁ</option>
-                                       <option value='নড়াইল'>নড়াইল</option>
-                                       <option value='নারায়নগঞ্জ'>নারায়নগঞ্জ</option>
-                                       <option value='নরসিংদী'>নরসিংদী</option>
-                                       <option value='নাটোর'>নাটোর</option>
-                                       <option value='নেত্রকোণা'>নেত্রকোণা</option>
-                                       <option value='নীলফামারী'>নীলফামারী</option>
-                                       <option value='নোয়াখালী'>নোয়াখালী</option>
-                                       <option value='পাবনা'>পাবনা</option>
-                                       <option value='পঞ্চগড়'>পঞ্চগড়</option>
-                                       <option value='পটুয়াখালী'>পটুয়াখালী</option>
-                                       <option value='পিরোজপুর'>পিরোজপুর</option>
-                                       <option value='রাজবাড়ী'>রাজবাড়ী</option>
-                                       <option value='রাজশাহী'>রাজশাহী</option>
-                                       <option value='রাঙ্গামাটি'>রাঙ্গামাটি</option>
-                                       <option value='রংপুর'>রংপুর</option>
-                                       <option value='সাতক্ষীরা'>সাতক্ষীরা</option>
-                                       <option value='শরিয়তপুর'>শরিয়তপুর</option>
-                                       <option value='শেরপুর'>শেরপুর</option>
-                                       <option value='সিরাজগঞ্জ'>সিরাজগঞ্জ</option>
-                                       <option value='সুনামগঞ্জ'>সুনামগঞ্জ</option>
-                                       <option value='সিলেট'>সিলেট</option>
-                                       <option value='টাঙ্গাইল'>টাঙ্গাইল</option>
-                                       <option value='ঠাকুরগাঁও'>ঠাকুরগাঁও</option>
-                                   </select>
-                                   @error('presentDistrict')
-                                   <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                   @enderror
+                                    <option value='1'>ব্রাক্ষ্মণবাড়িয়া</option>
+                                    <option value='2'>বাগেরহাট</option>
+                                    <option value='3'>বান্দরবান</option>
+                                    <option value='4'>বরিশাল</option>
+                                    <option value='5'>ভোলা</option>
+                                    <option value='6' Selected>বগুড়া</option>
+                                    <option value='7'>বরগুনা</option>
+                                    <option value='8'>চাঁদপুর</option>
+                                    <option value='9'>চাঁপাইনবাবগঞ্জ</option>
+                                    <option value='10'>চট্টগ্রাম</option>
+                                    <option value='11'>চুয়াডাঙ্গা</option>
+                                    <option value='12'>কুমিল্লা</option>
+                                    <option value='13'>কক্সবাজার</option>
+                                    <option value='14'>ঢাকা</option>
+                                    <option value='15'>দিনাজপুর</option>
+                                    <option value='16'>ফরিদপুর</option>
+                                    <option value='17'>ফেনী</option>
+                                    <option value='18'>গাইবান্ধা</option>
+                                    <option value='19'>গাজীপুর</option>
+                                    <option value='20'>গোপালগঞ্জ</option>
+                                    <option value='21'>হবিগঞ্জ</option>
+                                    <option value='22'>জামালপুর</option>
+                                    <option value='23'>যশোর</option>
+                                    <option value='24'>ঝালকাঠী</option>
+                                    <option value='25'>ঝিনাইদহ</option>
+                                    <option value='26'>জয়পুরহাট</option>
+                                    <option value='27'>খাগড়াছড়ি</option>
+                                    <option value='28'>খুলনা</option>
+                                    <option value='29'>কিশোরগঞ্জ</option>
+                                    <option value='30'>কুড়িগ্রাম</option>
+                                    <option value='31'>কুষ্টিয়া</option>
+                                    <option value='32'>লালমনিরহাট</option>
+                                    <option value='33'>লক্ষ্মীপুর</option>
+                                    <option value='34'>মাদারীপুর</option>
+                                    <option value='35'>মাগুরা</option>
+                                    <option value='36'>মানিকগঞ্জ</option>
+                                    <option value='37'>মেহেরপুর</option>
+                                    <option value='38'>মৌলভীবাজার</option>
+                                    <option value='39'>মুন্সীগঞ্জ</option>
+                                    <option value='40'>ময়মনসিংহ</option>
+                                    <option value='41'>নওগাঁ</option>
+                                    <option value='42'>নড়াইল</option>
+                                    <option value='43'>নারায়নগঞ্জ</option>
+                                    <option value='44'>নরসিংদী</option>
+                                    <option value='45'>নাটোর</option>
+                                    <option value='46'>নেত্রকোণা</option>
+                                    <option value='47'>নীলফামারী</option>
+                                    <option value='48'>নোয়াখালী</option>
+                                    <option value='49'>পাবনা</option>
+                                    <option value='50'>পঞ্চগড়</option>
+                                    <option value='51'>পটুয়াখালী</option>
+                                    <option value='52'>পিরোজপুর</option>
+                                    <option value='53'>রাজবাড়ী</option>
+                                    <option value='54'>রাজশাহী</option>
+                                    <option value='55'>রাঙ্গামাটি</option>
+                                    <option value='56'>রংপুর</option>
+                                    <option value='57'>সাতক্ষীরা</option>
+                                    <option value='58'>শরিয়তপুর</option>
+                                    <option value='59'>শেরপুর</option>
+                                    <option value='60'>সিরাজগঞ্জ</option>
+                                    <option value='61'>সুনামগঞ্জ</option>
+                                    <option value='62'>সিলেট</option>
+                                    <option value='63'>টাঙ্গাইল</option>
+                                    <option value='64'>ঠাকুরগাঁও</option>
+                                </select>
+                                @error('presentDistrict')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                            </div>
                            <div class="col-lg-6 form-group">
                                <label for="lastDonationDate">শেষবার রক্ত দানের তারিখ *</label>

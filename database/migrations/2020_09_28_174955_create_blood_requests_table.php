@@ -26,6 +26,8 @@ class CreateBloodRequestsTable extends Migration
             $table->string('donation_date');
             $table->string('about_patient')->nullable();
             $table->timestamps();
+
+            $table->foreign('district')->references('bengali_name')->on('districts')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

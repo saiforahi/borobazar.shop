@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class District extends Model
 {
     protected $table = 'districts';
-    protected $primaryKey = 'name';
+    protected $primaryKey = 'id';
     public $incrementing = false;
-
-    public function sub_districts()
+    
+    public function subdistricts()
     {
-        return $this->hasMany('App\SubDistrict');
+        return $this->hasMany('App\SubDistrict','district_id','id');
     }
 
-    public function users()
-    {
-        return $this->hasMany('App\User','district','name');
+    public function user_details(){
+        return $this->hasMany('App\UserDetails','district_id','id');
     }
+
 }

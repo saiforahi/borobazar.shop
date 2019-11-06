@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use HasApiTokens,Notifiable;
     protected  $primaryKey = 'cell';
-    protected $dates = ['last_donation_date'];
+    
     public $incrementing = false;
     /**
      * The attributes that are mass assignable.
@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','email', 'cell','blood_group','district','blood_organization','last_donation_date', 'password',
+        'name','email', 'cell', 'password',
     ];
     
     /**
@@ -36,17 +36,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
+        'cell_verified_at' => 'datetime',
         'email_verified_at' => 'datetime',
-        'last_donation_date' =>'date:d-M-Y'
     ];
 
     public function findForPassport($username) {
         return $this->where('cell', $username)->first(); //customizing username field for passport
     }
 
-    public function BloodRequest()
-    {
-        return $this->hasMany('App\BloodRequest','blood_group','blood_group'); //user has many blood requests
+    public function user_details(){
+        return $this->hasOne('App\UserDetails','user_cell','cell');
     }
-
 }

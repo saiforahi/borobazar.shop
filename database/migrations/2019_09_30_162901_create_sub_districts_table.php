@@ -14,9 +14,12 @@ class CreateSubDistrictsTable extends Migration
     public function up()
     {
         Schema::create('sub_districts', function (Blueprint $table) {
-            $table->string('district_name');
-            $table->string('sub_district_name');
-            $table->foreign('district_name')->references('name')->on('districts')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('id')->unique();
+            $table->string('district_id');
+            $table->string('bengali_name');
+            $table->string('english_name');
+            $table->primary('id');
+            $table->foreign('district_id')->references('id')->on('districts')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

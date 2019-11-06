@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\UserDetails;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -55,7 +56,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'], #'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'cell' => ['required', 'string', 'max:11', 'unique:users'],
             'blood_group' =>['required','string'],
-            'district' => ['required','string'],
+            'district_id' => ['required','string'],
             'last_donation_date'=>'required|date|before:today',
             'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
@@ -67,16 +68,23 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create_user(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'cell'=> $data['cell'],
-            'blood_group' => $data['bloodGroup'],
-            'district' => $data['presentDistrict'],
-            'blood_organization' =>$data['organizationName'],
-            'last_donation_date' => $data['lastDonationDate'],
             'password' => Hash::make($data['password'])
+        ]);
+    }
+
+    protected function create_user_details(array $data)
+    {
+        return UserDetails::create([
+            'user_cell'=> $data['cell'],
+            'blood_group' => $data['bloodGroup'],
+            'district_id' => $data['presentDistrict'],
+            'blood_organization' =>$data['organizationName'],
+            'last_donation_date' => $data['lastDonationDate']
         ]);
     }
 
@@ -102,9 +110,10 @@ class RegisterController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         else{
-            $user = $this->create($request->all());
+            $user = $this->create_user($request->only('name','cell','password'));
+            $user_details=$this->create_user_details($request->only('cell','bloodGroup','presentDistrict','lastDonationDate','organizationName'));
             Auth::login($user); 
-            return redirect('/')->with(['message'=>'Account Successfully Created.']);
+            return redirect('/')->with(['AccountCreatedMessage'=>'Account Successfully Created!']);
         }
    }
 }

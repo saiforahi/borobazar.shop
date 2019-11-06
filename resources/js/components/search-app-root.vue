@@ -23,13 +23,23 @@
                                 <option value="এবি+">এবি+ (পজিটিভ)</option>
                                 <option value="এবি-">এবি- (নেগেটিভ)</option>
                             </select>
+                            <select class="form-control0 search-blood" id="division" name="division" v-model="selectedDivision">
+                                <option value="" selected>বিভাগ নির্বাচন</option>
+                                <option value="বরিশাল">বরিশাল</option>
+                                <option value="চট্টগ্রাম">চট্টগ্রাম</option>
+                                <option value="ঢাকা">ঢাকা</option>
+                                <option value="ময়মনসিংহ">ময়মনসিংহ</option>
+                                <option value="রাজশাহী">রাজশাহী</option>
+                                <option value="রংপুর">রংপুর</option>
+                                <option value="সিলেট">সিলেট</option>
+                            </select>
                             <select class="form-control0 search-blood" id="presentDistrict" name="presentDistrict" v-model="selectedDistrict" @change="onChangeDistrict($event)">
                                 <option value="" selected>জেলা নির্বাচন</option>
-                                <option v-for="district in districts" v-bind:key="district.name" >{{ district.name }}</option>
+                                <option v-for="district in districts" v-bind:key="district.id" :value="district.id">{{ district.bengali_name }}</option>
                             </select>
-                            <select class="form-control0 search-blood" id="" name="presentDistrict" v-model="selectedSubdistrict">
+                            <select class="form-control0 search-blood" id="" name="" v-model="selectedSubdistrict">
                                 <option value="" selected>থানা/উপজেলা</option>
-                                <option v-for="subdistrict in subdistricts" v-bind:key="subdistrict.sub_district_name" >{{ subdistrict.sub_district_name }}</option>
+                                <option v-for="subdistrict in subdistricts" v-bind:key="subdistrict" >{{ subdistrict}}</option>
                             </select>
                             <button class="search-btn" type="submit" href="#viewDiv">
                                 <i id="demo" class="fa fa-search"></i>
@@ -85,6 +95,7 @@
                 selectedDistrict:'',
                 districts:[],
                 selectedSubdistrict:'',
+                selectedDivision:'',
                 subdistricts:[],
                 bloodGroup:'',
                 laravelData:{
@@ -101,14 +112,10 @@
             //on mounting these statements will be executed
             axios.get('api/randomdonars').then(response=>{
                 this.laravelData.data=response.data;
+                console.log(this.laravelData);
             });
         },
         mounted() {
-            //on mounting these statements will be executed
-            axios.get('api/districts').then(response=>{
-                this.districts=response.data;
-            });
-            
             if(window.login_errors!=undefined){
                 swal("",'অনুগ্রহ করে সঠিক তথ্য দিন','error');
             }
@@ -125,7 +132,7 @@
             },
             // whenever bloodgroup changes, this function will run
             bloodGroup: function(){
-                this.laravelData={};
+                //this.laravelData={};
                 this.allowed='no';
                 this.selectedDistrict='';
                 this.selectedSubdistrict='';
@@ -135,6 +142,13 @@
             //
             modalData: function(){
                 document.getElementById('donator-modal').style.display='block';
+            },
+
+            selectedDivision: function(){
+                //on changing division this statement will be executed
+                axios.get('api/districts/'+this.selectedDivision).then(response=>{
+                this.districts=response.data;
+            });
             }
         },
         methods:{
@@ -145,6 +159,7 @@
             },
             // whenever district changes, this function will run
             onChangeDistrict(event) {
+                
                 axios.get('api/subdistricts/'+event.target.value)
                 .then(response => {
                     this.subdistricts = response.data;
@@ -164,6 +179,7 @@
                     this.currentPage=this.laravelData.current_page;
                     this.rows=this.laravelData.total;
                     this.per_page=this.laravelData.per_page;
+                    console.log(this.laravelData)
                     if(response.data.data.length>0){
                         this.allowed ='yes';
                     }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" oncontextmenu="return false">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -24,7 +24,7 @@
       <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
-<body >
+<body>
       
       @include('layouts.topNav')
       <!--Navigator area -->

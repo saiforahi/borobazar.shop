@@ -14,7 +14,11 @@ class CreateDistrictsTable extends Migration
     public function up()
     {
         Schema::create('districts', function (Blueprint $table) {
-            $table->string('name')->unique();
+            $table->string('id')->unique();
+            $table->string('division');
+            $table->string('bengali_name')->unique();
+            $table->string('english_name')->nullable();
+            $table->primary('id');
         });
     }
 

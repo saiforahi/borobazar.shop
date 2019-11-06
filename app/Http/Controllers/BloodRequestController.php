@@ -35,7 +35,7 @@ class BloodRequestController extends Controller
             'blood_group' => $data['bloodGroup'],
             'quantity' => $data['quantity'],
             'patient_age' => $data['patientAge'],
-            'district' => $data['presentDistrict'],
+            'district_id' => $data['presentDistrict'],
             'donation_place' => $data['donationPlace'],
             'donation_date' => $data['donationDate'],
             'about_patient' => $data['patientDetails']
@@ -127,7 +127,7 @@ class BloodRequestController extends Controller
     //
     public function getNotifications($cell,$size){
         $user=User::find($cell);
-        $requests=BloodRequest::where('blood_group',$user->blood_group)->where('district',$user->district)->where('cell','!=',$user->cell)->orderBy('created_at', 'desc')->take($size)->get();
+        $requests=BloodRequest::where('blood_group',$user->blood_group)->where('district_id',$user->district_id)->where('cell','!=',$user->cell)->orderBy('created_at', 'desc')->take($size)->get();
         return $requests;
     }
 

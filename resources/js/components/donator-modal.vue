@@ -38,7 +38,7 @@
                         </tr>
                         <tr>
                             <th>বসবাসরত এরিয়াঃ</th>
-                            <td>{{ donator.district }}</td>
+                            <td>{{ donator.district_name }}</td>
                         </tr>
                         <tr>
                             <th>সংগঠনের নামঃ</th>
