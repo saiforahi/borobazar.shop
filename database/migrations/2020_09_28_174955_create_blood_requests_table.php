@@ -15,19 +15,21 @@ class CreateBloodRequestsTable extends Migration
     {
         Schema::create('blood_requests', function (Blueprint $table) {
             $table->string('blood_request_id')->unique()->primary();
-            $table->string('name');
-            $table->string('relation');
-            $table->string('cell');
-            $table->string('blood_group');
+            $table->string('patient_name');
+            $table->string('submitted_by');
+            $table->string('relation_with_patient');
+            $table->string('contact_no');
+            $table->Integer('blood_group');
             $table->string('quantity');
-            $table->string('patient_age');
-            $table->string('district');
+            $table->string('patient_age')->nullable();
+            $table->string('district_id');
             $table->string('donation_place');
-            $table->string('donation_date');
+            $table->date('donation_date');
             $table->string('about_patient')->nullable();
             $table->timestamps();
 
-            $table->foreign('district')->references('bengali_name')->on('districts')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('district_id')->references('id')->on('districts')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('blood_group')->references('id')->on('blood_groups')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

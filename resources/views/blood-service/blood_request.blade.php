@@ -29,36 +29,49 @@
                         </ul>
                     </div>
                     @endif
-                   <form class="bloodreq-form row" action="{{ route('blood_request_submit',$blood_request_id) }}" method="POST" id="bloodReqform">
+                   <form class="bloodreq-form row" action="{{ route('blood_request_submit') }}" method="POST" id="bloodReqform">
                        @csrf
-                       <!--p name="blood_request_id">অনুরোধ নং: <strong> {{ $blood_request_id}}</strong></p-->
                        <div class="form-group col-lg-4">
-                           <lebel for="name">অনুরোধকারীর নাম *</lebel>
+                           <lebel for="name">রোগীর নাম *</lebel>
                            <input type="text" class="form-control2" id="name" name="name" placeholder="" required value="{{ old('name') }}">
                        </div>
                        <div class="form-group col-lg-4">
                            <lebel for="text">রোগীর সাথে সম্পর্ক *</lebel>
                            <select class="form-control2 search-blood" name="relation">
-                               <option selected="select"value="ফ্যামিলি">ফ্যামিলি</option>
-                               <option value="আত্নীয়">আত্নীয়</option>
-                               <option value="বন্ধু">বন্ধু</option>
+                                <option selected="select"value="বাবা">বাবা</option>
+                                <option value="মা">মা</option>
+                                <option value="ছেলে">ছেলে</option>
+                                <option value="মেয়ে">মেয়ে</option>
+                                <option value="ভাই">ভাই</option>
+                                <option value="বোন">বোন</option>
+                                <option value="চাঁচা">চাঁচা</option>
+                                <option value="চাঁচী">চাঁচী</option>
+                                <option value="মামা">মামা</option>
+                                <option value="মামী">মামী</option>
+                                <option value="খালু">খালু</option>
+                                <option value="খালা">খালা</option>
+                                <option value="দাদা">দাদা</option>
+                                <option value="দাদি">দাদি</option>
+                                <option value="নানা">নানা</option>
+                                <option value="নানী">নানী</option>
+                                <option value="বন্ধু">বন্ধু</option>
                            </select>
                        </div>
                        <div class="form-group col-lg-4">
-                           <lebel for="cell">মোবাইল *</lebel>
+                           <lebel for="cell">যোগাযোগের নাম্বার *</lebel>
                            <input type="text" class="form-control2" id="cell" name="cell" placeholder="">
                        </div>
                        <div class="form-group col-lg-4">
                            <lebel for="bloodGroup">রোগীর রক্তের গ্রুপ</lebel>
                            <select class="form-control2 search-blood" name="bloodGroup">
-                               <option selected="select"value="এ+">এ+ (পজিটিভ)</option>
-                               <option value="এ-">এ- (নেগেটিভ)</option>
-                               <option value="বি+">বি+ (পজিটিভ)</option>
-                               <option value="বি-">বি- (নেগেটিভ)</option>
-                               <option value="ও+">ও+ (পজিটিভ)</option>
-                               <option value="ও-">ও- (নেগেটিভ)</option>
-                               <option value="এবি+">এবি+ (পজিটিভ)</option>
-                               <option value="এবি-">এবি- (নেগেটিভ)</option>
+                               <option selected="select"value="1">এ+ (পজিটিভ)</option>
+                               <option value="2">এ- (নেগেটিভ)</option>
+                               <option value="3">বি+ (পজিটিভ)</option>
+                               <option value="4">বি- (নেগেটিভ)</option>
+                               <option value="5">ও+ (পজিটিভ)</option>
+                               <option value="6">ও- (নেগেটিভ)</option>
+                               <option value="7">এবি+ (পজিটিভ)</option>
+                               <option value="8">এবি- (নেগেটিভ)</option>
                            </select>
                        </div>
                        <div class="form-group col-lg-4">

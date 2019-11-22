@@ -45,17 +45,12 @@
                                     </form>
                                 </div>
                             </li>
-                            @if($totalRequest>0)
+                           
                             <li class="header-cart dropdown default-dropdown" id="notification-vue">
-                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                    <div class="header-btns-icon">
-                                        <i class="bsquare fa fa-bell-o"></i>
-                                        <span class="count">{{ $totalRequest }}</span>
-                                    </div>
-                                </a>
-                                <notification-panel></notification-panel>
+                                <notification-icon :notification_number="number"></notification-icon>
+                                <notification-panel @new_arrival="setData"></notification-panel>
                             </li>
-                            @endif
+                           
                             @endauth
                             @guest
                                 @if(Request::path() == 'login')

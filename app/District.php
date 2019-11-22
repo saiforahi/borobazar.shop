@@ -12,11 +12,11 @@ class District extends Model
     
     public function subdistricts()
     {
-        return $this->hasMany('App\SubDistrict','district_id','id');
+        return $this->hasMany(SubDistrict::class,'district_id','id');
     }
 
     public function user_details(){
-        return $this->hasMany('App\UserDetails','district_id','id');
+        return $this->hasMany(UserDetails::class,'district_id','id');
     }
 
 }

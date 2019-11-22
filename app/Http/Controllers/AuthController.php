@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
+//use Illuminate\Support\Facades\Hash;
 use Auth;
 
 class AuthController extends Controller
@@ -16,16 +16,20 @@ class AuthController extends Controller
      * 
      * @return \Illuminate\Http\Response 
      */ 
-    public function login(){ 
+    public function login(Request $request){ 
         if(Auth::attempt(['cell' => request('cell'), 'password' => request('password')])){ 
-            $user = Auth::user();
-            $success['token'] =  $user->createToken('accessToken')-> accessToken; 
-            $success['name'] =  $user->name;
-            #dd($success['token']);
-            return redirect('/')->with(['success'=>$success], $this-> successStatus);
+            $user=User::where('cell',$request->cell)->first();
+            Auth::login($user);
+            $success['token'] =  Auth::user()->createToken('accessToken')-> accessToken; 
+            $success['name'] =  Auth::user()->name;
+            dd(Auth::user());
+            //return redirect('/')->with(['success'=>$success],200);
         } 
         else{ 
-            return redirect()->back()->with(['error'=>'অনুগ্রহ করে সঠিক তথ্য দিন']);
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
+            #return redirect()->back()->with(['error'=>'অনুগ্রহ করে সঠিক তথ্য দিন']);
         } 
     }
     //
@@ -46,11 +50,8 @@ class AuthController extends Controller
         return User::create([
             'name' => $data['name'],
             'cell'=> $data['cell'],
-            'blood_group' => $data['bloodGroup'],
-            'district' => $data['presentDistrict'],
-            'blood_organization' =>$data['organizationName'] ?? '',
-            'last_donation_date' => $data['lastDonationDate'],
-            'password' => Hash::make($data['password'])
+            'password' => bcrypt($data['password'])
+            //'password' => Hash::make($data['password'])
         ]);
     }
     public function register(Request $request) 
@@ -72,8 +73,8 @@ class AuthController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         if ($validator->fails()) { 
-            return redirect()->back()->withErrors($validator)->withInput();
-            #return response()->json(['error'=>$validator->errors()], 401);            
+            #return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json(['error'=>$validator->errors()], 401);            
         }
          
         $user = $this->create($request->all()); 

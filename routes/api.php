@@ -21,9 +21,10 @@ Route::post('login','AuthController@login')->name('apilogin');
 
 Route::get('districts/{division}','DonationController@getdistricts');
 Route::get('subdistricts/{district_id}','DonationController@getsubdistricts');
-Route::get('donators/{district}/{bloodGroup}','DonationController@getDonators');
-Route::get('bloodrequests/{district}/{bloodGroup}/{cell}','BloodRequestController@getRequests');
-Route::get('notifications/{cell}/{size}','BloodRequestController@getNotifications');
+Route::middleware('auth:api')->get('donators/{district}/{bloodGroup}','DonationController@getDonators');
+Route::middleware('auth:api')->get('matchedBloodrequests/{size}','BloodRequestController@getRequests');
+Route::middleware('auth:api')->get('notifications/{size}','BloodRequestController@getNotifications');
+Route::middleware('auth:api')->get('newNotification/{blood_request_id}','BloodRequestController@getNewNotification');
 Route::get('randomdonars','DonationController@getRandomDonars');
 
 

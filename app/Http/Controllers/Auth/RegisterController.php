@@ -58,7 +58,7 @@ class RegisterController extends Controller
             'blood_group' =>['required','string'],
             'district_id' => ['required','string'],
             'last_donation_date'=>'required|date|before:today',
-            'password' => ['required', 'string', 'min:8', 'confirmed']
+            'password' => 'required|string|min:8|confirmed'
         ]);
     }
 
@@ -73,7 +73,8 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'cell'=> $data['cell'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
+            'api_token' => Str::random(80)
         ]);
     }
 

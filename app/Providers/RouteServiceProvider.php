@@ -62,6 +62,8 @@ class RouteServiceProvider extends ServiceProvider
      * These routes are typically stateless.
      *
      * @return void
+     * 
+     * 
      */
     protected function mapApiRoutes()
     {
@@ -70,4 +72,12 @@ class RouteServiceProvider extends ServiceProvider
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
     }
+
+    /*protected function mapApiRoutes() {
+    Route::domain('api.' .  env('APP_URL'))
+    ->middleware('api')
+    ->namespace($this->namespace)
+    ->group(base_path('routes/api.php'));*/
 }
+
+

@@ -8,9 +8,9 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens,Notifiable;
+    use Notifiable, HasApiTokens;
     protected  $primaryKey = 'cell';
-    
+    protected $keyType = 'string';
     public $incrementing = false;
     /**
      * The attributes that are mass assignable.
@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','email', 'cell', 'password',
+        'name','email', 'cell', 'password','api_token'
     ];
     
     /**
@@ -45,6 +45,16 @@ class User extends Authenticatable
     }
 
     public function user_details(){
-        return $this->hasOne('App\UserDetails','user_cell','cell');
+        return $this->hasOne(UserDetails::class,'user_cell','cell');
     }
+
+    public function BloodRequest()
+    {
+        return $this->hasMany(BloodRequest::class,'submitted_by','cell'); //user has many blood requests
+    }
+
+    /*public function receivesBroadcastNotificationsOn()
+    {
+        return 'users'.$this->cell;
+    }*/
 }

@@ -30,7 +30,7 @@ Vue.use(VueSession);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
 Vue.component('search-app-root-component', require('./components/search-app-root.vue').default);
 Vue.component('searchDiv', require('./components/searchDiv.vue').default);
 Vue.component('donatorsView', require('./components/donatorsView.vue').default);
@@ -40,12 +40,13 @@ Vue.component('request-list', require('./components/RequestList.vue').default);
 Vue.component('request-view', require('./components/Request.vue').default);
 Vue.component('donator-modal', require('./components/donator-modal.vue').default);
 Vue.component('notification-panel', require('./components/notification.vue').default);
+Vue.component('notification-icon', require('./components/notification-icon.vue').default);
 
 //paginator registration using laravel-vue-pagination
 //Vue.component('pagination',require('laravel-vue-pagination'));
 //passport components
 
-Vue.component(
+/*Vue.component(
     'passport-clients',
     require('./components/passport/Clients.vue').default
 );
@@ -58,7 +59,7 @@ Vue.component(
 Vue.component(
     'passport-personal-access-tokens',
     require('./components/passport/PersonalAccessTokens.vue').default
-);
+);*/
 
 
 
@@ -77,5 +78,15 @@ const requestList = new Vue({
 });
 
 const notificationView = new Vue({
-    el: '#navbarSupportedContent'
+    el: '#navbarSupportedContent',
+    data(){
+        return{
+            number:''
+        }
+    },
+    methods:{
+        setData(data){
+            this.number=data;
+        }
+    }
 });

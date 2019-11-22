@@ -17,14 +17,14 @@
             <div class="area_content">
                 <ul>
                     <li class="n_text_bb" v-for="item in laravelData">
-                        <a href=""><span>{{ item.name }} {{ item.district }} হতে {{ item.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
-                        <div class="notify_indi">
+                        <a href=""><span>{{ item.data.submitted_by }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
+                        <!--div class="notify_indi">
                             <ul>
                                 <li><i class="fa fa-ellipsis-h 2x"></i></li>
                                 <br>
                                 <li><i class="fa fa-circle"></i></li>
                             </ul>
-                        </div>
+                        </div-->
                     </li>                                
                 </ul>
             </div>
@@ -40,15 +40,25 @@ export default {
     data(){
         return{
             laravelData:[],
-            per_page:2
+            per_page:2,
+            unread_notifications:''
         }
     },
     props:['requests'],
     methods: {
         showMore(){
             this.per_page+=2;
-            axios.get('api/notifications/'+window.auth_user.cell+'/'+this.per_page).then(response=>{
+            axios.get('api/notifications/'+this.per_page).then(response=>{
             this.laravelData=response.data;
+            if(this.laravelData.length>0){
+                this.unread_notifications=0;
+                for(var index=0;index<this.laravelData.length;index++){
+                    if(this.laravelData[index].read_at==undefined){
+                        this.unread_notifications+=1;
+                    }
+                }
+                this.$emit('new_arrival',this.unread_notifications);
+            }
             })
             .catch(function (error) {
             //console.log(error);
@@ -56,13 +66,38 @@ export default {
         }
     },
     mounted(){
-        axios.get('api/notifications/'+window.auth_user.cell+'/'+this.per_page).then(response=>{
+        axios.get('api/notifications/'+this.per_page).then(response=>{
             this.laravelData=response.data;
+            if(this.laravelData.length>0){
+                this.unread_notifications=0;
+                for(var index=0;index<this.laravelData.length;index++){
+                    if(this.laravelData[index].read_at==undefined){
+                        this.unread_notifications+=1;
+                    }
+                }
+                this.$emit('new_arrival',this.unread_notifications);
+            }
             })
             .catch(function (error) {
             //console.log(error);
         });
-
+        
+    },
+    created(){
+        Echo.private('App.User.' + window.auth_user.cell)
+            .notification((notification) => {
+                this.$emit('new_arrival',this.unread_notifications+=1);
+                axios.get('api/newNotification/'+notification.blood_request_id).then(response=>{
+                    this.laravelData.unshift(response.data);
+                })
+                .catch(function (error) {
+                //console.log(error);
+                });
+            });
+        /*Echo.channel('blood.')
+            .listen('.BloodRequestEvent', function(data) {
+                alert(JSON.stringify(data));
+        });*/
     }
 }
 </script>

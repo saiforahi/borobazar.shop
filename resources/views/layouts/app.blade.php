@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" oncontextmenu="return false">
+<!--html lang="en" oncontextmenu="return false"-->
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">

@@ -14,17 +14,17 @@
                         <form @submit.prevent="setData">
                             <select class="form-control0 search-blood" name="bloodGroup" v-model="bloodGroup">
                                 <option selected value="">রক্তের গ্রুপ</option>
-                                <option value="এ+">এ+ (পজিটিভ)</option>
-                                <option value="এ-">এ- (নেগেটিভ)</option>
-                                <option value="বি+">বি+ (পজিটিভ)</option>
-                                <option value="বি-">বি- (নেগেটিভ)</option>
-                                <option value="ও+">ও+ (পজিটিভ)</option>
-                                <option value="ও-">ও- (নেগেটিভ)</option>
-                                <option value="এবি+">এবি+ (পজিটিভ)</option>
-                                <option value="এবি-">এবি- (নেগেটিভ)</option>
+                                <option value="1">এ+ (পজিটিভ)</option>
+                                <option value="2">এ- (নেগেটিভ)</option>
+                                <option value="3">বি+ (পজিটিভ)</option>
+                                <option value="4">বি- (নেগেটিভ)</option>
+                                <option value="5">ও+ (পজিটিভ)</option>
+                                <option value="6">ও- (নেগেটিভ)</option>
+                                <option value="7">এবি+ (পজিটিভ)</option>
+                                <option value="8">এবি- (নেগেটিভ)</option>
                             </select>
                             <select class="form-control0 search-blood" id="division" name="division" v-model="selectedDivision">
-                                <option value="" selected>বিভাগ নির্বাচন</option>
+                                <option value="" selected>বিভাগ</option>
                                 <option value="বরিশাল">বরিশাল</option>
                                 <option value="চট্টগ্রাম">চট্টগ্রাম</option>
                                 <option value="ঢাকা">ঢাকা</option>
@@ -34,11 +34,11 @@
                                 <option value="সিলেট">সিলেট</option>
                             </select>
                             <select class="form-control0 search-blood" id="presentDistrict" name="presentDistrict" v-model="selectedDistrict" @change="onChangeDistrict($event)">
-                                <option value="" selected>জেলা নির্বাচন</option>
+                                <option value="" selected>জেলা</option>
                                 <option v-for="district in districts" v-bind:key="district.id" :value="district.id">{{ district.bengali_name }}</option>
                             </select>
                             <select class="form-control0 search-blood" id="" name="" v-model="selectedSubdistrict">
-                                <option value="" selected>থানা/উপজেলা</option>
+                                <option value="" selected>উপজেলা</option>
                                 <option v-for="subdistrict in subdistricts" v-bind:key="subdistrict" >{{ subdistrict}}</option>
                             </select>
                             <button class="search-btn" type="submit" href="#viewDiv">
@@ -46,7 +46,6 @@
                             </button>
                         </form>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -112,7 +111,6 @@
             //on mounting these statements will be executed
             axios.get('api/randomdonars').then(response=>{
                 this.laravelData.data=response.data;
-                console.log(this.laravelData);
             });
         },
         mounted() {
@@ -134,6 +132,7 @@
             bloodGroup: function(){
                 //this.laravelData={};
                 this.allowed='no';
+                this.selectedDivision='';
                 this.selectedDistrict='';
                 this.selectedSubdistrict='';
                 this.per_page='';
@@ -148,7 +147,9 @@
                 //on changing division this statement will be executed
                 axios.get('api/districts/'+this.selectedDivision).then(response=>{
                 this.districts=response.data;
-            });
+                });
+                this.selectedDistrict='';
+                this.selectedSubdistrict='';
             }
         },
         methods:{
@@ -179,7 +180,6 @@
                     this.currentPage=this.laravelData.current_page;
                     this.rows=this.laravelData.total;
                     this.per_page=this.laravelData.per_page;
-                    console.log(this.laravelData)
                     if(response.data.data.length>0){
                         this.allowed ='yes';
                     }

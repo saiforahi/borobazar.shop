@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -81,17 +86,18 @@ class LoginController extends Controller
             return response()->json('Something went wrong on the server.', $e->getCode());
         }
     }
-
+    */
     public function login(Request $request){
         $credentials = $request->only('cell', 'password');
 
-        if (Auth::attempt($credentials)) {
-            // Authentication passed...
-            dd(Auth::user()->district);
+        if (!Auth::attempt($credentials)) {
+            return back()->withErrors(['error'=>'অনুগ্রহ করে সঠিক তথ্য দিন']);
         }
-        else
-        {
-            dd('no data');
-        }
-    } */
+        // Authentication passed...
+        $new_token = Hash::make(Str::random(80));
+        Auth::user()->forceFill([
+            'api_token' => $new_token,
+        ])->save();
+        return redirect()->intended('/');
+    } 
 }

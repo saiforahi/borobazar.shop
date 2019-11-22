@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\BloodRequest;
-use App\User;
+use App\UserDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use phpseclib\Crypt\Random;
-
+use App\Events\BloodRequestEvent;
+use Auth;
 class BloodRequestController extends Controller
 {
     /**
@@ -14,10 +14,14 @@ class BloodRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getRequests($district,$blood_group,$cell)
-    {
-        $requests=BloodRequest::where('blood_group',$blood_group)->where('donation_place',$district)->where('cell','!=',$cell)->paginate(6);  //fetching blood requests with same blood group and donation place 
-        return $requests;
+    public function getRequests($size){   
+       $request_list=BloodRequest::where('submitted_by','!=',Auth::user()->cell)->where('blood_group',Auth::user()->user_details->blood_group)
+                    ->join('blood_groups','blood_groups.id','=','blood_requests.blood_group')
+                    ->join('users','users.cell','=','blood_requests.submitted_by')
+                    ->join('districts','blood_requests.district_id','=','districts.id')
+                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.created_at','blood_requests.updated_at')
+                    ->paginate($size);
+        return $request_list;
     }
 
     /**
@@ -25,13 +29,14 @@ class BloodRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(array $data,$blood_request_id)
+    public function create_request(array $data,$blood_request_id)
     {
         return BloodRequest::create([
             'blood_request_id' => $blood_request_id,
-            'name' => $data['name'],
-            'relation' => $data['relation'],
-            'cell'=> $data['cell'],
+            'patient_name' => $data['name'],
+            'submitted_by' => Auth::user()->cell,
+            'relation_with_patient' => $data['relation'],
+            'contact_no'=> $data['cell'],
             'blood_group' => $data['bloodGroup'],
             'quantity' => $data['quantity'],
             'patient_age' => $data['patientAge'],
@@ -48,12 +53,26 @@ class BloodRequestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$blood_request_id)
+    public function store(Request $request)
     {
+        $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $numbers = rand(100000, 999999);
+        $prefix = "BR";
+        $sufix = $letters[rand(0, 25)];
+        $blood_request_id = $prefix . $numbers . $sufix;
+        while(!Validator::make([$blood_request_id],['blood_request_id'=>'unique:blood_requests,blood_request_id']))
+        {
+            $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            $numbers = rand(100000, 999999);
+            $prefix = "BR";
+            $sufix = $letters[rand(0, 25)];
+            $blood_request_id = $prefix . $numbers . $sufix;
+        }
+
         $message = [
             'name.required' => 'We need to know your name',
             'donationDate.after_or_equal' => 'সঠিক রক্ত গ্রহণের তারিখ দিন',
-            'cell.max'=>''
+            'cell.max'=>'Wrong cell phone number'
         ];
 
         $rules=[
@@ -74,7 +93,12 @@ class BloodRequestController extends Controller
         }
         else
         {
-            $newRequest=$this->create($request->all(),$blood_request_id);
+            $this->create_request($request->all(),$blood_request_id);
+            $newRequest=BloodRequest::where('blood_request_id',$blood_request_id)->first();
+            $user=Auth::user();
+            event(new BloodRequestEvent($newRequest,$user));
+            //event(new BloodRequestEvent($newRequest));
+            //$request->user()->notify(new BloodRequestNotification($newRequest));
             return redirect('/')->with('success','request successfully submitted');
         }
     }
@@ -125,10 +149,13 @@ class BloodRequestController extends Controller
     }
 
     //
-    public function getNotifications($cell,$size){
-        $user=User::find($cell);
-        $requests=BloodRequest::where('blood_group',$user->blood_group)->where('district_id',$user->district_id)->where('cell','!=',$user->cell)->orderBy('created_at', 'desc')->take($size)->get();
-        return $requests;
+    public function getNotifications($size){
+        //$requests=BloodRequest::where('blood_group',$user->blood_group)->where('district_id',$user->district_id)->where('cell','!=',$user->cell)->orderBy('created_at', 'desc')->take($size)->get();
+        return Auth::user()->notifications->take($size);
+    }
+
+    public function getNewNotification($blood_request_id){
+        return Auth::user()->notifications->where('data.blood_request_id',$blood_request_id)->first(); // returning notification
     }
 
     
