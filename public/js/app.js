@@ -2374,29 +2374,23 @@ __webpack_require__.r(__webpack_exports__);
     return {
       laravelData: [],
       per_page: 2,
-      unread_notifications: ''
+      total_unread_notifications: ''
     };
   },
   props: ['requests'],
+  watch: {
+    total_unread_notifications: function total_unread_notifications() {
+      this.$emit('new_arrival', this.total_unread_notifications);
+    }
+  },
   methods: {
     showMore: function showMore() {
       var _this = this;
 
       this.per_page += 2;
       axios.get('api/notifications/' + this.per_page).then(function (response) {
-        _this.laravelData = response.data;
-
-        if (_this.laravelData.length > 0) {
-          _this.unread_notifications = 0;
-
-          for (var index = 0; index < _this.laravelData.length; index++) {
-            if (_this.laravelData[index].read_at == undefined) {
-              _this.unread_notifications += 1;
-            }
-          }
-
-          _this.$emit('new_arrival', _this.unread_notifications);
-        }
+        _this.laravelData = response.data.notifications;
+        _this.total_unread_notifications = response.data.total_unread;
       })["catch"](function (error) {//console.log(error);
       });
     }
@@ -2405,19 +2399,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this2 = this;
 
     axios.get('api/notifications/' + this.per_page).then(function (response) {
-      _this2.laravelData = response.data;
-
-      if (_this2.laravelData.length > 0) {
-        _this2.unread_notifications = 0;
-
-        for (var index = 0; index < _this2.laravelData.length; index++) {
-          if (_this2.laravelData[index].read_at == undefined) {
-            _this2.unread_notifications += 1;
-          }
-        }
-
-        _this2.$emit('new_arrival', _this2.unread_notifications);
-      }
+      _this2.laravelData = response.data.notifications;
+      _this2.total_unread_notifications = response.data.total_unread;
     })["catch"](function (error) {//console.log(error);
     });
   },
@@ -2425,10 +2408,10 @@ __webpack_require__.r(__webpack_exports__);
     var _this3 = this;
 
     Echo["private"]('App.User.' + window.auth_user.cell).notification(function (notification) {
-      _this3.$emit('new_arrival', _this3.unread_notifications += 1);
-
       axios.get('api/newNotification/' + notification.blood_request_id).then(function (response) {
         _this3.laravelData.unshift(response.data);
+
+        _this3.total_unread_notifications += 1;
       })["catch"](function (error) {//console.log(error);
       });
     });
@@ -93363,12 +93346,12 @@ var notificationView = new Vue({
   el: '#navbarSupportedContent',
   data: function data() {
     return {
-      number: ''
+      total_unread: ''
     };
   },
   methods: {
     setData: function setData(data) {
-      this.number = data;
+      this.total_unread = data;
     }
   }
 });

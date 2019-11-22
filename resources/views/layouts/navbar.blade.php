@@ -47,7 +47,7 @@
                             </li>
                            
                             <li class="header-cart dropdown default-dropdown" id="notification-vue">
-                                <notification-icon :notification_number="number"></notification-icon>
+                                <notification-icon :notification_number="total_unread"></notification-icon>
                                 <notification-panel @new_arrival="setData"></notification-panel>
                             </li>
                            

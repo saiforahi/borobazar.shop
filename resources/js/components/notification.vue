@@ -41,24 +41,21 @@ export default {
         return{
             laravelData:[],
             per_page:2,
-            unread_notifications:''
+            total_unread_notifications:''
         }
     },
     props:['requests'],
+    watch:{
+        total_unread_notifications: function(){
+            this.$emit('new_arrival',this.total_unread_notifications);
+        }
+    },  
     methods: {
         showMore(){
             this.per_page+=2;
             axios.get('api/notifications/'+this.per_page).then(response=>{
-            this.laravelData=response.data;
-            if(this.laravelData.length>0){
-                this.unread_notifications=0;
-                for(var index=0;index<this.laravelData.length;index++){
-                    if(this.laravelData[index].read_at==undefined){
-                        this.unread_notifications+=1;
-                    }
-                }
-                this.$emit('new_arrival',this.unread_notifications);
-            }
+            this.laravelData=response.data.notifications;
+            this.total_unread_notifications=response.data.total_unread;
             })
             .catch(function (error) {
             //console.log(error);
@@ -67,16 +64,8 @@ export default {
     },
     mounted(){
         axios.get('api/notifications/'+this.per_page).then(response=>{
-            this.laravelData=response.data;
-            if(this.laravelData.length>0){
-                this.unread_notifications=0;
-                for(var index=0;index<this.laravelData.length;index++){
-                    if(this.laravelData[index].read_at==undefined){
-                        this.unread_notifications+=1;
-                    }
-                }
-                this.$emit('new_arrival',this.unread_notifications);
-            }
+            this.laravelData=response.data.notifications;
+            this.total_unread_notifications=response.data.total_unread;
             })
             .catch(function (error) {
             //console.log(error);
@@ -86,9 +75,9 @@ export default {
     created(){
         Echo.private('App.User.' + window.auth_user.cell)
             .notification((notification) => {
-                this.$emit('new_arrival',this.unread_notifications+=1);
                 axios.get('api/newNotification/'+notification.blood_request_id).then(response=>{
                     this.laravelData.unshift(response.data);
+                    this.total_unread_notifications+=1;
                 })
                 .catch(function (error) {
                 //console.log(error);

@@ -151,7 +151,9 @@ class BloodRequestController extends Controller
     //
     public function getNotifications($size){
         //$requests=BloodRequest::where('blood_group',$user->blood_group)->where('district_id',$user->district_id)->where('cell','!=',$user->cell)->orderBy('created_at', 'desc')->take($size)->get();
-        return Auth::user()->notifications->take($size);
+        $notifications=Auth::user()->notifications->take($size);
+        $total_unread=Auth::user()->unreadNotifications->count();
+        return response()->json(['notifications'=>$notifications,'total_unread'=>$total_unread]) ;
     }
 
     public function getNewNotification($blood_request_id){

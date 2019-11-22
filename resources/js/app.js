@@ -81,12 +81,12 @@ const notificationView = new Vue({
     el: '#navbarSupportedContent',
     data(){
         return{
-            number:''
+            total_unread:''
         }
     },
     methods:{
         setData(data){
-            this.number=data;
+            this.total_unread=data;
         }
     }
 });
