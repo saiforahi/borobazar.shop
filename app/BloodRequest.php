@@ -19,6 +19,6 @@ class BloodRequest extends Model
     ];
 
     public function user(){
-        return $this->belongsTo(User::class,'cell','submitted_by');
+        return $this->belongsTo(Donar::class,'donar_cell','submitted_by');
     }
 }

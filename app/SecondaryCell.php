@@ -11,6 +11,6 @@ class SecondaryCell extends Model
     protected $fillable=['secondary_cell','primary_cell'];
     //
     public function user_details(){
-        return $this.belongsTo(UserDetails::class,'user_cell','primary_cell');
+        return $this.belongsTo(User::class,'cell','primary_cell');
     }
 }

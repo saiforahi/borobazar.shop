@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\BloodRequest;
-use App\UserDetails;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Events\BloodRequestEvent;
@@ -15,7 +15,7 @@ class BloodRequestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getRequests($size){   
-       $request_list=BloodRequest::where('submitted_by','!=',Auth::user()->cell)->where('blood_group',Auth::user()->user_details->blood_group)
+       $request_list=BloodRequest::where('submitted_by','!=',Auth::user()->cell)->where('blood_group',Auth::user()->donar_details->blood_group)->where('district_id',Auth::user()->donar_details->district_id)
                     ->join('blood_groups','blood_groups.id','=','blood_requests.blood_group')
                     ->join('users','users.cell','=','blood_requests.submitted_by')
                     ->join('districts','blood_requests.district_id','=','districts.id')
@@ -95,10 +95,8 @@ class BloodRequestController extends Controller
         {
             $this->create_request($request->all(),$blood_request_id);
             $newRequest=BloodRequest::where('blood_request_id',$blood_request_id)->first();
-            $user=Auth::user();
+            $user=User::where('cell',Auth::user()->cell)->first();
             event(new BloodRequestEvent($newRequest,$user));
-            //event(new BloodRequestEvent($newRequest));
-            //$request->user()->notify(new BloodRequestNotification($newRequest));
             return redirect('/')->with('success','request successfully submitted');
         }
     }

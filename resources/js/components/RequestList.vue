@@ -118,7 +118,6 @@
                     this.laravelData=response.data;
                     this.currentPage=this.laravelData.current_page;
                     this.rows=this.laravelData.total;
-                    console.log(this.laravelData);
                     })
                     .catch(function (error) {
                         //console.log(error);

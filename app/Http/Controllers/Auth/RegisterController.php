@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Donar;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\UserDetails;
@@ -82,6 +83,14 @@ class RegisterController extends Controller
     {
         return UserDetails::create([
             'user_cell'=> $data['cell'],
+            'district_id' => $data['presentDistrict']
+        ]);
+    }
+
+    protected function create_donar(array $data)
+    {
+        return Donar::create([
+            'donar_cell'=> $data['cell'],
             'blood_group' => $data['bloodGroup'],
             'district_id' => $data['presentDistrict'],
             'blood_organization' =>$data['organizationName'],
@@ -113,6 +122,7 @@ class RegisterController extends Controller
         else{
             $user = $this->create_user($request->only('name','cell','password'));
             $user_details=$this->create_user_details($request->only('cell','bloodGroup','presentDistrict','lastDonationDate','organizationName'));
+            $donar=$this->create_donar($request->only('cell','bloodGroup','presentDistrict','lastDonationDate','organizationName'));
             Auth::login($user); 
             return redirect('/')->with(['AccountCreatedMessage'=>'Account Successfully Created!']);
         }

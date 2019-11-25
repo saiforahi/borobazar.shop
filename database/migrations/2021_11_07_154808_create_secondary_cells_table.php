@@ -19,7 +19,7 @@ class CreateSecondaryCellsTable extends Migration
             $table->timestamps();
 
             $table->primary('secondary_cell');
-            $table->foreign('primary_cell')->references('user_cell')->on('user_details')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('primary_cell')->references('cell')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

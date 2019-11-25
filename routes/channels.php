@@ -15,6 +15,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
     return  $user->cell === $id;
 });
 
+
 Broadcast::channel('blood.{group}', function ($user,$blood_group) {
     return $user->user_details->blood_group==$blood_group;
 });

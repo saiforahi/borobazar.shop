@@ -33,16 +33,17 @@
                             </li>
                             <!-- Authentication Links -->
                             @auth
-                            <li class="nav-item dropdown">
-                                <i class="bsquare fa fa-user"></i>
-                                <a id="navbarDropdown" class="text-uppercase whyborobazar dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                   {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                            <li>
+                                <div class="header-account" onclick="myFunction()">
+                                    <i class="bsquare fa fa-user-o"></i>  {{ Auth::user()->name }}
+                                    <div id="demo" class="dropdown-content">
+                                        <a href="{{ route('profile') }}"><i class="mt-1 fa fa-user"></i>আমার অ্যাকাউন্ট</a>
+                                        <a href="#"><i class="mt-1 fa fa-cog"></i>সেটিংস</a>
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="mt-1 fa fa-power-off"></i>লগআউট</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
                                 </div>
                             </li>
                            
@@ -63,7 +64,7 @@
                                 
                                 <li>
                                     <i class="bsquare fa fa-user"></i>
-                                    <a class="text-uppercase whyborobazar" href="#" onclick="document.getElementById('loginModalBlade').style.display='block'">লগইন</a> 
+                                    <a class="text-uppercase whyborobazar" href="{{route('login')}}">লগইন</a> 
                                 </li>
 
                                 @else
@@ -88,6 +89,9 @@
     </div>
          <!--start notification bar.-->
     <script type="text/javascript">
+        function myFunction() {
+            document.getElementById("demo").classList.toggle("open");
+        }
         $(document).ready(function () {
 
         // ANIMATEDLY DISPLAY THE NOTIFICATION COUNTER.

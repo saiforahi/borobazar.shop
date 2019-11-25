@@ -16,17 +16,20 @@
             });
         </script-->
         <!--auto modal--> 
+        <!-- document.cookie.indexOf('visited=true') == -1 -->
         <script> 
         // A $( document ).ready() block.
             $( document ).ready(function() {
                 if (document.cookie.indexOf('visited=true') == -1 && window.auth_user==undefined){
                     // load the overlay
-                    $('#automodal').modal({show:true});
+                    
                     //var year = 1000*60*60*24*365;
                     var lifetime = 1000*60*15;
                     var expires = new Date((new Date()).valueOf() + lifetime);
                     document.cookie = "visited=true;expires=" + expires.toUTCString();
-     
+                    setTimeout(function(){
+                        $('#loginModalBlade').modal({show:true});
+                    },3000); // 1000ms = 1 second
                 }
             }); 	
         </script>          

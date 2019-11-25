@@ -29,10 +29,8 @@ class BloodRequestListener implements ShouldQueue
      */
     public function handle(BloodRequestEvent $event)
     {
-       $users=User::join('user_details','user_details.user_cell','=','users.cell')->where('cell','!=',$event->user->cell)->where('blood_group',$event->blood_request->blood_group)->get();
-       /*foreach($users as $user){
-           $user->notify(new BloodRequestNotification($event->blood_request));
-       }*/
+        $lastDonationDate = date('Y-m-d', strtotime('-3 month'));
+        $users=User::where('cell','!=',$event->user->cell)->join('donars','donars.donar_cell','=','users.cell')->where('donars.blood_group',$event->blood_request->blood_group)->where('donars.last_donation_date','<=',$lastDonationDate)->get();
         Notification::send($users, new BloodRequestNotification($event->blood_request));
     }
 }

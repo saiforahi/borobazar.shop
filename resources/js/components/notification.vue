@@ -73,18 +73,24 @@ export default {
         
     },
     created(){
-        Echo.private('App.User.' + window.auth_user.cell)
+        console.log('created');
+        if(window.auth_user!=null){
+            Echo.private('App.User.'+window.auth_user.cell)
             .notification((notification) => {
+                console.log('working');
                 axios.get('api/newNotification/'+notification.blood_request_id).then(response=>{
                     this.laravelData.unshift(response.data);
                     this.total_unread_notifications+=1;
+                    new Audio('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3').play();
                 })
                 .catch(function (error) {
                 //console.log(error);
                 });
             });
-        /*Echo.channel('blood.')
-            .listen('.BloodRequestEvent', function(data) {
+        }
+        
+        /*Echo.channel('my-channel.')
+            .listen('.my-event', function(data) {
                 alert(JSON.stringify(data));
         });*/
     }

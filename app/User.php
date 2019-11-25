@@ -48,13 +48,12 @@ class User extends Authenticatable
         return $this->hasOne(UserDetails::class,'user_cell','cell');
     }
 
-    public function BloodRequest()
-    {
-        return $this->hasMany(BloodRequest::class,'submitted_by','cell'); //user has many blood requests
+
+    public function donar_details(){
+        return $this->hasOne(Donar::class,'donar_cell','cell');
     }
 
-    /*public function receivesBroadcastNotificationsOn()
-    {
-        return 'users'.$this->cell;
-    }*/
+    public function secondary_cells(){
+        return $this.hasMany(SecondaryCell::class,'primary_cell','cell');
+    }
 }

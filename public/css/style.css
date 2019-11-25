@@ -456,8 +456,8 @@ span.fs-48 {
 }
 span.fs-49 {
     font-size: 45px;
-    background-image: linear-gradient(transparent 66%, #ededed -25%);
-    background-repeat: repeat-x;
+    /*background-image: linear-gradient(transparent 66%, #ededed -25%);
+    background-repeat: repeat-x;*/
     color: #228b22;
     display: inline;
     font-weight: 600;
@@ -497,10 +497,10 @@ p.cr-para {
     box-shadow: 0 10px 20px rgba(0, 0, 0, .1);
     display: flex;
     flex-direction: column;
-    /* position: relative; */
+    position: relative;
     transition: box-shadow .4s, transform .4s;
-    height: 480px;
-    width: 100%;
+    height: auto;
+    /* width: 100%; */
     margin-top: 1em;
 }
 .box-activity:hover {
@@ -2699,12 +2699,17 @@ section.empty-cart-area {
     box-shadow: 0px 1px 5px 6px rgb(237, 237, 237);
     padding: 1.5rem;
 }
-form.track-form .form-group {
+/*form.track-form .form-group {
     margin-bottom: 30px;
-}
-form.track-form .form-group lebel {
+}*/
+form.track-form,
+.form-group,
+.bloodreg-inner.blood-form-inner lebel.cfg,
+lebel {
     font-size: 14px;
     color: forestgreen;
+    display: inline-block;
+    margin-bottom: 0.5rem;
 }
 form.track-form .form-group input {
     display: block;
@@ -2712,10 +2717,6 @@ form.track-form .form-group input {
     line-height: 30px;
     padding: 7px;
     border: 1px solid #ededed;
-}
-lebel {
-    display: inline-block;
-    margin-bottom: 0.5rem;
 }
 /*contact area*/
 .contact-info-item {
@@ -2877,18 +2878,6 @@ input#male {
 input#female {
     margin-left: 100px;
 }
-input.form-control2 {
-    padding: 7px;
-    border: 1px solid #ededed;
-    background: transparent;
-    height: 45px;
-    width: 100%;
-    font-size: 14px;
-}
-lebel.cfg {
-    color: forestgreen;
-    font-size: 14px;
-}
 a.frgetpass {
     margin-top: 25px;
     float: right;
@@ -2897,15 +2886,6 @@ a.frgetpass {
 #second, #third, #fourth, #five {
     display: none;
 }
-/*select.form-control2 {
-    border: 1px solid #ededed;
-    padding: 7px;
-    height: 45px;
-    width: 100%;
-    font-size: 11px;
-    background-color: transparent;
-    margin-top: 1.5rem;
-}*/
 /*confirmation area*/
 section.confirmation-area {
     padding: 100px;
@@ -3699,21 +3679,17 @@ button#viewBtn {
 
 
 /*register page*/
-.register-inner {
-    margin: auto;
-    max-width: 600px;
-    box-shadow: 0px 1px 5px 6px rgb(237, 237, 237);
-    padding: 1.5em;
-}
-.register-inner .already {
+.bloodreg-inner .already, .register-inner .already {
     color: #2e3192;
+    font-size: 12px;
 }
-.register-inner .login {
+.login a {
     color: forestgreen;
     font-size: 12px;
     margin-left: 8px;
+    transition: all ease .5s;
 }
-.register-inner .login:hover {
+.login a:hover {
     color: #2e3192;
 }
 /*compare area*/
@@ -4584,6 +4560,33 @@ h5.btitle {
 
 
 /*account area*/
+.iconbar-area {
+    top: 60%;
+    left: 0px;
+    transform: translateY(-50%);
+    position: fixed;
+    z-index: 100;
+}
+.iconbar-area ul {
+    padding: initial;
+}
+.iconbar-area ul li {
+    height: 40px;
+    width: 40px;
+    list-style-type: none;
+    padding-left: 12px;
+    padding-top: 6px;
+    transition: all ease .5s;
+}
+ul.iconbar-inner li {
+    background:#fff;
+}
+
+.iconbar-area ul li:hover {
+    padding-left: 40px;
+    width: 80px;
+    transition: all ease .5s;
+}
 .account-area {
     padding: 45px 0px 0px;
 }
@@ -4815,7 +4818,10 @@ i.fa.fa-hands:before {
     background-color: #ededed;
     /* border-color: #dee2e6 #dee2e6 #fff; */
 }
-.personal-details {
+.personal-details,
+.social-work {
+    padding: 25px 0;
+} {
     padding: 25px 0px;
 }
 .accordion {
@@ -4901,7 +4907,7 @@ th:first-child, td:first-child {
     height: 45px;
     box-shadow: 0px 1px 6px 0px rgb(0, 0, 0, 0.4);
 }
-select.form-control2 {
+select.form-control2, .bloodreg-area.pt-5.pb-5 .bloodreg-inner .bloodreg-form select.form-control2, .bloodreq-area .bloodreq-form select.form-control2 {
     border: 1px solid #ededed;
     padding: 7px;
     height: 45px;
@@ -4909,7 +4915,8 @@ select.form-control2 {
     font-size: 11px;
     background-color: transparent;
     margin-top: 0;
-    /* margin-bottom: 1rem; */
+    margin-bottom: 1rem;
+    color: #2e3192;
 }
 /*eduoccu area*/
 .edu {
@@ -5208,39 +5215,10 @@ section.product-sub-catagories {
 }
 
 /*blood donation area*/
-.bloodreq-form-area.pt-5.pb-5 h4 {
+.bloodreq-area.pt-5.pb-5 h4 {
     font-size: 20px;
     color: #2e3192;
     padding-bottom: 1em;
-}
-.bloodreq-form-area.pt-5.pb-5 {
-    margin: auto;
-    /* max-width: 600px; */
-    box-shadow: 0px 1px 5px 6px rgb(237, 237, 237);
-    padding: 1.5em;
-}
-.blood-form-inner lebel {
-    font-size: 14px;
-    color: forestgreen;
-}
-.bloodreq-form-area .bloodreq-form input.form-control2 {
-    padding: 7px;
-    border: 1px solid #ededed;
-    background: transparent;
-    height: 45px;
-    width: 100%;
-    font-size: 14px;
-}
-.bloodreq-area .bloodreq-form select.form-control2 {
-    border: 1px solid #ededed;
-    padding: 7px;
-    height: 45px;
-    width: 100%;
-    font-size: 14px;
-    background-color: transparent;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: #2e3192;
 }
 .bloodreq-area.pt-5.pb-5 .bloodreq-form textarea {
     height: 230px;
@@ -5260,7 +5238,7 @@ span.text-sm {
     font-size: 14px;
     color: #2e3192;
 }
-.bloodreg-area.pt-5.pb-5 .bloodreg-inner .bloodreg-form select.form-control2 {
+input.form-control2, .bloodreq-form-area .bloodreq-form input.form-control2, .bloodreg-area.pt-5.pb-5 .bloodreg-inner .bloodreg-form input.form-control2 {
     border: 1px solid #ededed;
     padding: 7px;
     height: 45px;
@@ -5268,37 +5246,23 @@ span.text-sm {
     font-size: 14px;
     background-color: transparent;
     margin-top: 0;
-    margin-bottom: 1rem;
+    /* margin-bottom: .5em; */
     color: #2e3192;
 }
-.bloodreg-area.pt-5.pb-5 .bloodreg-inner .bloodreg-form input.form-control2 {
-    border: 1px solid #ededed;
-    padding: 7px;
-    height: 45px;
-    width: 100%;
-    font-size: 14px;
-    background-color: transparent;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: #2e3192;
-}
-.bloodreg-area.pt-5.pb-5 .bloodreg-inner{
-    margin: auto;
+.register-area.pt-5.pb-5 .register-inner,
+.secuquest {
+   margin: auto;
     max-width: 600px;
     box-shadow: 0px 1px 5px 6px rgb(237, 237, 237);
+    padding: 1.5em; 
+}
+
+.bloodreg-area.pt-5.pb-5 .bloodreg-inner,
+.bloodreq-area.pt-5.pb-5 .bloodreq-inner{
+    margin: auto;
+    max-width: 800px;
+    box-shadow: 0px 1px 5px 6px rgb(237, 237, 237);
     padding: 1.5em;
-}
-.bloodreg-inner lebel {
-    font-size: 14px;
-    color: forestgreen;
-}
-.bloodreg-inner .already {
-    color: #2e3192;
-}
-.bloodreg-inner .login {
-    color: forestgreen;
-    font-size: 12px;
-    margin-left: 8px;
 }
 .navbar a.dropdown-item {
     font-size: 14px;
@@ -5342,16 +5306,379 @@ section.error-area {
 }
 /*End Error page area*/
 
+/*settings area*/
+.settings-area{
+    padding: 25px 0;
+}
+.settings.nav-tabs {
+    border: none;
+    padding: 2em 0;
+    display: block;
+}
+.settings.nav-tabs .nav-item {
+    margin-bottom: -1px;
+    border-right: 1px solid forestgreen;
+}
+h4.title {
+    padding: 1em 0;
+    color: #2e3192;
+    font-size: 20px;
+}
+/*chat box*/
+.chatbox {
+    position: fixed;
+    bottom: 0;
+    right: 30px;
+    width: 300px;
+    height: 400px;
+    background-color: #fff;
+    font-family: 'Lato', sans-serif;
+    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 999;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+span.input-group-btn {
+    margin-top: 6px;
+}
+i.fa.fa-caret-right {
+    margin-left: 6px;
+}
 
+.chatbox--tray {
+    bottom: -350px;
+}
 
+.chatbox--closed {
+    bottom: -400px;
+}
 
+.chatbox .form-control:focus {
+    border-color: #1f2836;
+}
 
+.chatbox__title,
+.chatbox__body {
+    border-bottom: none;
+}
 
+.chatbox__title {
+    min-height: 50px;
+    padding-right: 10px;
+    background-color: #2e3192;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    cursor: pointer;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
 
+.chatbox__title h5 {
+    height: 50px;
+    margin: 0 0 0 15px;
+    line-height: 50px;
+    position: relative;
+    padding-left: 20px;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    font-size: 14px;
+    color: #fff;
+}
 
+.chatbox__title h5 a {
+    color: #fff;
+    max-width: 195px;
+    display: inline-block;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
+.chatbox__title h5:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    background: #4CAF50;
+    border-radius: 6px;
 
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
 
+.chatbox__title__tray,
+.chatbox__title__close {
+    width: 24px;
+    height: 24px;
+    outline: 0;
+    border: none;
+    background-color: transparent;
+    opacity: 0.5;
+    cursor: pointer;
+
+    -webkit-transition: opacity 200ms;
+    transition: opacity 200ms;
+}
+
+.chatbox__title__tray:hover,
+.chatbox__title__close:hover {
+    opacity: 1;
+}
+
+.chatbox__title__tray span {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-bottom: 2px solid #fff
+}
+
+.chatbox__title__close svg {
+    vertical-align: middle;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.2px;
+}
+
+.chatbox__body, .chatbox__credentials {
+    padding: 15px;
+    border-top: 0;
+    background-color: #ededed;
+    border-left: 1px solid #ededed;
+    border-right: 1px solid #ededed;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+}
+
+.chatbox__credentials {
+    display: none;
+}
+
+.chatbox__credentials .form-control {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.chatbox__body {
+    overflow-y: auto;
+}
+strong.unam {
+    font-size: 14px;
+    color: #2e3192;
+}
+.chatbox__body__message {
+    position: relative;
+}
+
+.chatbox__body__message p {
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px rgba(100, 100, 100, 0.1);
+    box-shadow: 1px 1px rgba(100, 100, 100, 0.1);
+}
+
+.chatbox__body__message img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #fcfcfc;
+    position: absolute;
+    top: 15px;
+}
+
+.chatbox__body__message--left p {
+    margin-left: 15px;
+    padding-left: 30px;
+    text-align: left;padding-top: 25px;
+}
+
+.chatbox__body__message--left img {
+    left: -5px;
+}
+
+.chatbox__body__message--right p {
+    margin-right: 15px;
+    padding-right: 30px;
+    text-align: right;
+}
+
+.chatbox__body__message--right img {
+    right: -5px;
+}
+
+.chatbox__message {
+    padding: 15px;
+    min-height: 50px;
+    outline: 0;
+    resize: none;
+    border: none;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    background-color: #fefefe;
+}
+
+.chatbox--empty {
+    height: 262px;
+}
+
+.chatbox--empty.chatbox--tray {
+    bottom: -212px;
+}
+
+.chatbox--empty.chatbox--closed {
+    bottom: -262px;
+}
+
+.chatbox--empty .chatbox__body,
+.chatbox--empty .chatbox__message {
+    display: none;
+}
+
+.chatbox--empty .chatbox__credentials {
+    display: block;
+}
+.chatbox_timing {
+    position: absolute;
+    right: 10px;
+    font-size: 12px;
+    top: 2px;
+}
+.chatbox_timing ul{padding:0;margin:0}
+.chatbox_timing ul li {
+    list-style: none;
+    display: inline-block;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.chatbox_timing ul li a {
+    display: block;
+    color: forestgreen;
+}
+
+.ul_msg {
+
+    
+    padding: 10px !important;
+
+}
+.chatbox__body__message--right .ul_section_full{
+	margin-right: 15px;
+padding-right: 30px;
+text-align: right;
+border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px rgba(100, 100, 100, 0.1);
+    box-shadow: 1px 1px rgba(100, 100, 100, 0.1);margin-bottom: 15px;
+padding-bottom: 5px;padding-top:15px;
+}
+.chatbox__body__message--left .ul_section_full {
+
+    margin-left: 15px;
+    padding-left: 15px;
+    text-align: left;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px rgba(100, 100, 100, 0.1);
+    box-shadow: 1px 1px rgba(100, 100, 100, 0.1);
+
+}
+.ul_msg{padding:0;margin:0px}
+.ul_msg li{list-style:none;display:block}
+.ul_msg2{padding:0;margin:0px;text-align: right;}
+.ul_msg2 li{list-style:none;display:inline-block;margin-right: 15px;}
+.chatbox__body__message--right .chatbox_timing  {
+    position: absolute;
+    left: 10px;
+    font-size: 12px;
+    top: 2px;
+}
+.chatbox__body__message--right .ul_msg2{text-align:left}
+.chatbox__body__message--right .ul_msg2 li {
+    list-style: none;
+    display: inline-block;
+    margin-left: 15px;margin-right:0px
+}
+.chat_set_height {
+    height: 40px;
+    margin-top: 1px;
+}
+.chatbox22 .form-control:focus {
+    border-color: #DCDCDC;
+}
+.width50{width:50%;float:left;background:#ECECEC;}
+/*======================Chat Box Ends=====================================================*/
+/*======================Message=====================================================*/
+.message_check{padding-top:10px;}
+.messsade_date {
+    text-align: left;
+    padding-top: 9px;
+}
+.messsade_date a{color:#000;}
+.padleftright0{padding-left:0px;padding-right:0px;}
+.message_box_area {
+    color: #000;
+    cursor: pointer;
+}
+.create_m {
+    border: 1px solid #ccc !important;
+}
+.fileinput-button {
+    float: left;
+    margin-right: 4px;
+    overflow: hidden;
+    position: relative;
+}
+.fileinput-button {
+    background: none repeat scroll 0 0 #eeeeee;
+    border: 1px solid #e6e6e6;margin-top: 15px;
+}
+.fileinput-button {
+    float: left;
+    margin-right: 4px;
+    overflow: hidden;
+    position: relative;
+}
+.fileinput-button input {
+    cursor: pointer;
+    direction: ltr;
+    font-size: 23px;
+    margin: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(-300px, 0px) scale(4);
+}
+.fileupload-buttonbar .btn, .fileupload-buttonbar .toggle {
+    margin-bottom: 5px;
+}
+.create_m:focus {
+    border-color: #66afe9 !important;
+    outline: 0 !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6) !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6) !important;
+}
+.col-lg-3.control-label {
+    text-align: left;
+}
 
 
 

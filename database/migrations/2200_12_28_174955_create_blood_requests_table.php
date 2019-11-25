@@ -16,7 +16,7 @@ class CreateBloodRequestsTable extends Migration
         Schema::create('blood_requests', function (Blueprint $table) {
             $table->string('blood_request_id')->unique()->primary();
             $table->string('patient_name');
-            $table->string('submitted_by');
+            $table->string('submitted_by')->nullable();
             $table->string('relation_with_patient');
             $table->string('contact_no');
             $table->Integer('blood_group');
@@ -30,6 +30,7 @@ class CreateBloodRequestsTable extends Migration
 
             $table->foreign('district_id')->references('id')->on('districts')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('blood_group')->references('id')->on('blood_groups')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('submitted_by')->references('donar_cell')->on('donars')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

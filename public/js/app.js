@@ -2042,7 +2042,6 @@ __webpack_require__.r(__webpack_exports__);
         _this2.laravelData = response.data;
         _this2.currentPage = _this2.laravelData.current_page;
         _this2.rows = _this2.laravelData.total;
-        console.log(_this2.laravelData);
       })["catch"](function (error) {//console.log(error);
       });
     }
@@ -2407,18 +2406,25 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this3 = this;
 
-    Echo["private"]('App.User.' + window.auth_user.cell).notification(function (notification) {
-      axios.get('api/newNotification/' + notification.blood_request_id).then(function (response) {
-        _this3.laravelData.unshift(response.data);
+    console.log('created');
 
-        _this3.total_unread_notifications += 1;
-      })["catch"](function (error) {//console.log(error);
+    if (window.auth_user != null) {
+      Echo["private"]('App.User.' + window.auth_user.cell).notification(function (notification) {
+        console.log('working');
+        axios.get('api/newNotification/' + notification.blood_request_id).then(function (response) {
+          _this3.laravelData.unshift(response.data);
+
+          _this3.total_unread_notifications += 1;
+          new Audio('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3').play();
+        })["catch"](function (error) {//console.log(error);
+        });
       });
-    });
-    /*Echo.channel('blood.')
-        .listen('.BloodRequestEvent', function(data) {
+    }
+    /*Echo.channel('my-channel.')
+        .listen('.my-event', function(data) {
             alert(JSON.stringify(data));
     });*/
+
   }
 });
 
@@ -93396,7 +93402,6 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + window.auth_user.api_token;
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
  * all outgoing HTTP requests automatically have it attached. This is just
@@ -93419,19 +93424,22 @@ if (token) {
 
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
-  broadcaster: 'pusher',
-  key: "b63085ad795a75e45ebf",
-  cluster: "ap2",
-  forceTLS: true,
-  encrypted: true
-  /*auth: {
-      headers: {
-          Authorization: 'Bearer ' + window.auth_user.api_token
-      }
-  }*/
 
-});
+if (window.auth_user) {
+  window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + window.auth_user.api_token;
+  window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
+    broadcaster: 'pusher',
+    key: "06275fd12d68db19f10c",
+    cluster: "ap2",
+    forceTLS: true,
+    encrypted: true,
+    auth: {
+      headers: {
+        Authorization: 'Bearer ' + window.auth_user.api_token
+      }
+    }
+  });
+}
 
 /***/ }),
 
