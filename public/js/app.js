@@ -2367,7 +2367,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2383,28 +2382,37 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    showMore: function showMore() {
+    markRead: function markRead(data) {
       var _this = this;
+
+      axios.post('api/notifications/markread/' + data + '/' + this.per_page).then(function (response) {
+        _this.laravelData = response.data.notifications;
+        _this.total_unread_notifications = response.data.total_unread;
+      })["catch"](function (error) {//console.log(error);
+      });
+    },
+    showMore: function showMore() {
+      var _this2 = this;
 
       this.per_page += 2;
       axios.get('api/notifications/' + this.per_page).then(function (response) {
-        _this.laravelData = response.data.notifications;
-        _this.total_unread_notifications = response.data.total_unread;
+        _this2.laravelData = response.data.notifications;
+        _this2.total_unread_notifications = response.data.total_unread;
       })["catch"](function (error) {//console.log(error);
       });
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     axios.get('api/notifications/' + this.per_page).then(function (response) {
-      _this2.laravelData = response.data.notifications;
-      _this2.total_unread_notifications = response.data.total_unread;
+      _this3.laravelData = response.data.notifications;
+      _this3.total_unread_notifications = response.data.total_unread;
     })["catch"](function (error) {//console.log(error);
     });
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     console.log('created');
 
@@ -2412,9 +2420,10 @@ __webpack_require__.r(__webpack_exports__);
       Echo["private"]('App.User.' + window.auth_user.cell).notification(function (notification) {
         console.log('working');
         axios.get('api/newNotification/' + notification.blood_request_id).then(function (response) {
-          _this3.laravelData.unshift(response.data);
+          _this4.laravelData.unshift(response.data);
 
-          _this3.total_unread_notifications += 1;
+          _this4.total_unread_notifications += 1;
+          _this4.per_page = _this4.laravelData.length;
           new Audio('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3').play();
         })["catch"](function (error) {//console.log(error);
         });
@@ -2443,12 +2452,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_1__);
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -77379,20 +77382,39 @@ var render = function() {
           _c(
             "ul",
             _vm._l(_vm.laravelData, function(item) {
-              return _c("li", { staticClass: "n_text_bb" }, [
-                _c("a", { attrs: { href: "" } }, [
-                  _c("span", [
-                    _vm._v(
-                      _vm._s(item.data.submitted_by) +
-                        " " +
-                        _vm._s(item.data.donation_place) +
-                        " হতে " +
-                        _vm._s(item.data.quantity) +
-                        " ব্যাগ রক্তের জন্য অনুরোধ করেছেন"
-                    )
+              return _c(
+                "li",
+                {
+                  staticClass: "n_text_bb",
+                  on: {
+                    click: function($event) {
+                      return _vm.markRead(item.id)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "n_text" }, [
+                    item.read_at == null
+                      ? _c("i", { staticClass: "fa fa-envelope" })
+                      : _c("i", { staticClass: "fa fa-envelope-open" })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "n_text" }, [
+                    _c("a", { attrs: { href: "#" } }, [
+                      _c("span", [
+                        _vm._v(
+                          _vm._s(item.data.submitted_by) +
+                            " " +
+                            _vm._s(item.data.donation_place) +
+                            " হতে " +
+                            _vm._s(item.data.quantity) +
+                            " ব্যাগ রক্তের জন্য অনুরোধ করেছেন"
+                        )
+                      ])
+                    ])
                   ])
-                ])
-              ])
+                ]
+              )
             }),
             0
           )
@@ -77482,253 +77504,242 @@ var render = function() {
       _c("div", { staticClass: "search-area" }, [
         _vm._m(0),
         _vm._v(" "),
-        _c("div", { staticClass: "row text-center" }, [
-          _c("div", { staticClass: "col-lg-12" }, [
-            _c("div", { staticClass: "blood-srch" }, [
+        _c("div", { staticClass: "blood-srch" }, [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.setData($event)
+                }
+              }
+            },
+            [
               _c(
-                "form",
+                "select",
                 {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.bloodGroup,
+                      expression: "bloodGroup"
+                    }
+                  ],
+                  staticClass: "form-control0 search-blood",
+                  attrs: { name: "bloodGroup", required: "" },
                   on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.setData($event)
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.bloodGroup = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
                     }
                   }
                 },
                 [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.bloodGroup,
-                          expression: "bloodGroup"
-                        }
-                      ],
-                      staticClass: "form-control0 search-blood",
-                      attrs: { name: "bloodGroup" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.bloodGroup = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { selected: "", value: "" } }, [
-                        _vm._v("রক্তের গ্রুপ")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "1" } }, [
-                        _vm._v("এ+ (পজিটিভ)")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "2" } }, [
-                        _vm._v("এ- (নেগেটিভ)")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "3" } }, [
-                        _vm._v("বি+ (পজিটিভ)")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "4" } }, [
-                        _vm._v("বি- (নেগেটিভ)")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "5" } }, [
-                        _vm._v("ও+ (পজিটিভ)")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "6" } }, [
-                        _vm._v("ও- (নেগেটিভ)")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "7" } }, [
-                        _vm._v("এবি+ (পজিটিভ)")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "8" } }, [
-                        _vm._v("এবি- (নেগেটিভ)")
-                      ])
-                    ]
-                  ),
+                  _c("option", { attrs: { selected: "", value: "" } }, [
+                    _vm._v("রক্তের গ্রুপ")
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.selectedDivision,
-                          expression: "selectedDivision"
-                        }
-                      ],
-                      staticClass: "form-control0 search-blood",
-                      attrs: { id: "division", name: "division" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.selectedDivision = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("বিভাগ")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "বরিশাল" } }, [
-                        _vm._v("বরিশাল")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "চট্টগ্রাম" } }, [
-                        _vm._v("চট্টগ্রাম")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "ঢাকা" } }, [
-                        _vm._v("ঢাকা")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "ময়মনসিংহ" } }, [
-                        _vm._v("ময়মনসিংহ")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "রাজশাহী" } }, [
-                        _vm._v("রাজশাহী")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "রংপুর" } }, [
-                        _vm._v("রংপুর")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "সিলেট" } }, [
-                        _vm._v("সিলেট")
-                      ])
-                    ]
-                  ),
+                  _c("option", { attrs: { value: "1" } }, [
+                    _vm._v("এ+ (পজিটিভ)")
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.selectedDistrict,
-                          expression: "selectedDistrict"
-                        }
-                      ],
-                      staticClass: "form-control0 search-blood",
-                      attrs: { id: "presentDistrict", name: "presentDistrict" },
-                      on: {
-                        change: [
-                          function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.selectedDistrict = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          },
-                          function($event) {
-                            return _vm.onChangeDistrict($event)
-                          }
-                        ]
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("জেলা")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.districts, function(district) {
-                        return _c(
-                          "option",
-                          {
-                            key: district.id,
-                            domProps: { value: district.id }
-                          },
-                          [_vm._v(_vm._s(district.bengali_name))]
-                        )
-                      })
-                    ],
-                    2
-                  ),
+                  _c("option", { attrs: { value: "2" } }, [
+                    _vm._v("এ- (নেগেটিভ)")
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.selectedSubdistrict,
-                          expression: "selectedSubdistrict"
-                        }
-                      ],
-                      staticClass: "form-control0 search-blood",
-                      attrs: { id: "", name: "" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.selectedSubdistrict = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("উপজেলা")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.subdistricts, function(subdistrict) {
-                        return _c("option", { key: subdistrict }, [
-                          _vm._v(_vm._s(subdistrict))
-                        ])
-                      })
-                    ],
-                    2
-                  ),
+                  _c("option", { attrs: { value: "3" } }, [
+                    _vm._v("বি+ (পজিটিভ)")
+                  ]),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _c("option", { attrs: { value: "4" } }, [
+                    _vm._v("বি- (নেগেটিভ)")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "5" } }, [
+                    _vm._v("ও+ (পজিটিভ)")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "6" } }, [
+                    _vm._v("ও- (নেগেটিভ)")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "7" } }, [
+                    _vm._v("এবি+ (পজিটিভ)")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "8" } }, [
+                    _vm._v("এবি- (নেগেটিভ)")
+                  ])
                 ]
-              )
-            ])
-          ])
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selectedDivision,
+                      expression: "selectedDivision"
+                    }
+                  ],
+                  staticClass: "form-control0 search-blood",
+                  attrs: { id: "division", name: "division", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.selectedDivision = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "", selected: "" } }, [
+                    _vm._v("বিভাগ")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "বরিশাল" } }, [
+                    _vm._v("বরিশাল")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "চট্টগ্রাম" } }, [
+                    _vm._v("চট্টগ্রাম")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "ঢাকা" } }, [_vm._v("ঢাকা")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "ময়মনসিংহ" } }, [
+                    _vm._v("ময়মনসিংহ")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "রাজশাহী" } }, [
+                    _vm._v("রাজশাহী")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "রংপুর" } }, [
+                    _vm._v("রংপুর")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "সিলেট" } }, [_vm._v("সিলেট")])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selectedDistrict,
+                      expression: "selectedDistrict"
+                    }
+                  ],
+                  staticClass: "form-control0 search-blood",
+                  attrs: { id: "presentDistrict", name: "presentDistrict" },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.selectedDistrict = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      function($event) {
+                        return _vm.onChangeDistrict($event)
+                      }
+                    ]
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "", selected: "" } }, [
+                    _vm._v("জেলা")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.districts, function(district) {
+                    return _c(
+                      "option",
+                      { key: district.id, domProps: { value: district.id } },
+                      [_vm._v(_vm._s(district.bengali_name))]
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selectedSubdistrict,
+                      expression: "selectedSubdistrict"
+                    }
+                  ],
+                  staticClass: "form-control0 search-blood",
+                  attrs: { id: "", name: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.selectedSubdistrict = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "", selected: "" } }, [
+                    _vm._v("উপজেলা")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.subdistricts, function(subdistrict) {
+                    return _c("option", { key: subdistrict }, [
+                      _vm._v(_vm._s(subdistrict))
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _vm._m(1)
+            ]
+          )
         ])
       ]),
       _vm._v(" "),
@@ -77867,16 +77878,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row text-center" }, [
-      _c("div", { staticClass: "col-lg-12" }, [
-        _c("img", {
-          attrs: { width: "60", height: "auto", src: "img/blood.svg" }
-        }),
-        _vm._v(" "),
-        _c("h4", { staticClass: "blood-title" }, [_vm._v("রক্ত দান")]),
-        _vm._v(" "),
-        _c("p", [_vm._v(".....")])
-      ])
+    return _c("div", { staticClass: "blood-inner" }, [
+      _c("img", {
+        attrs: { width: "60", height: "auto", src: "img/blood-drop.svg" }
+      }),
+      _vm._v(" "),
+      _c("h4", { staticClass: "blood-title" }, [_vm._v("রক্ত দান")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(".....")])
     ])
   },
   function() {

@@ -193,7 +193,7 @@
                                                 
                                             	<div class="form-group col-md-12">
                                        			  <label for="">নামের শেষ অংশ*</label>
-                                       			  <input type="text" class="form-control2" placeholder="" value={{Auth::user()->user_details->last_name}} name="txtLastName" id="txtLastName">
+                                       			  <input type="text" class="form-control2" placeholder="" value={{Auth::user()->user_details->last_name ?? ''}} name="txtLastName" id="txtLastName">
                                     		    </div>
                                                 
                                             	<div class="form-group col-md-12">
@@ -203,7 +203,7 @@
                                                 
                                            		<div class="form-group col-md-12">
                                                     <label for="">মাতার নাম</label>
-                                                    <input type="text" class="form-control2" placeholder="" value={{Auth::user()->user_details->mother_name}} name="txtMName" id="txtMName">
+                                                    <input type="text" class="form-control2" placeholder="" value="" name="txtMName" id="txtMName">
                                                 </div>
                                                 
                                            		<div class="form-group col-md-12">
@@ -271,7 +271,7 @@
                                            </div>
                                            		<div class="form-group col-md-12">
                                               <label for="">মোবাইল নম্বর ২</label>
-                                             <input type="text" class="form-control2" placeholder="" value={{Auth::user()->user_details()->secondary_cells}} name="txtPhone_H" id="txtPhone_H">
+                                             <input type="text" class="form-control2" placeholder="" value="" name="txtPhone_H" id="txtPhone_H">
                                            </div>
                                            		<div class="form-group col-md-12">
                                               <label for="">মোবাইল নম্বর ৩</label>

@@ -16,15 +16,14 @@
 			<div class="n_body">
             <div class="area_content">
                 <ul>
-                    <li class="n_text_bb" v-for="item in laravelData">
-                        <a href=""><span>{{ item.data.submitted_by }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
-                        <!--div class="notify_indi">
-                            <ul>
-                                <li><i class="fa fa-ellipsis-h 2x"></i></li>
-                                <br>
-                                <li><i class="fa fa-circle"></i></li>
-                            </ul>
-                        </div-->
+                    <li class="n_text_bb" v-for="item in laravelData" @click="markRead(item.id)">
+                        <div class="n_text" >
+                            <i v-if="item.read_at==null" class="fa fa-envelope"></i>
+                            <i v-else="item.read_at!=null" class="fa fa-envelope-open"></i>
+                        </div>
+                        <div class="n_text">
+                            <a href="#"><span>{{ item.data.submitted_by }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
+                        </div>
                     </li>                                
                 </ul>
             </div>
@@ -51,6 +50,15 @@ export default {
         }
     },  
     methods: {
+        markRead(data){
+            axios.post('api/notifications/markread/'+data+'/'+this.per_page).then(response=>{
+            this.laravelData=response.data.notifications;
+            this.total_unread_notifications=response.data.total_unread;
+            })
+            .catch(function (error) {
+            //console.log(error);
+            });
+        },
         showMore(){
             this.per_page+=2;
             axios.get('api/notifications/'+this.per_page).then(response=>{
@@ -81,6 +89,7 @@ export default {
                 axios.get('api/newNotification/'+notification.blood_request_id).then(response=>{
                     this.laravelData.unshift(response.data);
                     this.total_unread_notifications+=1;
+                    this.per_page=this.laravelData.length;
                     new Audio('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3').play();
                 })
                 .catch(function (error) {

@@ -25,6 +25,7 @@ Route::middleware('auth:api')->get('donators/{district}/{bloodGroup}','DonationC
 Route::middleware('auth:api')->get('matchedBloodrequests/{size}','BloodRequestController@getRequests');
 Route::middleware('auth:api')->get('notifications/{size}','BloodRequestController@getNotifications');
 Route::middleware('auth:api')->get('newNotification/{blood_request_id}','BloodRequestController@getNewNotification');
+Route::middleware('auth:api')->post('notifications/markread/{notification_id}/{size}','NotificationController@markNotificationAsRead');
 Route::get('randomdonars','DonationController@getRandomDonars');
 
 

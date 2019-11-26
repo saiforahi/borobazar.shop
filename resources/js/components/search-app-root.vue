@@ -1,52 +1,46 @@
 <template>
     <div class="container" id="mainDiv">
         <div class="search-area">
-            <div class="row text-center">
-                <div class="col-lg-12">
-                    <img width="60" height="auto" src="img/blood.svg">
-                    <h4 class="blood-title">রক্ত দান</h4>
-                    <p>.....</p>
-                </div>
+            <div class="blood-inner">
+                <img width="60" height="auto" src="img/blood-drop.svg">
+                <h4 class="blood-title">রক্ত দান</h4>
+                <p>.....</p>
             </div>
-            <div class="row text-center" >
-                <div class="col-lg-12">
-                    <div class="blood-srch" >
-                        <form @submit.prevent="setData">
-                            <select class="form-control0 search-blood" name="bloodGroup" v-model="bloodGroup">
-                                <option selected value="">রক্তের গ্রুপ</option>
-                                <option value="1">এ+ (পজিটিভ)</option>
-                                <option value="2">এ- (নেগেটিভ)</option>
-                                <option value="3">বি+ (পজিটিভ)</option>
-                                <option value="4">বি- (নেগেটিভ)</option>
-                                <option value="5">ও+ (পজিটিভ)</option>
-                                <option value="6">ও- (নেগেটিভ)</option>
-                                <option value="7">এবি+ (পজিটিভ)</option>
-                                <option value="8">এবি- (নেগেটিভ)</option>
-                            </select>
-                            <select class="form-control0 search-blood" id="division" name="division" v-model="selectedDivision">
-                                <option value="" selected>বিভাগ</option>
-                                <option value="বরিশাল">বরিশাল</option>
-                                <option value="চট্টগ্রাম">চট্টগ্রাম</option>
-                                <option value="ঢাকা">ঢাকা</option>
-                                <option value="ময়মনসিংহ">ময়মনসিংহ</option>
-                                <option value="রাজশাহী">রাজশাহী</option>
-                                <option value="রংপুর">রংপুর</option>
-                                <option value="সিলেট">সিলেট</option>
-                            </select>
-                            <select class="form-control0 search-blood" id="presentDistrict" name="presentDistrict" v-model="selectedDistrict" @change="onChangeDistrict($event)">
-                                <option value="" selected>জেলা</option>
-                                <option v-for="district in districts" v-bind:key="district.id" :value="district.id">{{ district.bengali_name }}</option>
-                            </select>
-                            <select class="form-control0 search-blood" id="" name="" v-model="selectedSubdistrict">
-                                <option value="" selected>উপজেলা</option>
-                                <option v-for="subdistrict in subdistricts" v-bind:key="subdistrict" >{{ subdistrict}}</option>
-                            </select>
-                            <button class="search-btn" type="submit" href="#viewDiv">
-                                <i id="demo" class="fa fa-search"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
+            <div class="blood-srch" >
+                <form @submit.prevent="setData">
+                    <select class="form-control0 search-blood" name="bloodGroup" v-model="bloodGroup" required>
+                        <option selected value="">রক্তের গ্রুপ</option>
+                        <option value="1">এ+ (পজিটিভ)</option>
+                        <option value="2">এ- (নেগেটিভ)</option>
+                        <option value="3">বি+ (পজিটিভ)</option>
+                        <option value="4">বি- (নেগেটিভ)</option>
+                        <option value="5">ও+ (পজিটিভ)</option>
+                        <option value="6">ও- (নেগেটিভ)</option>
+                        <option value="7">এবি+ (পজিটিভ)</option>
+                        <option value="8">এবি- (নেগেটিভ)</option>
+                    </select>
+                    <select class="form-control0 search-blood" id="division" name="division" v-model="selectedDivision" required>
+                        <option value="" selected>বিভাগ</option>
+                        <option value="বরিশাল">বরিশাল</option>
+                        <option value="চট্টগ্রাম">চট্টগ্রাম</option>
+                        <option value="ঢাকা">ঢাকা</option>
+                        <option value="ময়মনসিংহ">ময়মনসিংহ</option>
+                        <option value="রাজশাহী">রাজশাহী</option>
+                        <option value="রংপুর">রংপুর</option>
+                        <option value="সিলেট">সিলেট</option>
+                    </select>
+                    <select class="form-control0 search-blood" id="presentDistrict" name="presentDistrict" v-model="selectedDistrict" @change="onChangeDistrict($event)">
+                        <option value="" selected>জেলা</option>
+                        <option v-for="district in districts" v-bind:key="district.id" :value="district.id">{{ district.bengali_name }}</option>
+                    </select>
+                    <select class="form-control0 search-blood" id="" name="" v-model="selectedSubdistrict">
+                        <option value="" selected>উপজেলা</option>
+                        <option v-for="subdistrict in subdistricts" v-bind:key="subdistrict" >{{ subdistrict}}</option>
+                    </select>
+                    <button class="search-btn" type="submit" href="#viewDiv">
+                        <i id="demo" class="fa fa-search"></i>
+                    </button>
+                </form>
             </div>
         </div>
         <div class="bogra-area pt-5" id="viewDiv">
