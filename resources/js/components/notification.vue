@@ -81,7 +81,6 @@ export default {
         
     },
     created(){
-        console.log('created');
         if(window.auth_user!=null){
             Echo.private('App.User.'+window.auth_user.cell)
             .notification((notification) => {

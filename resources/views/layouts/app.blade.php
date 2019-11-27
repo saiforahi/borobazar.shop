@@ -58,9 +58,13 @@
           
           
       <script type="text/javascript">
+      
         function openForm() {
           document.getElementById("myForm").style.display = "block";
-        }
+          document.getElementById("textbutton").addEventListener("click", function(event){
+              event.preventDefault()
+            });
+          }
 
         function closeForm() {
           document.getElementById("myForm").style.display = "none";

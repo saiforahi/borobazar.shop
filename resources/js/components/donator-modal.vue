@@ -44,14 +44,24 @@
                     </tbody>
                 </table>
                 <div class="text-area">
-                    <div class="form-popup" id="myForm">
-                        <form action="" class="form-group">
+                    
+                    <button type="button" class="btn-getinvite1" id="textbutton"><i class="fa fa-envelope-o"></i> টেক্সট করুন </button>
+                    <b-popover
+                        :target="`textbutton`"
+                        :placement="'bottom'"
+                        title=  "জরুরী রক্তের প্রয়োজন",
+                        triggers="click"
+                    ><form action="#" class="form-group"><textarea type="text" class="form-control2" placeholder="" name="text"></textarea>
+                    <button type="submit" class="btn-getinvite1">পাঠান</button>
+                    </form>
+                    </b-popover>
+                    <!--div class="form-popup" id="myForm">
+                        <form action="#" class="form-group">
                             <textarea type="text" class="form-control2" placeholder="" name="text"></textarea>
                             <button type="submit" class="btn-getinvite1">পাঠান</button>
                             <button type="cancle" class="btn-getinvite1" onclick="closeForm()"><i class="fa fa-close"></i></button>
                         </form>
-                    </div>
-                    <button class="btn-getinvite1" onclick="openForm()" ><i class="fa fa-envelope-o"></i> রিকুয়েস্ট করুন </button>  
+                    </div-->
                 </div>
                 <div class="call-area">
                     <button type="button" class="btn-getinvite1"  id="popover-cell"><i class="fa fa-phone"></i> কল করুন</button>
@@ -61,7 +71,8 @@
                         title="মোবাইল নাম্বার"
                         triggers="click"
                         :content="`${donator.cell}`"
-                    ></b-popover>
+                    ><a href="tel:donator.cell"><span>{{donator.cell}}</span></a>
+                    </b-popover>
                 </div>  
             </div>
         </form> 
