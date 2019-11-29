@@ -9,7 +9,7 @@
             <div class="blood-srch" >
                 <form @submit.prevent="setData">
                     <select class="form-control0 search-blood" name="bloodGroup" v-model="bloodGroup" required>
-                        <option selected value="">রক্তের গ্রুপ</option>
+                        <option selected value="-1">রক্তের গ্রুপ</option>
                         <option value="1">এ+ (পজিটিভ)</option>
                         <option value="2">এ- (নেগেটিভ)</option>
                         <option value="3">বি+ (পজিটিভ)</option>
@@ -20,7 +20,7 @@
                         <option value="8">এবি- (নেগেটিভ)</option>
                     </select>
                     <select class="form-control0 search-blood" id="division" name="division" v-model="selectedDivision" required>
-                        <option value="" selected>বিভাগ</option>
+                        <option value="-1" selected>বিভাগ</option>
                         <option value="বরিশাল">বরিশাল</option>
                         <option value="চট্টগ্রাম">চট্টগ্রাম</option>
                         <option value="ঢাকা">ঢাকা</option>
@@ -30,11 +30,11 @@
                         <option value="সিলেট">সিলেট</option>
                     </select>
                     <select class="form-control0 search-blood" id="presentDistrict" name="presentDistrict" v-model="selectedDistrict" @change="onChangeDistrict($event)">
-                        <option value="" selected>জেলা</option>
+                        <option value="-1" selected>জেলা</option>
                         <option v-for="district in districts" v-bind:key="district.id" :value="district.id">{{ district.bengali_name }}</option>
                     </select>
                     <select class="form-control0 search-blood" id="" name="" v-model="selectedSubdistrict">
-                        <option value="" selected>উপজেলা</option>
+                        <option value="-1" selected>উপজেলা</option>
                         <option v-for="subdistrict in subdistricts" v-bind:key="subdistrict" >{{ subdistrict}}</option>
                     </select>
                     <button class="search-btn" type="submit" href="#viewDiv">
@@ -82,40 +82,47 @@
     import swal from 'sweetalert'
     export default {
         name: 'search-app-root-component',
-        
         data(){
             return{
-                selectedDistrict:'',
+                selectedDistrict:-1,
+                selectedSubdistrict:-1,
+                selectedDivision:-1,
                 districts:[],
-                selectedSubdistrict:'',
-                selectedDivision:'',
                 subdistricts:[],
-                bloodGroup:'',
+                bloodGroup:-1,
                 laravelData:{
                     data:[]
                 },
                 allowed:'no',
-                currentPage:'',
+                currentPage:1,
                 rows:'',
                 per_page:'',
-                modalData:[],
+                modalData:[]
             }
         },
         beforeMount(){
             //on mounting these statements will be executed
             axios.get('api/randomdonars').then(response=>{
-                this.laravelData.data=response.data;
+                this.laravelData=response.data;
+                this.rows=this.laravelData.total;
+                this.per_page=this.laravelData.per_page;
+                if(response.data.data.length>0){
+                    this.allowed ='yes';
+                }
             });
         },
         mounted() {
             if(window.login_errors!=undefined){
-                swal("",'অনুগ্রহ করে সঠিক তথ্য দিন','error');
+                swal("দুঃখিত",'অনুগ্রহ করে সঠিক তথ্য দিন','error');
+            }
+            if(window.blood_success!=undefined){
+                swal("Great!",window.blood_success,'success');
             }
         },
         watch: {
             // whenever currentPage changes, this function will run
             currentPage: function () {
-                axios.get('api/donators/'+this.selectedDistrict+'/'+this.bloodGroup+'?page='+this.currentPage).then(response=>{
+                axios.get(this.laravelData.path+'?page='+this.currentPage).then(response=>{
                     this.laravelData=response.data;
                     })
                     .catch(function (error) {
@@ -125,12 +132,9 @@
             // whenever bloodgroup changes, this function will run
             bloodGroup: function(){
                 //this.laravelData={};
-                this.allowed='no';
-                this.selectedDivision='';
-                this.selectedDistrict='';
-                this.selectedSubdistrict='';
-                this.per_page='';
-                this.rows='';
+                this.selectedDivision=-1;
+                this.selectedDistrict=-1;
+                this.selectedSubdistrict=-1;
             },
             //
             modalData: function(){
@@ -142,8 +146,8 @@
                 axios.get('api/districts/'+this.selectedDivision).then(response=>{
                 this.districts=response.data;
                 });
-                this.selectedDistrict='';
-                this.selectedSubdistrict='';
+                this.selectedDistrict=-1;
+                this.selectedSubdistrict=-1;
             }
         },
         methods:{
@@ -158,7 +162,7 @@
                 axios.get('api/subdistricts/'+event.target.value)
                 .then(response => {
                     this.subdistricts = response.data;
-                    this.selectedSubdistrict='';
+                    this.selectedSubdistrict=-1;
                 }).catch(function (error) {
                 // handle error
                 //console.log(error);
@@ -171,14 +175,15 @@
                 {
                     axios.get('api/donators/'+this.selectedDistrict+'/'+this.bloodGroup).then(response=>{
                     this.laravelData=response.data;
-                    this.currentPage=this.laravelData.current_page;
                     this.rows=this.laravelData.total;
                     this.per_page=this.laravelData.per_page;
                     if(response.data.data.length>0){
                         this.allowed ='yes';
                     }
                     else{
-                        alert('দুঃখিত এই মুহূর্তে '+this.bloodGroup+' গ্রুপের কোন রক্তদানকারী '+this.selectedDistrict+' এ নেই');
+                        swal("দুঃখিত",'এই মুহূর্তে কোন রক্তদানকারী নেই','warning',{
+                            button: "OK"
+                        });
                     }
                     })
                     .catch(function (error) {
@@ -187,9 +192,7 @@
                     
                 }
                 else{
-                    swal("",'অনুগ্রহ করে লগইন করুন','warning',{
-                        button: "OK"
-                    });
+                    document.getElementById('loginModalBlade').style.display='block';
                 }
             }
         }

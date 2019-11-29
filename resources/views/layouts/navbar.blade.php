@@ -1,8 +1,8 @@
 @include('auth.navLoginModal')
 <section class="bnavigationbar">
     <div class="container-fluid pt-2 pb-1">
-        <div class="container" id="nav">
-            <div class="row">
+        <div class="container" >
+            <div class="row" id="nav">
               <div class="col-lg-12">
                   <div class="row">
                       <!--brand-logo area -->

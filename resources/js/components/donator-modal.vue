@@ -49,7 +49,7 @@
                     <b-popover
                         :target="`textbutton`"
                         :placement="'bottom'"
-                        title=  "জরুরী রক্তের প্রয়োজন",
+                        title=  "জরুরী রক্তের প্রয়োজন"
                         triggers="click"
                     ><form action="#" class="form-group"><textarea type="text" class="form-control2" placeholder="" name="text"></textarea>
                     <button type="submit" class="btn-getinvite1">পাঠান</button>
@@ -70,8 +70,8 @@
                         :placement="'bottom'"
                         title="মোবাইল নাম্বার"
                         triggers="click"
-                        :content="`${donator.cell}`"
-                    ><a href="tel:donator.cell"><span>{{donator.cell}}</span></a>
+                        :content="`${donator.cell}`" 
+                    ><a v-bind:href="'tel:'+donator.cell"><span>{{donator.cell}}</span></a>
                     </b-popover>
                 </div>  
             </div>

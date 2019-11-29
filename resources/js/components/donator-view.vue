@@ -46,8 +46,7 @@ export default {
                 document.getElementById('donator-modal').style.display='block'; //opening modal 
             }
             else{
-                swal("",'অনুগ্রহ করে লগইন করুন','warning'); //
-                
+                document.getElementById('loginModalBlade').style.display='block';
             }
             
         },

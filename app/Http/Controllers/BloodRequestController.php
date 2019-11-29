@@ -97,7 +97,7 @@ class BloodRequestController extends Controller
             $newRequest=BloodRequest::where('blood_request_id',$blood_request_id)->first();
             $user=User::where('cell',Auth::user()->cell)->first();
             event(new BloodRequestEvent($newRequest,$user));
-            return redirect('/')->with('success','request successfully submitted');
+            return redirect('/')->with(['success'=>'Your blood request has been submitted successfuly!']);
         }
     }
 
@@ -149,7 +149,7 @@ class BloodRequestController extends Controller
     //
     public function getNotifications($size){
         //$requests=BloodRequest::where('blood_group',$user->blood_group)->where('district_id',$user->district_id)->where('cell','!=',$user->cell)->orderBy('created_at', 'desc')->take($size)->get();
-        $notifications=Auth::user()->notifications->take($size);
+        $notifications=Auth::user()->notifications->sortBy('data.donation_date')->take($size);
         $total_unread=Auth::user()->unreadNotifications->count();
         return response()->json(['notifications'=>$notifications,'total_unread'=>$total_unread]) ;
     }

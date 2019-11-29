@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\BloodGroup;
+use App\User;
 use Auth;
 use App\BloodRequest;
 use Illuminate\Bus\Queueable;
@@ -63,7 +64,7 @@ class BloodRequestNotification extends Notification implements ShouldQueue
     {
         return [
             'blood_request_id'=> $this->blood_request->blood_request_id,
-            'submitted_by' => Auth::user()->name,
+            'submitted_by' => User::where('cell',$this->blood_request->submitted_by)->select('name','cell')->first(),
             'blood_group' => $this->blood_group,
             'quantity' => $this->blood_request->quantity,
             'contact_no' => $this->blood_request->contact_no,
@@ -82,7 +83,7 @@ class BloodRequestNotification extends Notification implements ShouldQueue
     public function toBroadcast($notifiable){
         return new BroadcastMessage([
             'blood_request_id'=> $this->blood_request->blood_request_id,
-            'submitted_by' => Auth::user()->name,
+            'submitted_by' => User::where('cell',$this->blood_request->submitted_by)->select('name','cell')->first(),
             'blood_group' => $this->blood_group,
             'quantity' => $this->blood_request->quantity,
             'contact_no' => $this->blood_request->contact_no,

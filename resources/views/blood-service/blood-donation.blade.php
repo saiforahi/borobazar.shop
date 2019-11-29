@@ -2,10 +2,13 @@
 @section('content')
     @include('auth.loginModal')
         <section class="blood-donar-area">
+            @if ($errors->any())
+                <script>window.login_errors={!! json_encode($errors) !!}</script>
+            @endif
+            @if (session()->has('success'))
+                <script>window.blood_success={!! json_encode(session('success')) !!}</script>
+            @endif
             <div class="container-fluid pb-5 pt-5" id="search-app-root">
-                    @if ($errors->any())
-                    <script>window.login_errors={!! json_encode($errors) !!}</script>
-                    @endif
                 <search-app-root-component></search-app-root-component>
             </div>
         </section>
@@ -21,9 +24,6 @@
         // A $( document ).ready() block.
             $( document ).ready(function() {
                 if (document.cookie.indexOf('visited=true') == -1 && window.auth_user==undefined){
-                    // load the overlay
-                    
-                    //var year = 1000*60*60*24*365;
                     var lifetime = 1000*60*15;
                     var expires = new Date((new Date()).valueOf() + lifetime);
                     document.cookie = "visited=true;expires=" + expires.toUTCString();
@@ -31,7 +31,7 @@
                         $('#loginModalBlade').modal({show:true});
                     },3000); // 1000ms = 1 second
                 }
-            }); 	
+            });
         </script>          
         <!--end auto modal--> 
         <script>

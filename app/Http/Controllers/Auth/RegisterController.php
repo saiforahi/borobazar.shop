@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\BloodGroup;
+use App\BloodRequest;
 use App\Donar;
 use App\Http\Controllers\Controller;
+use App\Notifications\BloodRequestNotification;
 use App\User;
 use App\UserDetails;
 use Illuminate\Http\Request;
@@ -123,7 +126,12 @@ class RegisterController extends Controller
             $user = $this->create_user($request->only('name','cell','password'));
             $user_details=$this->create_user_details($request->only('cell','bloodGroup','presentDistrict','lastDonationDate','organizationName'));
             $donar=$this->create_donar($request->only('cell','bloodGroup','presentDistrict','lastDonationDate','organizationName'));
-            Auth::login($user); 
+            Auth::login($user);
+            $previousRequests=BloodRequest::where('blood_group',$donar->blood_group)->get();
+            
+            foreach ($previousRequests as $previousRequest){
+                Auth::user()->notify(new BloodRequestNotification($previousRequest));
+            }
             return redirect('/')->with(['AccountCreatedMessage'=>'Account Successfully Created!']);
         }
    }

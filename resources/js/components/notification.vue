@@ -22,7 +22,7 @@
                             <i v-else="item.read_at!=null" class="fa fa-envelope-open"></i>
                         </div>
                         <div class="n_text">
-                            <a href="#"><span>{{ item.data.submitted_by }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
+                            <a href="#"><span>{{ item.data.submitted_by.name }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
                         </div>
                     </li>                                
                 </ul>
@@ -78,13 +78,13 @@ export default {
             .catch(function (error) {
             //console.log(error);
         });
+        this.laravelData.sort((a, b) => (a.created_at < b.created_at) ? 1 : -1)
         
     },
     created(){
         if(window.auth_user!=null){
             Echo.private('App.User.'+window.auth_user.cell)
             .notification((notification) => {
-                console.log('working');
                 axios.get('api/newNotification/'+notification.blood_request_id).then(response=>{
                     this.laravelData.unshift(response.data);
                     this.total_unread_notifications+=1;

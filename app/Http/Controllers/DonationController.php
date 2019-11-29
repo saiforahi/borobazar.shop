@@ -23,12 +23,13 @@ class DonationController extends Controller
     public function getDonators( $district,$bloodGroup)
     {
         $lastDonationDate = date('Y-m-d', strtotime('-3 month'));
-        $realdonators=DB::table('donars')
-                    ->join('users', function ($join) use($bloodGroup,$district,$lastDonationDate) {$join->on('users.cell', '=', 'donars.donar_cell')->where('donars.blood_group', '=', $bloodGroup)->where('donars.district_id', '=', $district)->where('donars.last_donation_date','<=',$lastDonationDate);})
+        $realdonators=DB::table('donars')->where('blood_group', '=', $bloodGroup)->where('last_donation_date','<=',$lastDonationDate)
+                    ->join('users','users.cell', '=', 'donars.donar_cell')
                     ->join('districts', 'donars.district_id', '=', 'districts.id')
                     ->join('blood_groups','blood_groups.id','=','donars.blood_group')
+                    ->where('donars.district_id', '=', $district)
                     ->select( 'users.cell','users.name','blood_groups.bangla as blood_group','donars.district_id','donars.blood_organization', 'donars.last_donation_date','districts.bengali_name as district_name',DB::raw("DATE_FORMAT(donars.last_donation_date, '%d-%M-%Y') as last_donation_date"))
-                    ->paginate(8);
+                    ->paginate(16);
         return $realdonators;
     }
 
@@ -40,7 +41,7 @@ class DonationController extends Controller
         ->join('districts', 'donars.district_id', '=', 'districts.id')
         ->join('blood_groups','blood_groups.id','=','donars.blood_group')
         ->select( 'users.cell','users.name','blood_groups.bangla as blood_group','donars.district_id','donars.blood_organization', 'donars.last_donation_date','districts.bengali_name as district_name',DB::raw("DATE_FORMAT(donars.last_donation_date, '%d-%M-%Y') as last_donation_date"))
-        ->get()->random(1);
+        ->paginate(16);
         
         return $realrandomDonars;
     }
