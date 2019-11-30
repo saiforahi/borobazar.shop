@@ -8,15 +8,21 @@ require('./bootstrap');
 import BootstrapVue from 'bootstrap-vue' //Importing
 import VueRouter from 'vue-router'
 import Popover  from 'vue-js-popover'
+import VueProgressBar from 'vue-progressbar'
+//vue session importing
+import VueSession from 'vue-session'
 
 window.Vue = require('vue');
 window.axios = require('axios');
 Vue.use(BootstrapVue); // Telling Vue to use this in whole application
 Vue.use(VueRouter);
 Vue.use(Popover);
+Vue.use(VueProgressBar, {
+    color: 'rgb(143, 255, 199)',
+    failedColor: 'red',
+    height: '15px'
+  })
 
-//vue session importing
-import VueSession from 'vue-session'
 Vue.use(VueSession);
 
 /**

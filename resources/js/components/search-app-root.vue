@@ -1,5 +1,6 @@
 <template>
     <div class="container" id="mainDiv">
+        <vue-progress-bar></vue-progress-bar>
         <div class="search-area">
             <div class="blood-inner">
                 <img width="60" height="auto" src="img/blood-drop.svg">
@@ -103,10 +104,10 @@
         beforeMount(){
             //on mounting these statements will be executed
             axios.get('api/randomdonars').then(response=>{
-                this.laravelData=response.data;
-                this.rows=this.laravelData.total;
-                this.per_page=this.laravelData.per_page;
                 if(response.data.data.length>0){
+                    this.laravelData=response.data;
+                    this.rows=this.laravelData.total;
+                    this.per_page=this.laravelData.per_page;
                     this.allowed ='yes';
                 }
             });
@@ -118,12 +119,17 @@
             if(window.blood_success!=undefined){
                 swal("Great!",window.blood_success,'success');
             }
+            if(window.password_change_success!=undefined){
+                swal("Successful!",window.password_change_success,'success')
+            }
         },
         watch: {
             // whenever currentPage changes, this function will run
             currentPage: function () {
                 axios.get(this.laravelData.path+'?page='+this.currentPage).then(response=>{
                     this.laravelData=response.data;
+                    this.rows=this.laravelData.total;
+                    this.per_page=this.laravelData.per_page;
                     })
                     .catch(function (error) {
                         //console.log(error);
@@ -131,7 +137,6 @@
             },
             // whenever bloodgroup changes, this function will run
             bloodGroup: function(){
-                //this.laravelData={};
                 this.selectedDivision=-1;
                 this.selectedDistrict=-1;
                 this.selectedSubdistrict=-1;
@@ -173,11 +178,12 @@
             {
                 if(window.auth_user!=null)
                 {
+                    this.$Progress.start()
                     axios.get('api/donators/'+this.selectedDistrict+'/'+this.bloodGroup).then(response=>{
-                    this.laravelData=response.data;
-                    this.rows=this.laravelData.total;
-                    this.per_page=this.laravelData.per_page;
                     if(response.data.data.length>0){
+                        this.laravelData=response.data;
+                        this.rows=this.laravelData.total;
+                        this.per_page=this.laravelData.per_page;
                         this.allowed ='yes';
                     }
                     else{
@@ -185,9 +191,11 @@
                             button: "OK"
                         });
                     }
+                    this.$Progress.finish()
                     })
                     .catch(function (error) {
                         //console.log(error);
+                        this.$Progress.fail()
                     });
                     
                 }

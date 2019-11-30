@@ -1027,7 +1027,7 @@ img.startshop {
     overflow-x: auto;
 }
 .n_body a {
-    padding: 1em 1em;
+    padding: 1em 0;
 }
 .n_body span {
     color: forestgreen;
@@ -1068,6 +1068,10 @@ li.n_text_bb {
     display: table-cell;
     padding: 0.2em;
     vertical-align: middle;
+}
+h4.n_title {
+    font-size: 20px;
+    color: forestgreen;
 }
 .n_more {
     text-align: center;
@@ -1913,15 +1917,24 @@ strong.text-uppercase {
     z-index: 9;
     height: auto;
 }
-.dropdown-content-2 a {
-    float: none;
-    color: forestgreen;
-    /* padding: 8px 12px; */
-    text-decoration: none;
-    display: block;
-    /* text-align: right; */
-    font-weight: 100;
-    font-size: 14px;
+.dropdown-content-2 {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    width: 300px;
+    box-shadow: 0 0px 5px 0px rgba(0,0,0,0.2);
+    z-index: 9;
+    height: auto;
+    margin-top: 1em;
+}
+.dropdown-content-2:before, .dropdown-content:before {
+    content: "";
+    position: absolute;
+    top: -13px;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #ededed;
+    overflow: hidden;
 }
 .open {
     display: block!important;
@@ -2466,8 +2479,26 @@ h4.hotheadln {
       box-shadow: 0 0 0 0 rgba(46,49,146, 0);
   }
 }
+/*end pulse effect*/
+/*glow effect*/
+.glow {
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
 
-
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+/*end glow effect*/
 
 /*shoppingcart area*/
 section.shopping-cart-area {
@@ -2708,7 +2739,7 @@ form.track-form,
 lebel {
     font-size: 14px;
     color: forestgreen;
-    display: inline-block;
+    /*display: inline-block;*/
     margin-bottom: 0.5rem;
 }
 form.track-form .form-group input {
@@ -4574,9 +4605,9 @@ h5.btitle {
     height: 40px;
     width: 40px;
     list-style-type: none;
-    padding-left: 12px;
-    padding-top: 6px;
+    padding: 6px 12px;
     transition: all ease .5s;
+    border-bottom: 1px solid forestgreen;
 }
 ul.iconbar-inner li {
     background:#fff;
@@ -4818,11 +4849,21 @@ i.fa.fa-hands:before {
     background-color: #ededed;
     /* border-color: #dee2e6 #dee2e6 #fff; */
 }
+a.nav-link.active::before {
+    content: "";
+    position: absolute;
+    top: 72px;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid #ededed;
+    overflow: hidden;
+}
+
 .personal-details,
-.social-work {
+.social-work,
+.edu,
+.occu {
     padding: 25px 0;
-} {
-    padding: 25px 0px;
 }
 .accordion {
     color: #fff;
@@ -4915,13 +4956,10 @@ select.form-control2, .bloodreg-area.pt-5.pb-5 .bloodreg-inner .bloodreg-form se
     font-size: 11px;
     background-color: transparent;
     margin-top: 0;
-    margin-bottom: 1rem;
+    margin-bottom: .5em;
     color: #2e3192;
 }
 /*eduoccu area*/
-.edu {
-    padding: 25px 0px;
-}
 .trining-all-info {
     padding: 25px 0px;
 }
@@ -4960,7 +4998,6 @@ select.form-control2, .bloodreg-area.pt-5.pb-5 .bloodreg-inner .bloodreg-form se
 display:none;
 
 }
-
 
 
 
@@ -5324,6 +5361,10 @@ h4.title {
     color: #2e3192;
     font-size: 20px;
 }
+.brtb {
+    border-top: 1px solid forestgreen;
+    margin: 1em 0;
+}
 /*chat box*/
 .chatbox {
     position: fixed;
@@ -5679,6 +5720,118 @@ padding-bottom: 5px;padding-top:15px;
 .col-lg-3.control-label {
     text-align: left;
 }
+
+/*tutor area*/
+select.form-control0.search-tutor {
+    height: 40px;
+    position: relative;
+    margin-left: -6px;
+    background: #ffffff;
+    color: forestgreen;
+    border-color: #ededed;
+    padding: 4px;
+    font-size: 14px;
+    border-collapse: collapse;
+    outline: none;
+    width: 62px;
+}
+@media only screen and (min-width: 768px){
+
+    select.form-control0.search-tutor {
+        
+        width: 100px;
+    }
+}
+
+/*scroll indicator area*/
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+}
+
+.header h2 {
+  text-align: center;
+}
+
+.progress-container {
+    width: 100%;
+    height: 8px;
+    background: #fff;
+}
+
+.progress-bar {
+    height: 8px;
+    background: forestgreen;
+    width: 0%;
+}
+
+.content {
+  padding: 100px 0;
+  margin: 50px auto 0 auto;
+  width: 80%;
+}
+
+/*end scroll indicator area*/
+
+/*page loader area*/
+
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 2px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 2px solid #2e3192;
+  border-bottom: 2px solid forestgreen;
+  width: 120px;
+  height: 120px;
+ -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+    background-image: url(img/logo.png);
+    background-size: cover;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+
+/*end page loader are*/
 
 
 

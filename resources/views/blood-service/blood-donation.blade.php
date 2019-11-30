@@ -1,12 +1,15 @@
 @extends('layouts.app')
 @section('content')
-    @include('auth.loginModal')
+    @include('auth.navLoginModal')
         <section class="blood-donar-area">
             @if ($errors->any())
                 <script>window.login_errors={!! json_encode($errors) !!}</script>
             @endif
             @if (session()->has('success'))
                 <script>window.blood_success={!! json_encode(session('success')) !!}</script>
+            @endif
+            @if(session()->has('password_change_success'))
+                <script>window.password_change_success={!!json_encode(session('password_change_success'))!!}</script>
             @endif
             <div class="container-fluid pb-5 pt-5" id="search-app-root">
                 <search-app-root-component></search-app-root-component>

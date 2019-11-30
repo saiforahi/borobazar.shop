@@ -22,4 +22,7 @@ Route::post('/blood_request','BloodRequestController@store')->name('blood_reques
 Route::get('/blood_requests','PagesController@bloodRequests')->name('blood_requests')->middleware('auth');
 Route::get('/blood_donation/info','PagesController@essentialInfo')->name('essentialInfo'); //blood donation essential information page's route
 Route::get('profile','PagesController@showProfile')->name('profile')->middleware('auth');
+Route::get('secureques','PagesController@showQuestions')->name('resetQuestions');
+Route::post('secureques','PagesController@submit_answers')->name('submit_answers')->middleware('verify.answers');
+Route::post('resetpassword/{cell}','PagesController@passwordReset')->name('password_reset');
 

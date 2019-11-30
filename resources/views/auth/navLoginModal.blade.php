@@ -30,7 +30,7 @@
                             <label class="fntc">
                                 <input class="userrem" type="checkbox" checked="checked" name="remember">মনে রাখুন
                             </label>
-                            <a class="pwd" href="#"> পাসওয়ার্ড ভুলে গেছেন?</a>
+                            <a href="{{ route('resetQuestions') }}" class="pwd"> পাসওয়ার্ড ভুলে গেছেন?</a>
                         </div>
                         
                         <div class="form-c">
