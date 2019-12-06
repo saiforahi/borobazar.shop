@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\User;
-use Notification;
+use Illuminate\Support\Facades\Notification;
 use App\Events\BloodRequestEvent;
 use App\Notifications\BloodRequestNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;

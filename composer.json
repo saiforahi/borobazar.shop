@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "components/jquery": "^3.4",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -17,7 +18,8 @@
         "laravel/framework": "^6.0",
         "laravel/passport": "^7.5",
         "laravel/tinker": "^1.0",
-        "pusher/pusher-php-server": "~4.0"
+        "pusher/pusher-php-server": "~4.0",
+        "twbs/bootstrap": "4.3.1"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

@@ -14,25 +14,42 @@
                 </div>
             </div>
 			<div class="n_body">
-            <div class="area_content">
-                <ul>
-                    <li class="n_text_bb" v-for="item in laravelData" @click="markRead(item.id)">
-                        <div class="n_text" >
-                            <i v-if="item.read_at==null" class="fa fa-envelope"></i>
-                            <i v-else="item.read_at!=null" class="fa fa-envelope-open"></i>
-                        </div>
-                        <div class="n_text">
-                            <a href="#"><span>{{ item.data.submitted_by.name }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
-                        </div>
-                    </li>                                
-                </ul>
+                <div class="area_content">
+                    <ul>
+                        <li v-for="item in laravelData" @click="markRead(item)">
+                            <div v-if="item.read_at==null" class="n_text_bb active">    
+                                <div class="n_ic">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <div class="n_text" style="width:auto;">
+                                    <a href="#"><span>{{ item.data.submitted_by.name }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
+                                    <div class="n_timloc">
+                                        <span class="n_time">তারিখঃ {{item.data.donation_date}}</span>
+                                        <span class="n_locate">স্থানঃ {{item.data.donation_place}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-else="item.read_at!=null" class="n_text_bb">    
+                                <div class="n_ic">
+                                    <i class="fa fa-envelope-open"></i>
+                                </div>
+                                <div class="n_text" style="width:auto;">
+                                    <a href="#"><span>{{ item.data.submitted_by.name }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
+                                    <div class="n_timloc">
+                                        <span class="n_time">তারিখঃ {{item.data.donation_date}}</span>
+                                        <span class="n_locate">স্থানঃ {{item.data.donation_place}}</span>
+                                    </div>
+                                </div>
+                            </div>   
+                        </li>                                
+                    </ul>
+                </div>
             </div>
-        </div>
-		<div class="n_more">
-            <a href="#" @click="showMore"><span class="view_more">আরো দেখুন</span></a>
-        </div>
-	</div>
-</div>
+            <div class="n_more">
+                <a href="#" @click="showMore"><span class="view_more">আরো দেখুন</span></a>
+            </div>
+	    </div>
+    </div>
 </template>
 <script>
 export default {
@@ -51,9 +68,11 @@ export default {
     },  
     methods: {
         markRead(data){
-            axios.post('api/notifications/markread/'+data+'/'+this.per_page).then(response=>{
+            axios.get('api/notifications/markread/'+data.id+'/'+this.per_page).then(response=>{
             this.laravelData=response.data.notifications;
             this.total_unread_notifications=response.data.total_unread;
+            this.$emit('user_click',response.data.blood_request);
+            console.log(response.data.blood_request);
             })
             .catch(function (error) {
             //console.log(error);
@@ -74,11 +93,11 @@ export default {
         axios.get('api/notifications/'+this.per_page).then(response=>{
             this.laravelData=response.data.notifications;
             this.total_unread_notifications=response.data.total_unread;
+            this.per_page=response.data.notifications.length;
             })
             .catch(function (error) {
             //console.log(error);
         });
-        this.laravelData.sort((a, b) => (a.created_at < b.created_at) ? 1 : -1)
         
     },
     created(){

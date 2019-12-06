@@ -20,6 +20,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('cell_verified_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('google_id')->nullable();
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->nullable();
             $table->string('available')->default('yes');
             $table->string('api_token', 80)->unique()->nullable()->default(null);
             $table->rememberToken();

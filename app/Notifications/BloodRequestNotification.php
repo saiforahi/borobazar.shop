@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use App\BloodGroup;
 use App\User;
-use Auth;
 use App\BloodRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -68,7 +67,7 @@ class BloodRequestNotification extends Notification implements ShouldQueue
             'blood_group' => $this->blood_group,
             'quantity' => $this->blood_request->quantity,
             'contact_no' => $this->blood_request->contact_no,
-            'donation_date'=> $this->blood_request->donation_date,
+            'donation_date'=> $this->blood_request->donation_date->format('d/m/Y'),
             'donation_place' => $this->blood_request->donation_place,
             'message' => $this->blood_request->submitted_by." ".$this->blood_request->donation_place." হতে ".$this->blood_request->quantity." ব্যাগ রক্তের জন্য অনুরোধ করেছেন",
         ];
@@ -87,7 +86,7 @@ class BloodRequestNotification extends Notification implements ShouldQueue
             'blood_group' => $this->blood_group,
             'quantity' => $this->blood_request->quantity,
             'contact_no' => $this->blood_request->contact_no,
-            'donation_date'=> $this->blood_request->donation_date,
+            'donation_date'=> $this->blood_request->donation_date->format('d/m/Y'),
             'donation_place' => $this->blood_request->donation_place,
             'message' => $this->blood_request->submitted_by." ".$this->blood_request->donation_place." হতে ".$this->blood_request->quantity." ব্যাগ রক্তের জন্য অনুরোধ করেছেন",
         ]);

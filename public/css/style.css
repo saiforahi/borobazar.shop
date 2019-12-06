@@ -876,6 +876,9 @@ p.p-text {
     color: forestgreen;
     font-size: 12px;
 }
+.blood-pagination {
+    padding-top: 100px;
+}
 .blog-pagination {
     padding-top: 25px;
     padding-bottom: 95px;
@@ -1055,14 +1058,31 @@ li.n_text_bb:hover .notify_indi{
 li.n_text_bb.active span {
     color: #2e3192;
 }
+span.n_time {
+    font-size: 11px;
+    padding-right: .5em;
+    opacity: .8;
+}
+span.n_locate {
+    float: right;
+    font-size: 11px;
+    padding: .4em .5em 0 0;
+    opacity: .8;
+}
 li.n_text_bb.active {
     background-color: #dadada;
 }
 li.n_text_bb {
     border-bottom: 1px solid #ededed;
 }
-.n_text i {
+.n_ic i {
     color: #2e3192;
+}
+.n_ic {
+    display: table-cell;
+    padding: 0 1em 0 .5em;
+    vertical-align: middle;
+    padding-right: 1em;
 }
 .n_text {
     display: table-cell;
@@ -1072,6 +1092,9 @@ li.n_text_bb {
 h4.n_title {
     font-size: 20px;
     color: forestgreen;
+}
+.modal-lg {
+    max-width: 85%;
 }
 .n_more {
     text-align: center;
@@ -1328,6 +1351,7 @@ button:hover {
 img.avatar {
     width: 18%;
     border-radius: 50%;
+    background: url(img/bg.svg);
 }
 
 /*.container {
@@ -1906,7 +1930,7 @@ strong.text-uppercase {
     min-width: 160px;
     box-shadow: 0 0px 5px 0px rgba(0,0,0,0.2);
     z-index: 2;
-    margin-top: 30px;
+    margin-top: 14px;
 }
 .dropdown-content-2 {
     display: none;
@@ -4457,11 +4481,15 @@ table.bldreq-list td {
     background-color: #ededed;
 }
 .bogra-area .donar-inner .thumb img {
-    height: 33px;
-    width: 33px;
-    margin-bottom: 0.5rem;
-    margin-top: .5rem;
+    height: 45px;
+    width: 45px;
+    border: 1px solid #ededed;
+    border-radius: 50%;
+    /* margin-bottom: 0.5rem; */
+    /* margin-top: .5rem; */
+    background: url(img/bg.svg);
 }
+
 .bogra-area .donar-inner .name h5 {
     font-size: 14px;
     color: forestgreen;
@@ -5534,9 +5562,10 @@ strong.unam {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 2px solid #fcfcfc;
+    border: 1px solid #fff;
     position: absolute;
     top: 15px;
+    background: #fff;
 }
 
 .chatbox__body__message--left p {
@@ -5606,7 +5635,7 @@ strong.unam {
 }
 .chatbox_timing ul li a {
     display: block;
-    color: forestgreen;
+    color: #2e3192;
 }
 
 .ul_msg {
@@ -5832,7 +5861,6 @@ select.form-control0.search-tutor {
 }
 
 /*end page loader are*/
-
 
 
 

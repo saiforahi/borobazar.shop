@@ -70,10 +70,10 @@
                 align="center"
                 aria-controls="viewDiv"
             >
-                <template v-slot:first-text><span class="text-success">⏮</span></template>
-                <template v-slot:prev-text><span class="text-danger">⏪</span></template>
-                <template v-slot:next-text><span class="text-warning">⏩</span></template>
-                <template v-slot:last-text><span class="text-info">⏭</span></template>
+                <!--template v-slot:first-text><span class="text-success">⏮</span></template-->
+                <template v-slot:prev-text><span class="fa fa-chevron-left"></span></template>
+                <template v-slot:next-text><span class="fa fa-chevron-right"></span></template>
+                <!--template v-slot:last-text><span class="text-info">⏭</span></template-->
                 <template v-slot:ellipsis-text>
                     <b-spinner small type="grow"></b-spinner>
                     <b-spinner small type="grow"></b-spinner>

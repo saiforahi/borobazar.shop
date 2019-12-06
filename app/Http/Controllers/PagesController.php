@@ -25,10 +25,10 @@ class PagesController extends Controller
     public function passwordReset(Request $request,$cell){
         if(Validator::make([$request->password],['password'=>'required|string|min:8|confirmed'])){
             $new_password = Hash::make($request->password);
-        User::where('cell',$cell)->first()->forceFill([
+            User::where('cell',$cell)->first()->forceFill([
             'password' => $new_password,
-        ])->save();
-        return redirect('/')->with(['password_change_success'=>'New Password has been set!']);
+            ])->save();
+            return redirect('/')->with(['password_change_success'=>'New Password has been set!']);
         }
         return back();
         

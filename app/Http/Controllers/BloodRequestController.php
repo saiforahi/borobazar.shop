@@ -6,7 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Events\BloodRequestEvent;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 class BloodRequestController extends Controller
 {
     /**
@@ -148,15 +149,15 @@ class BloodRequestController extends Controller
 
     //
     public function getNotifications($size){
-        //$requests=BloodRequest::where('blood_group',$user->blood_group)->where('district_id',$user->district_id)->where('cell','!=',$user->cell)->orderBy('created_at', 'desc')->take($size)->get();
         $notifications=Auth::user()->notifications->sortBy('data.donation_date')->take($size);
+        $unreadNotifications=Auth::user()->unreadNotifications;
+        $result=$unreadNotifications->merge($notifications);
         $total_unread=Auth::user()->unreadNotifications->count();
-        return response()->json(['notifications'=>$notifications,'total_unread'=>$total_unread]) ;
+        return response()->json(['notifications'=>$result,'total_unread'=>$total_unread]);
     }
 
     public function getNewNotification($blood_request_id){
         return Auth::user()->notifications->where('data.blood_request_id',$blood_request_id)->first(); // returning notification
     }
-
     
 }

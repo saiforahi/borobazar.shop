@@ -1,4 +1,4 @@
-<section class="footer bottom">
+<section class="footer bottom pt">
     <div class="container-fluid text-center pb-2 pt-2">
         <div class="container">
             <div class="row">
@@ -15,4 +15,3 @@
         </div>
     </div>
 </section>
-    

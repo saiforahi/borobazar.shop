@@ -44,7 +44,6 @@
                     </tbody>
                 </table>
                 <div class="text-area">
-                    
                     <button type="button" class="btn-getinvite1" id="textbutton"><i class="fa fa-envelope-o"></i> টেক্সট করুন </button>
                     <b-popover
                         :target="`textbutton`"
