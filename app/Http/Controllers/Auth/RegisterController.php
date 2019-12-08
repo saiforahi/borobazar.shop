@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\BloodGroup;
 use App\BloodRequest;
 use App\Donar;
 use App\Http\Controllers\Controller;
@@ -10,7 +9,7 @@ use App\Notifications\BloodRequestNotification;
 use App\User;
 use App\UserDetails;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -72,6 +71,8 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+    
+
     protected function create_user(array $data)
     {
         return User::create([
@@ -82,18 +83,20 @@ class RegisterController extends Controller
         ]);
     }
 
-    protected function create_user_details(array $data)
+    
+
+    protected function create_user_details(array $data,$id)
     {
         return UserDetails::create([
-            'user_cell'=> $data['cell'],
+            'user_id'=> $id,
             'district_id' => $data['presentDistrict']
         ]);
     }
 
-    protected function create_donar(array $data)
+    protected function create_donar(array $data,$id)
     {
         return Donar::create([
-            'donar_cell'=> $data['cell'],
+            'donar_id'=> $id,
             'blood_group' => $data['bloodGroup'],
             'district_id' => $data['presentDistrict'],
             'blood_organization' =>$data['organizationName'],
@@ -124,8 +127,8 @@ class RegisterController extends Controller
         }
         else{
             $user = $this->create_user($request->only('name','cell','password'));
-            $user_details=$this->create_user_details($request->only('cell','bloodGroup','presentDistrict','lastDonationDate','organizationName'));
-            $donar=$this->create_donar($request->only('cell','bloodGroup','presentDistrict','lastDonationDate','organizationName'));
+            $user_details=$this->create_user_details($request->only('cell','bloodGroup','presentDistrict','lastDonationDate','organizationName'),$user->id);
+            $donar=$this->create_donar($request->only('cell','bloodGroup','presentDistrict','lastDonationDate','organizationName'),$user->id);
             Auth::login($user);
             $previousRequests=BloodRequest::where('blood_group',$donar->blood_group)->get();
             

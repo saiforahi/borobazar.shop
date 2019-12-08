@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class UserDetails extends Model
 {
     protected $table = 'user_details';
-    protected $primaryKey = 'user_cell';
-    protected $keyType = 'string';
+    protected $primaryKey = 'user_id';
+    //protected $keyType = 'string';
     protected $dates = ['passport_issue_date','birth_date'];
     protected $casts = [
         'passport_issue_date' => 'date:d-M-Y',
         'birth_date' => 'date:d-M-Y'
     ];
     protected $fillable = [
-        'user_cell','district_id'
+        'user_id','district_id'
     ];
     public function user(){
-        return $this->belongsTo(User::class,'cell','user_cell');
+        return $this->belongsTo(User::class,'id','user_id');
     }
 
     public function district(){

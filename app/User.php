@@ -10,9 +10,10 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable
 {
     use Notifiable, HasApiTokens;
-    protected  $primaryKey = 'cell';
-    protected $keyType = 'string';
-    public $incrementing = false;
+    protected  $primaryKey = 'id';
+    //protected $keyType = 'string';
+    //public $incrementing = false;
+    protected $table='users';
     /**
      * The attributes that are mass assignable.
      *
@@ -37,24 +38,24 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'cell_verified_at' => 'datetime',
-        'email_verified_at' => 'datetime',
+        'cell_verified_at' => 'date:d-M-Y',
+        'email_verified_at' => 'date:d-M-Y',
     ];
 
     public function findForPassport($username) {
-        return $this->where('cell', $username)->first(); //customizing username field for passport
+        return $this->where('id', $username)->first(); //customizing username field for passport
     }
 
     public function user_details(){
-        return $this->hasOne(UserDetails::class,'user_cell','cell');
+        return $this->hasOne(UserDetails::class,'user_id','id');
     }
 
 
     public function donar_details(){
-        return $this->hasOne(Donar::class,'donar_cell','cell');
+        return $this->hasOne(Donar::class,'donar_id','id');
     }
 
     public function secondary_cells(){
-        return $this.hasMany(SecondaryCell::class,'primary_cell','cell');
+        return $this->hasMany(SecondaryCell::class,'primary_cell','cell');
     }
 }

@@ -4,7 +4,7 @@
             <div class="imgcontainer">
                 <span @click="hidemodal" class="close" title="Close">&times;</span>
                 <img src="img/login-avatar.png" alt="Avatar" class="avatar">
-                <div class="status">
+                <div class="u-status">
                     <h5 class="title">রক্ত দিব বাচঁবে প্রাণ</h5>
                 </div>
                 <div class="col-lg-12">

@@ -16,9 +16,9 @@ class BloodRequestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getRequests($size){   
-       $request_list=BloodRequest::where('submitted_by','!=',Auth::user()->cell)->where('blood_group',Auth::user()->donar_details->blood_group)->where('district_id',Auth::user()->donar_details->district_id)
+       $request_list=BloodRequest::where('submitted_by','!=',Auth::user()->id)->where('blood_group',Auth::user()->donar_details->blood_group)->where('district_id',Auth::user()->donar_details->district_id)
                     ->join('blood_groups','blood_groups.id','=','blood_requests.blood_group')
-                    ->join('users','users.cell','=','blood_requests.submitted_by')
+                    ->join('users','users.id','=','blood_requests.submitted_by')
                     ->join('districts','blood_requests.district_id','=','districts.id')
                     ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.created_at','blood_requests.updated_at')
                     ->paginate($size);
@@ -35,7 +35,7 @@ class BloodRequestController extends Controller
         return BloodRequest::create([
             'blood_request_id' => $blood_request_id,
             'patient_name' => $data['name'],
-            'submitted_by' => Auth::user()->cell,
+            'submitted_by' => Auth::user()->id,
             'relation_with_patient' => $data['relation'],
             'contact_no'=> $data['cell'],
             'blood_group' => $data['bloodGroup'],
@@ -57,7 +57,7 @@ class BloodRequestController extends Controller
     public function store(Request $request)
     {
         $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $numbers = rand(100000, 999999);
+        $numbers = rand(0, 999999999);
         $prefix = "BR";
         $sufix = $letters[rand(0, 25)];
         $blood_request_id = $prefix . $numbers . $sufix;
@@ -96,7 +96,7 @@ class BloodRequestController extends Controller
         {
             $this->create_request($request->all(),$blood_request_id);
             $newRequest=BloodRequest::where('blood_request_id',$blood_request_id)->first();
-            $user=User::where('cell',Auth::user()->cell)->first();
+            $user=User::where('id',Auth::user()->id)->first();
             event(new BloodRequestEvent($newRequest,$user));
             return redirect('/')->with(['success'=>'Your blood request has been submitted successfuly!']);
         }

@@ -72,7 +72,6 @@ export default {
             this.laravelData=response.data.notifications;
             this.total_unread_notifications=response.data.total_unread;
             this.$emit('user_click',response.data.blood_request);
-            console.log(response.data.blood_request);
             })
             .catch(function (error) {
             //console.log(error);

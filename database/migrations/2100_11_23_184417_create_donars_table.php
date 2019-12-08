@@ -14,7 +14,8 @@ class CreateDonarsTable extends Migration
     public function up()
     {
         Schema::create('donars', function (Blueprint $table) {
-            $table->string('donar_cell');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('donar_id');
             $table->Integer('blood_group')->nullable();
             $table->string('blood_organization')->nullable();
             $table->string('district_id')->nullable();
@@ -22,8 +23,8 @@ class CreateDonarsTable extends Migration
             $table->date('last_donation_date')->nullable();
             $table->timestamps();
 
-            $table->primary('donar_cell');
-            $table->foreign('donar_cell')->references('cell')->on('users')->onDelete('cascade')->onUpdate('cascade');
+           
+            $table->foreign('donar_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('blood_group')->references('id')->on('blood_groups')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade')->onUpdate('cascade');
         });

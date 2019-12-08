@@ -14,7 +14,8 @@ class CreateUserDetailsTable extends Migration
     public function up()
     {
         Schema::create('user_details', function (Blueprint $table) {
-            $table->string('user_cell')->unique();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->unique();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('sex')->nullable();
@@ -33,8 +34,7 @@ class CreateUserDetailsTable extends Migration
             $table->string('secondary_email')->nullable();
             $table->timestamps();
 
-            $table->primary('user_cell');
-            $table->foreign('user_cell')->references('cell')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('subdistrict_id')->references('id')->on('sub_districts')->onDelete('cascade')->onUpdate('cascade');
         });

@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\BloodRequest;
-use App\Donar;
 use App\User;
-use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
-use DB;
+
 
 class PagesController extends Controller
 {
@@ -35,9 +32,6 @@ class PagesController extends Controller
     }
     public function bloodDonation(Request $request) //function for route 'home' and '/'
     {
-        $lastDonationDate = date('Y-m-d');
-        BloodRequest::where('donation_date','<',$lastDonationDate)->delete();
-        
         return view('blood-service.blood-donation');
     }
 

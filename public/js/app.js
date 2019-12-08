@@ -2746,8 +2746,6 @@ __webpack_require__.r(__webpack_exports__);
         _this.total_unread_notifications = response.data.total_unread;
 
         _this.$emit('user_click', response.data.blood_request);
-
-        console.log(response.data.blood_request);
       })["catch"](function (error) {//console.log(error);
       });
     },
@@ -77716,10 +77714,39 @@ var render = function() {
                   scopedSlots: _vm._u(
                     [
                       {
+                        key: "first-text",
+                        fn: function() {
+                          return [
+                            _c("span", {
+                              directives: [
+                                {
+                                  name: "b-tooltip",
+                                  rawName: "v-b-tooltip.hover",
+                                  modifiers: { hover: true }
+                                }
+                              ],
+                              staticClass: "fa fa-angle-double-left",
+                              attrs: { title: "সর্বপ্রথম" }
+                            })
+                          ]
+                        },
+                        proxy: true
+                      },
+                      {
                         key: "prev-text",
                         fn: function() {
                           return [
-                            _c("span", { staticClass: "fa fa-chevron-left" })
+                            _c("span", {
+                              directives: [
+                                {
+                                  name: "b-tooltip",
+                                  rawName: "v-b-tooltip.hover",
+                                  modifiers: { hover: true }
+                                }
+                              ],
+                              staticClass: "fa fa-chevron-left",
+                              attrs: { title: "পূর্ববর্তী" }
+                            })
                           ]
                         },
                         proxy: true
@@ -77728,7 +77755,36 @@ var render = function() {
                         key: "next-text",
                         fn: function() {
                           return [
-                            _c("span", { staticClass: "fa fa-chevron-right" })
+                            _c("span", {
+                              directives: [
+                                {
+                                  name: "b-tooltip",
+                                  rawName: "v-b-tooltip.hover",
+                                  modifiers: { hover: true }
+                                }
+                              ],
+                              staticClass: "fa fa-chevron-right",
+                              attrs: { title: "পরবর্তী" }
+                            })
+                          ]
+                        },
+                        proxy: true
+                      },
+                      {
+                        key: "last-text",
+                        fn: function() {
+                          return [
+                            _c("span", {
+                              directives: [
+                                {
+                                  name: "b-tooltip",
+                                  rawName: "v-b-tooltip.hover",
+                                  modifiers: { hover: true }
+                                }
+                              ],
+                              staticClass: "fa fa-angle-double-right",
+                              attrs: { title: "সর্বশেষ" }
+                            })
                           ]
                         },
                         proxy: true
@@ -77767,7 +77823,7 @@ var render = function() {
                     ],
                     null,
                     false,
-                    2320828604
+                    4079576942
                   ),
                   model: {
                     value: _vm.currentPage,
@@ -77914,10 +77970,39 @@ var render = function() {
                     scopedSlots: _vm._u(
                       [
                         {
+                          key: "first-text",
+                          fn: function() {
+                            return [
+                              _c("span", {
+                                directives: [
+                                  {
+                                    name: "b-tooltip",
+                                    rawName: "v-b-tooltip.hover",
+                                    modifiers: { hover: true }
+                                  }
+                                ],
+                                staticClass: "fa fa-angle-double-left",
+                                attrs: { title: "সর্বপ্রথম" }
+                              })
+                            ]
+                          },
+                          proxy: true
+                        },
+                        {
                           key: "prev-text",
                           fn: function() {
                             return [
-                              _c("span", { staticClass: "fa fa-chevron-left" })
+                              _c("span", {
+                                directives: [
+                                  {
+                                    name: "b-tooltip",
+                                    rawName: "v-b-tooltip.hover",
+                                    modifiers: { hover: true }
+                                  }
+                                ],
+                                staticClass: "fa fa-chevron-left",
+                                attrs: { title: "পূর্ববর্তী" }
+                              })
                             ]
                           },
                           proxy: true
@@ -77926,7 +78011,36 @@ var render = function() {
                           key: "next-text",
                           fn: function() {
                             return [
-                              _c("span", { staticClass: "fa fa-chevron-right" })
+                              _c("span", {
+                                directives: [
+                                  {
+                                    name: "b-tooltip",
+                                    rawName: "v-b-tooltip.hover",
+                                    modifiers: { hover: true }
+                                  }
+                                ],
+                                staticClass: "fa fa-chevron-right",
+                                attrs: { title: "পরবর্তী" }
+                              })
+                            ]
+                          },
+                          proxy: true
+                        },
+                        {
+                          key: "last-text",
+                          fn: function() {
+                            return [
+                              _c("span", {
+                                directives: [
+                                  {
+                                    name: "b-tooltip",
+                                    rawName: "v-b-tooltip.hover",
+                                    modifiers: { hover: true }
+                                  }
+                                ],
+                                staticClass: "fa fa-angle-double-right",
+                                attrs: { title: "সর্বশেষ" }
+                              })
                             ]
                           },
                           proxy: true
@@ -77965,7 +78079,7 @@ var render = function() {
                       ],
                       null,
                       false,
-                      2320828604
+                      4079576942
                     ),
                     model: {
                       value: _vm.currentPage,
@@ -78457,7 +78571,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "status" }, [
+    return _c("div", { staticClass: "u-status" }, [
       _c("h5", { staticClass: "title" }, [_vm._v("রক্ত দিব বাচঁবে প্রাণ")])
     ])
   },
