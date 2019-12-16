@@ -14,12 +14,11 @@ class CreateSecondaryCellsTable extends Migration
     public function up()
     {
         Schema::create('secondary_cells', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('secondary_cell')->unique();
-            $table->string('primary_cell');
             $table->timestamps();
-
-            $table->primary('secondary_cell');
-            $table->foreign('primary_cell')->references('cell')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

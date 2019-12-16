@@ -25,7 +25,7 @@ class PagesController extends Controller
             User::where('cell',$cell)->first()->forceFill([
             'password' => $new_password,
             ])->save();
-            return redirect('/')->with(['password_change_success'=>'New Password has been set!']);
+            return redirect('/')->with(['password_change_success'=>'আপনার পাসওয়ার্ড পরিবর্তিত ও সংরক্ষিত হয়েছে!']);
         }
         return back();
         

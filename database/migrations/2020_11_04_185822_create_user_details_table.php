@@ -18,19 +18,18 @@ class CreateUserDetailsTable extends Migration
             $table->unsignedBigInteger('user_id')->unique();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('sex')->nullable();
-            $table->string('district_id')->nullable();
-            $table->string('subdistrict_id')->nullable();
-            
-            $table->string('NID')->unique()->nullable();
-            $table->string('passport_no')->unique()->nullable();
-            $table->date('passport_issue_date')->nullable();
             $table->string('father_name')->nullable();
             $table->string('mother_name')->nullable();
             $table->date('birth_date')->nullable();
+            $table->string('sex')->nullable();
             $table->string('relegion')->nullable();
             $table->string('marital_status')->nullable();
             $table->string('nationality')->nullable();
+            $table->string('NID')->unique()->nullable();
+            $table->string('passport_no')->unique()->nullable();
+            $table->date('passport_issue_date')->nullable();
+            $table->string('district_id')->nullable();
+            $table->string('subdistrict_id')->nullable();
             $table->string('secondary_email')->nullable();
             $table->timestamps();
 

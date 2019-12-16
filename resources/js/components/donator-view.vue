@@ -3,7 +3,9 @@
     <div class="col-lg-3" style="padding-bottom: 15px;">
         <div class="donar-inner  product product-single">
             <div class="thumb">
-                <img width="80" height="auto" src="img/login-avatar.png">
+                <img v-if="donator.sex=='male'" width="80" height="auto" src="img/male-user.svg">
+                <img v-else-if="donator.sex=='female'" width="80" height="auto" src="img/female-user.svg">
+                <img v-else width="80" height="auto" src="img/login-avatar.png">
             </div>
             <div class="name">
                 <h5 class="title">{{ donator.name }}</h5>

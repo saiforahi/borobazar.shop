@@ -2,8 +2,11 @@ window._ = require('lodash');
 
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
+import PortalVue from 'portal-vue'
 
 Vue.use(BootstrapVue);
+Vue.use(PortalVue)
+
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

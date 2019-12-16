@@ -76,7 +76,7 @@ class RegisterController extends Controller
     protected function create_user(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'name' => ucfirst(trans($data['name'])),
             'cell'=> $data['cell'],
             'password' => Hash::make($data['password']),
             'api_token' => Str::random(80)
@@ -89,6 +89,7 @@ class RegisterController extends Controller
     {
         return UserDetails::create([
             'user_id'=> $id,
+            'first_name' => ucfirst(trans($data['name'])),
             'district_id' => $data['presentDistrict']
         ]);
     }
@@ -127,15 +128,15 @@ class RegisterController extends Controller
         }
         else{
             $user = $this->create_user($request->only('name','cell','password'));
-            $user_details=$this->create_user_details($request->only('cell','bloodGroup','presentDistrict','lastDonationDate','organizationName'),$user->id);
-            $donar=$this->create_donar($request->only('cell','bloodGroup','presentDistrict','lastDonationDate','organizationName'),$user->id);
+            $user_details=$this->create_user_details($request->only('name','cell','bloodGroup','presentDistrict'),$user->id);
+            $donar=$this->create_donar($request->only('bloodGroup','presentDistrict','lastDonationDate','organizationName'),$user->id);
             Auth::login($user);
             $previousRequests=BloodRequest::where('blood_group',$donar->blood_group)->get();
             
             foreach ($previousRequests as $previousRequest){
                 Auth::user()->notify(new BloodRequestNotification($previousRequest));
             }
-            return redirect('/')->with(['AccountCreatedMessage'=>'Account Successfully Created!']);
+            return redirect('/')->with(['AccountCreatedMessage'=>' বড়বাজারে সংযুক্ত হওয়ার জন্য আপনাকে ধন্যবাদ']);
         }
    }
 }

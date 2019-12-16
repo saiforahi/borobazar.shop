@@ -1,4 +1,4 @@
-@include('auth.navLoginModal')
+
 <section class="bnavigationbar">
     <div class="container-fluid pt-2 pb-1">
         <div class="container" >
@@ -26,7 +26,12 @@
                                         <a href="{{ route('essentialInfo') }}" class="whyborobazar">প্রয়োজনীয় তথ্য</a>
                                     </li>                                
                                     <li>
-                                        <a href="{{ route('blood_request') }}" target="_blank" class="whyborobazar">গ্রহীতার অনুরোধ</a>
+                                        <a href="#" onclick="showMenu()" class="whyborobazar">গ্রহীতার অনুরোধ</a>
+                                        <div id="grohitarmenu" class="dropdown-content">
+                                            <a href="{{ route('blood_request') }}" target="_blank"><i class="mt-1 fa fa-file-o"></i>নতুন অনুরোধ</a>
+                                            <a href="#"><i class="mt-1 fa fa-list"></i>আমার অনুরোধ সমূহ</a>
+                                        </div>
+                                        
                                     </li>
                                     <li>
                                         <a href="{{ route('blood_requests') }}" class="whyborobazar"> অনুরোধের তালিকা</a>
@@ -35,7 +40,7 @@
                                     @auth
                                     <li>
                                         <div class="header-account" onclick="myFunction()">
-                                            <i class="bsquare fa fa-user-o"></i>  {{ Auth::user()->name }}
+                                            <i class="bsquare fa fa-user-o"></i>  {{ ucfirst(trans(Auth::user()->name)) }}
                                             <div id="demo" class="dropdown-content">
                                                 <a href="{{ route('profile') }}"><i class="mt-1 fa fa-user"></i>আমার অ্যাকাউন্ট</a>
                                                 <a href="#"><i class="mt-1 fa fa-cog"></i>সেটিংস</a>
@@ -57,19 +62,19 @@
                                     @guest
                                     @if(Request::path() == 'login')
                                     <li>
-                                        <i class="bsquare fa fa-user"></i>
+                                        <i class="bsquare fa fa-user-o"></i>
                                         <a class="text-uppercase whyborobazar" href="{{ route('register') }}">নিবন্ধন</a> 
                                     </li>
                                     
                                     @elseif(Request::path() == 'register')
                                     <li>
-                                        <i class="bsquare fa fa-user"></i>
+                                        <i class="bsquare fa fa-user-o"></i>
                                         <a class="text-uppercase whyborobazar" href="{{route('login')}}">লগইন</a> 
                                     </li>
 
                                     @else
                                     <li>
-                                        <i class="bsquare fa fa-user"></i>
+                                        <i class="bsquare fa fa-user-o"></i>
                                         <a class="text-uppercase whyborobazar" href="#" onclick="document.getElementById('loginModalBlade').style.display='block'">লগইন</a> / 
                                         <a class="text-uppercase whyborobazar" href="{{ route('register') }}">নিবন্ধন</a> 
                                     </li>
@@ -90,6 +95,10 @@
     <script type="text/javascript">
         function myFunction() {
             document.getElementById("demo").classList.toggle("open");
+        }
+
+        function showMenu(){
+            document.getElementById("grohitarmenu").classList.toggle("open");
         }
         
     </script>

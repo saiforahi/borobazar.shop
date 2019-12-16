@@ -942,6 +942,7 @@ i.bsquare, .categories {
     text-align: center;
     margin-top: -10px;
     color: forestgreen;
+    user-select: none;
 }
 
 ul.middle li {
@@ -1023,6 +1024,7 @@ img.startshop {
 .n_body {
     max-height: 250px;
     overflow-x: auto;
+    overscroll-behavior: none;
 }
 .n_body a {
     padding: 1em 0;
@@ -1213,16 +1215,17 @@ input.form-mail::-webkit-input-placeholder {
 input.input-text {
     font-size: 14px;
     width: 100%;
-    height: 35px;
+    /* height: 35px; */
     outline: none;
     background: transparent;
     border: none;
     border-bottom: 1px solid #ededed;
     color: #000;
     transition: all ease .2s;
+    margin-bottom: .5em;
 }
 .username {
-    position: absolute;
+    /*position: absolute;*/
     pointer-events: none;
     left: 0;
     top: 12px;
@@ -1243,13 +1246,13 @@ input.input-text:focus ~ .username{
     color: #2e3192;
 }
 .form-a {
-    position: absolute;
-    width: 88%;
+    /* position: absolute; */
+    /* width: 88%; */
 }
 .form-b {
-    position: absolute;
-    width: 88%;
-    margin-top: 35px;
+    /* position: absolute; */
+    /* width: 88%; */
+    /* margin-top: 35px; */
 }
 .form-c {
     padding: .5em 0;
@@ -1268,8 +1271,8 @@ a.reg:hover {
 }
 .form-btn {
     position: relative;
-    padding: .5em 0;
-    margin: 4em auto 0 auto;
+    /* padding: .5em 0; */
+    /* margin: 4em auto 0 auto; */
 }
 input.userrem {
     margin: 12px 10px 20px 0px;
@@ -1282,12 +1285,16 @@ label.fntc {
     font-size: 14px;
     margin-top: .5em;
 }
+a.pwd:hover {
+    color: forestgreen;
+}
 a.pwd {
     text-decoration: none;
     float: right;
     color: #2e3192;
     font-size: 14px;
     margin-top: .5em;
+    transition: all ease .5s;
 }
 input.usermail::-webkit-input-placeholder {
     color: #2e3192;
@@ -1398,6 +1405,7 @@ span.psw {
     border: none;
     min-width: 300px;
     padding: 0 0.5em;
+    overflow: hidden;
 }
 /*@media only screen and (min-width: 768px){
 
@@ -1919,7 +1927,7 @@ strong.text-uppercase {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #ededed;
+    background-color: #fff;
     min-width: 160px;
     box-shadow: 0 0px 5px 0px rgba(0,0,0,0.2);
     z-index: 2;
@@ -4700,9 +4708,9 @@ ul.iconbar-inner li {
     width: 80px;
     transition: all ease .5s;
 }
-.account-area {
+/*.account-area {
     padding: 45px 0px 0px;
-}
+}*/
 .account-area .profile-area .col-lg-12 {
     border: 1px solid #ededed;
     border-bottom: none;
@@ -6494,23 +6502,7 @@ span.clrdb a:hover {
     font-weight: normal;
     font-size: 11px;
 }
-input {
-    position: relative;
-    width: 90%;
-    font-family: 'Roboto';
-    font-size: 12px;
-    line-height: 20px;
-    font-weight: 500;
-    color: #000;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-    outline: none;
-    background: #fff;
-    display: inline-block;
-    resize: none;
-    padding: 5px;
-    border-radius: 3px;
-}
+
 .chat_form .get-notified input {
     margin: 2px 0 0 0;
     border: 1px solid #228b22;
@@ -6793,5 +6785,38 @@ strong.chat_time {
 
 
 /*End Live Chat area*/
+
+/*swl modal*/
+
+.swal-icon.swal-icon--error {
+    border-color: #228b22;
+    -webkit-animation: animateErrorIcon .5s;
+    animation: animateErrorIcon .5s;
+}
+.swal-icon--error__line {
+    position: absolute;
+    height: 5px;
+    width: 47px;
+    background-color: #2e3192;
+    display: block;
+    top: 37px;
+    border-radius: 2px;
+}
+
+/*bb-allserv*/
+.bb-allserv {
+    cursor: pointer;
+    user-select: none;
+}
+.mega.dropdown-content {
+    min-width: 252px;
+}
+.bb-allserv ul li a img {
+    width: 23px;
+    height: 23px;
+}
+
+
+
 
 

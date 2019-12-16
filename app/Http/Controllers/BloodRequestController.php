@@ -16,7 +16,7 @@ class BloodRequestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getRequests($size){   
-       $request_list=BloodRequest::where('submitted_by','!=',Auth::user()->id)->where('blood_group',Auth::user()->donar_details->blood_group)->where('district_id',Auth::user()->donar_details->district_id)
+       $request_list=BloodRequest::where('submitted_by','!=',Auth::user()->id)->where('blood_group',Auth::user()->donars->blood_group)->where('district_id',Auth::user()->donars->district_id)
                     ->join('blood_groups','blood_groups.id','=','blood_requests.blood_group')
                     ->join('users','users.id','=','blood_requests.submitted_by')
                     ->join('districts','blood_requests.district_id','=','districts.id')
@@ -98,7 +98,7 @@ class BloodRequestController extends Controller
             $newRequest=BloodRequest::where('blood_request_id',$blood_request_id)->first();
             $user=User::where('id',Auth::user()->id)->first();
             event(new BloodRequestEvent($newRequest,$user));
-            return redirect('/')->with(['success'=>'Your blood request has been submitted successfuly!']);
+            return redirect('/')->with(['success'=>'অনুরোধ সম্পন্ন হয়েছে']);
         }
     }
 

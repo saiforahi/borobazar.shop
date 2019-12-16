@@ -51,7 +51,7 @@ class User extends Authenticatable
     }
 
 
-    public function donar_details(){
+    public function donars(){
         return $this->hasOne(Donar::class,'donar_id','id');
     }
 

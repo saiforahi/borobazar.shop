@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SecondaryCell extends Model
 {
     protected $table='secondary_cells';
-    protected $fillable=['secondary_cell','primary_cell'];
+    protected $fillable=['secondary_cell','user_id'];
     //
-    public function user_details(){
-        return $this.belongsTo(User::class,'cell','primary_cell');
+    public function user(){
+        return $this.belongsTo(User::class,'id','user_id');
     }
 }

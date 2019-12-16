@@ -16,32 +16,30 @@
 			<div class="n_body">
                 <div class="area_content">
                     <ul>
-                        <li v-for="item in laravelData" @click="markRead(item)">
-                            <div v-if="item.read_at==null" class="n_text_bb active">    
-                                <div class="n_ic">
-                                    <i class="fa fa-envelope"></i>
-                                </div>
-                                <div class="n_text" style="width:auto;">
-                                    <a href="#"><span>{{ item.data.submitted_by.name }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
-                                    <div class="n_timloc">
-                                        <span class="n_time">তারিখঃ {{item.data.donation_date}}</span>
-                                        <span class="n_locate">স্থানঃ {{item.data.donation_place}}</span>
-                                    </div>
-                                </div>
+                        <li v-if="item.read_at==null" class="n_text_bb active" v-for="item in laravelData" @click="markRead(item)">  
+                            <div class="n_ic">
+                                <i class="fa fa-envelope"></i>
                             </div>
-                            <div v-else="item.read_at!=null" class="n_text_bb">    
-                                <div class="n_ic">
-                                    <i class="fa fa-envelope-open"></i>
-                                </div>
-                                <div class="n_text" style="width:auto;">
-                                    <a href="#"><span>{{ item.data.submitted_by.name }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
-                                    <div class="n_timloc">
-                                        <span class="n_time">তারিখঃ {{item.data.donation_date}}</span>
-                                        <span class="n_locate">স্থানঃ {{item.data.donation_place}}</span>
-                                    </div>
+                            <div class="n_text" style="width:auto;">
+                                <a href="#"><span>{{ item.data.submitted_by.name }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
+                                <div class="n_timloc">
+                                    <span class="n_time">তারিখঃ {{item.data.donation_date}}</span>
+                                    <span class="n_locate">স্থানঃ {{item.data.donation_place}}</span>
                                 </div>
                             </div>   
-                        </li>                                
+                        </li>   
+                        <li v-if="item.read_at!=null" class="n_text_bb" v-for="item in laravelData" @click="markRead(item)">  
+                            <div class="n_ic">
+                                <i class="fa fa-envelope-open"></i>
+                            </div>
+                            <div class="n_text" style="width:auto;">
+                                <a href="#"><span>{{ item.data.submitted_by.name }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
+                                <div class="n_timloc">
+                                    <span class="n_time">তারিখঃ {{item.data.donation_date}}</span>
+                                    <span class="n_locate">স্থানঃ {{item.data.donation_place}}</span>
+                                </div>
+                            </div>   
+                        </li>                              
                     </ul>
                 </div>
             </div>
@@ -101,7 +99,7 @@ export default {
     },
     created(){
         if(window.auth_user!=null){
-            Echo.private('App.User.'+window.auth_user.cell)
+            Echo.private('App.User.'+window.auth_user.id)
             .notification((notification) => {
                 axios.get('api/newNotification/'+notification.blood_request_id).then(response=>{
                     this.laravelData.unshift(response.data);

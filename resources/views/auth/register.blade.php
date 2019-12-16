@@ -173,9 +173,8 @@
                         </form>
                         <div class="row text-right">
                            <div class="col-lg-12">
-                               <a href="{{ route('login') }}" target="_blank"><small class="already">আপনি কি নিবন্ধিত?</small>
-                               <span class="login">লগইন করুন</span>
-                               </a>
+                                <small class="already">আপনি কি নিবন্ধিত?</small>
+                                <span class="login"><a href="{{ route('login') }}" target="_blank">লগইন করুন</a></span>
                             </div>
                         </div>
                    </div>

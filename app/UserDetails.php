@@ -11,18 +11,18 @@ class UserDetails extends Model
     //protected $keyType = 'string';
     protected $dates = ['passport_issue_date','birth_date'];
     protected $casts = [
-        'passport_issue_date' => 'date:d-M-Y',
-        'birth_date' => 'date:d-M-Y'
+        'passport_issue_date' => 'date:Y-m-d',
+        'birth_date' => 'date:Y-m-d'
     ];
     protected $fillable = [
-        'user_id','district_id'
+        'user_id','first_name','district_id'
     ];
     public function user(){
-        return $this->belongsTo(User::class,'id','user_id');
+        return $this->belongsTo(User::class,'user_id','id');
     }
 
     public function district(){
-        return $this->belongsTo(District::class,'id','district_id');
+        return $this->belongsTo(District::class,'district_id','id');
     }
 
     

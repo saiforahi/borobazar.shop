@@ -18,8 +18,8 @@
                         aria-controls="viewDiv"
                     >
                         <template v-slot:first-text><span v-b-tooltip.hover title="সর্বপ্রথম" class="fa fa-angle-double-left"></span></template>
-                        <template v-slot:prev-text><span v-b-tooltip.hover title="পূর্ববর্তী" class="fa fa-chevron-left"></span></template>
-                        <template v-slot:next-text><span v-b-tooltip.hover title="পরবর্তী" class="fa fa-chevron-right"></span></template>
+                        <template v-slot:prev-text><span v-b-tooltip.hover title="পূর্ববর্তী" class="fa fa-angle-left"></span></template>
+                        <template v-slot:next-text><span v-b-tooltip.hover title="পরবর্তী" class="fa fa-angle-right"></span></template>
                         <template v-slot:last-text><span class="fa fa-angle-double-right" v-b-tooltip.hover title="সর্বশেষ"></span></template>
                         <template v-slot:ellipsis-text>
                             <b-spinner small type="grow"></b-spinner>

@@ -6,6 +6,7 @@
         <div class="container">
             <div class="register-inner">
                <form class="track-form row" method="POST" action="{{ route('login') }}">
+                    @csrf
                     @if ($errors->any())
                         <div class="alert">
                             <ul>
@@ -15,7 +16,6 @@
                             </ul>
                         </div>
                     @endif
-                @csrf
                    <div class="col-lg-12 form-group">
                        <label for="cell">মোবাইল*</label>
                        <input type="text" class="form-control2" placeholder="" id="cell" name="cell">
@@ -30,9 +30,8 @@
                 </form>
                 <div class="row text-right">
                    <div class="col-lg-12">
-                       <a href="{{ route('register') }}" target="_blank"><small class="already">আপনি কি নিবন্ধিত না?</small>
-                       <span class="login">নিবন্ধন করুন</span>
-                       </a>
+                        <small class="already">আপনি কি নিবন্ধিত না?</small>
+                        <span class="login"><a href="{{ route('register') }}" target="_blank">নিবন্ধন করুন</a></span>
                     </div>
                 </div>
            </div>

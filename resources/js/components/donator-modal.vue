@@ -3,7 +3,9 @@
         <form class="modal-content animate" action="">
             <div class="imgcontainer">
                 <span @click="hidemodal" class="close" title="Close">&times;</span>
-                <img src="img/login-avatar.png" alt="Avatar" class="avatar">
+                <img v-if="donator.sex=='male'" width="80" height="auto" src="img/male-user.svg" alt="Avatar" class="avatar">
+                <img v-else-if="donator.sex=='female'" width="80" height="auto" src="img/female-user.svg" alt="Avatar" class="avatar">
+                <img v-else width="80" height="auto" src="img/login-avatar.png" alt="Avatar" class="avatar">
                 <div class="u-status">
                     <h5 class="title">রক্ত দিব বাচঁবে প্রাণ</h5>
                 </div>
@@ -50,28 +52,24 @@
                         :placement="'bottom'"
                         title=  "জরুরী রক্তের প্রয়োজন"
                         triggers="click"
-                    ><form action="#" class="form-group"><textarea type="text" class="form-control2" placeholder="" name="text"></textarea>
-                    <button type="submit" class="btn-getinvite1">পাঠান</button>
+                        container= null
+                    ><form action="" class="form-group"><textarea type="text" class="form-control2" placeholder="" name="text"></textarea>
+                    <button type="button" class="btn-getinvite1">পাঠান</button>
                     </form>
                     </b-popover>
-                    <!--div class="form-popup" id="myForm">
-                        <form action="#" class="form-group">
-                            <textarea type="text" class="form-control2" placeholder="" name="text"></textarea>
-                            <button type="submit" class="btn-getinvite1">পাঠান</button>
-                            <button type="cancle" class="btn-getinvite1" onclick="closeForm()"><i class="fa fa-close"></i></button>
-                        </form>
-                    </div-->
                 </div>
                 <div class="call-area">
-                    <button type="button" class="btn-getinvite1"  id="popover-cell"><i class="fa fa-phone"></i> কল করুন</button>
+                    <button type="button" class="btn-getinvite1" id="popover-cell"><i class="fa fa-phone"></i> কল করুন</button>
                     <b-popover
-                        :target="`popover-cell`"
+                        target="popover-cell"
                         :placement="'bottom'"
                         title="মোবাইল নাম্বার"
                         triggers="click"
-                        :content="`${donator.cell}`" 
-                    ><a v-bind:href="'tel:'+donator.cell"><span>{{donator.cell}}</span></a>
+                        :content="`${donator.cell}`"
+                        container= null
+                    ><a style="color: forestgreen;" v-bind:href="'tel:'+donator.cell"><span>{{donator.cell}}</span></a>
                     </b-popover>
+                    
                 </div>  
             </div>
         </form> 
@@ -82,11 +80,6 @@
 <script>
 
 export default {
-    data(){
-        return{
-            cell:''
-        }
-    },
     props:['donator'],
     methods: {
         hidemodal() {
