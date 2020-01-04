@@ -6,7 +6,7 @@
                     <div class="header_action">
                         <ul>
                             <li><span class="notify_title" id="">নটিফিকেশন</span></li>
-                            <li><a href="#"><span class="mark_all_read" role="button">চিহ্নিত করুন</span></a></li>
+                            <li><a href="#" @click="markallread"><span class="mark_all_read" role="button">চিহ্নিত করুন</span></a></li>
                             <li><span class="ptpb" role="presentation" aria-hidden="true"> · </span></li>
                             <li><a href="#"><span class="mark_all_read">সেটিংস</span></a></li>
                         </ul>
@@ -18,25 +18,25 @@
                     <ul>
                         <li v-if="item.read_at==null" class="n_text_bb active" v-for="item in laravelData" @click="markRead(item)">  
                             <div class="n_ic">
-                                <i class="fa fa-envelope"></i>
+                                <i class="fa fa-bell-o"></i>
                             </div>
                             <div class="n_text" style="width:auto;">
                                 <a href="#"><span>{{ item.data.submitted_by.name }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
                                 <div class="n_timloc">
-                                    <span class="n_time">তারিখঃ {{item.data.donation_date}}</span>
-                                    <span class="n_locate">স্থানঃ {{item.data.donation_place}}</span>
+                                    <span class="n_time">{{item.data.donation_date}}</span>
+                                    <span class="n_locate">{{item.data.donation_place}}</span>
                                 </div>
                             </div>   
                         </li>   
                         <li v-if="item.read_at!=null" class="n_text_bb" v-for="item in laravelData" @click="markRead(item)">  
                             <div class="n_ic">
-                                <i class="fa fa-envelope-open"></i>
+                                <i class="fa fa-bell-o"></i>
                             </div>
                             <div class="n_text" style="width:auto;">
                                 <a href="#"><span>{{ item.data.submitted_by.name }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
                                 <div class="n_timloc">
-                                    <span class="n_time">তারিখঃ {{item.data.donation_date}}</span>
-                                    <span class="n_locate">স্থানঃ {{item.data.donation_place}}</span>
+                                    <span class="n_time">{{item.data.donation_date}}</span>
+                                    <span class="n_locate">{{item.data.donation_place}}</span>
                                 </div>
                             </div>   
                         </li>                              
@@ -66,7 +66,7 @@ export default {
     },  
     methods: {
         markRead(data){
-            axios.get('api/notifications/markread/'+data.id+'/'+this.per_page).then(response=>{
+            axios.get('/api/notifications/markread/'+data.id+'/'+this.per_page).then(response=>{
             this.laravelData=response.data.notifications;
             this.total_unread_notifications=response.data.total_unread;
             this.$emit('user_click',response.data.blood_request);
@@ -77,17 +77,25 @@ export default {
         },
         showMore(){
             this.per_page+=2;
-            axios.get('api/notifications/'+this.per_page).then(response=>{
-            this.laravelData=response.data.notifications;
-            this.total_unread_notifications=response.data.total_unread;
+            axios.get('/api/notifications/'+this.per_page).then(response=>{
+                this.laravelData=response.data.notifications;
+                this.total_unread_notifications=response.data.total_unread;
             })
             .catch(function (error) {
-            //console.log(error);
-        });
+                //console.log(error);
+            });
+        },
+        markallread(){
+            axios.post('/api/blood_request_notifications/markallread',{size:this.per_page}).then(response=>{
+                this.laravelData=response.data.notifications;
+                this.total_unread_notifications=response.data.total_unread;
+            }).catch(error=>{
+
+            })
         }
     },
     mounted(){
-        axios.get('api/notifications/'+this.per_page).then(response=>{
+        axios.get('/api/notifications/'+this.per_page).then(response=>{
             this.laravelData=response.data.notifications;
             this.total_unread_notifications=response.data.total_unread;
             this.per_page=response.data.notifications.length;
@@ -101,15 +109,18 @@ export default {
         if(window.auth_user!=null){
             Echo.private('App.User.'+window.auth_user.id)
             .notification((notification) => {
-                axios.get('api/newNotification/'+notification.blood_request_id).then(response=>{
-                    this.laravelData.unshift(response.data);
-                    this.total_unread_notifications+=1;
-                    this.per_page=this.laravelData.length;
-                    new Audio('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3').play();
-                })
-                .catch(function (error) {
-                //console.log(error);
-                });
+                if(notification.type=='App\\Notifications\\BloodRequestNotification'){
+                    axios.get('/api/newNotification/'+notification.blood_request_id).then(response=>{
+                        this.laravelData.unshift(response.data);
+                        this.total_unread_notifications+=1;
+                        this.per_page=this.laravelData.length;
+                        new Audio('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3').play();
+                    })
+                    .catch(function (error) {
+                    //console.log(error);
+                    });
+                }
+                
             });
         }
         

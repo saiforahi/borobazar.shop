@@ -7,8 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-
-
+use VisitLog;
 class PagesController extends Controller
 {
     public function showQuestions(){
@@ -32,6 +31,7 @@ class PagesController extends Controller
     }
     public function bloodDonation(Request $request) //function for route 'home' and '/'
     {
+        VisitLog::save();
         return view('blood-service.blood-donation');
     }
 
@@ -57,5 +57,9 @@ class PagesController extends Controller
 
     public function showProfile(){
         return view('pages.profile');
+    }
+
+    public function showMyRequests(){
+        return view('blood-service.submitted_blood_requests');
     }
 }

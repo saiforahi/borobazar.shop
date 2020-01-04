@@ -8,7 +8,7 @@
                 <img v-else width="80" height="auto" src="img/login-avatar.png">
             </div>
             <div class="name">
-                <h5 class="title">{{ donator.name }}</h5>
+                <h5 class="title">{{ donator.first_name }} {{donator.last_name}}</h5>
                 <h6 class="cart-title"><span>সদস্যঃ</span> {{ donator.blood_organization }}</h6>
                 <h6>শেষবার রক্ত দান : <i class="fa fa-calendar"></i> <span> {{ donator.last_donation_date }}</span></h6>
             </div>

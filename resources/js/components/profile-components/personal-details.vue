@@ -147,7 +147,7 @@ export default {
     },
     mounted(){
         console.log(window.auth_user.api_token);
-        axios.get('api/user/show_details')
+        axios.get('/api/user/show_details')
         .then(response=>{
             this.first_name=response.data.data.first_name;
             this.last_name=response.data.data.last_name;
@@ -172,7 +172,7 @@ export default {
     
     methods:{
         save(){
-            axios.post('api/user/update_details', {
+            axios.post('/api/user/update_details', {
                 first_name: this.first_name,
                 last_name: this.last_name,
                 father_name:this.father_name,

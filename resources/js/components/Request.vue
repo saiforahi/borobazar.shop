@@ -1,5 +1,5 @@
 <template>
-    <div class="col-lg-6" style="padding-bottom: 30px;" v-if="allowed==='yes'">
+    <div id="request_card" class="col-lg-6" style="padding-bottom: 30px;" v-if="allowed==='yes'">
         <div class="donar-inner">
             <table class="bldreq-list">
                 <tbody>
@@ -66,6 +66,13 @@
             if(this.request!=null)
             {
                 this.allowed='yes';
+            }
+        },
+        watch:{
+            request:function(){
+                //let today=new Date().getTime();
+                //console.log(today-new Date(this.request.donation_date).getTime());
+                //document.getElementById("request_card").className += " old-disabled";
             }
         }
     }

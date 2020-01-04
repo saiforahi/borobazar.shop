@@ -72,7 +72,7 @@ export default {
     },
     beforeMount(){
         //on mounting these statements will be executed
-        axios.get('api/randomdonars').then(response=>{
+        axios.get('/api/randomdonars').then(response=>{
             if(response.data.data.length>0){
                 this.laravelData=response.data;
                 this.allowed ='yes';

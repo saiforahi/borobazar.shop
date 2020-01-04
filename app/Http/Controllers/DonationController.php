@@ -30,7 +30,7 @@ class DonationController extends Controller
         ->join('user_details', 'user_details.user_id', '=', 'users.id')
         ->where('donars.district_id', '=', $district)
         ->orderBy('donars.last_donation_date','asc')
-        ->select( 'users.cell','users.name','blood_groups.bangla as blood_group','donars.district_id','donars.blood_organization', 'donars.last_donation_date','districts.bengali_name as district_name','user_details.sex as sex',DB::raw("DATE_FORMAT(donars.last_donation_date, '%d/%m/%Y') as last_donation_date"))
+        ->select('users.id', 'users.cell','users.name','user_details.first_name','user_details.last_name','blood_groups.bangla as blood_group','donars.district_id','donars.blood_organization', 'donars.last_donation_date','districts.bengali_name as district_name','user_details.sex as sex',DB::raw("DATE_FORMAT(donars.last_donation_date, '%d/%m/%Y') as last_donation_date"))
         ->paginate(16);
         return $realdonators;
     }
@@ -39,12 +39,12 @@ class DonationController extends Controller
         $lastDonationDate = date('Y-m-d', strtotime('-3 month'));
         
         $realrandomDonars = DB::table('users')
-        ->join('donars',function ($join) use($lastDonationDate) {$join->on('users.id', '=', 'donars.donar_id')->where('donars.last_donation_date','<=',$lastDonationDate);})
+        ->join('donars',function ($join) use($lastDonationDate) {$join->on('users.id', '=', 'donars.donar_id');})
         ->join('districts', 'donars.district_id', '=', 'districts.id')
         ->join('user_details', 'user_details.user_id', '=', 'users.id')
         ->join('blood_groups','blood_groups.id','=','donars.blood_group')
         ->orderBy('donars.last_donation_date','asc')
-        ->select('users.cell','users.name','blood_groups.bangla as blood_group','donars.district_id','donars.blood_organization', 'donars.last_donation_date','districts.bengali_name as district_name','user_details.sex as sex',DB::raw("DATE_FORMAT(donars.last_donation_date, '%d/%m/%Y') as last_donation_date"))
+        ->select('users.id','users.cell','users.name','user_details.first_name','user_details.last_name','blood_groups.bangla as blood_group','donars.district_id','donars.blood_organization', 'donars.last_donation_date','districts.bengali_name as district_name','user_details.sex as sex',DB::raw("DATE_FORMAT(donars.last_donation_date, '%d/%m/%Y') as last_donation_date"))
         ->paginate(16);
         
         return $realrandomDonars;

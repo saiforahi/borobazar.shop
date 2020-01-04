@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\UserDetails;
-use App\SecondaryCell;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -79,11 +78,12 @@ class UserController extends Controller
         $user_details->passport_no=$request->input('passport');
         /*$user_details->passport_issue_date= $request->input('passport_issue_date');
         $user_details->user->cell=$request->input('cell1');
-        $user_details->user->email=$request->input('primary_email');*/
-        $user_details->save();
+        $user_details->user->email=$request->input('primary_email');
+        
         SecondaryCell::where('primary_cell',Auth::user()->cell)->forceFill([
             'secondary'
-        ])->save();
+        ])->save();*/
+        $user_details->save();
         User::where('id',Auth::user()->id)->first()->forceFill([
             'name' => $request->input('first_name'),
             ])->save();
@@ -93,7 +93,7 @@ class UserController extends Controller
     public function show_user_details(){
         $data=UserDetails::join('users','users.id','=','user_details.user_id')->where('user_id',Auth::user()->id)->select('user_details.first_name','user_details.last_name','user_details.father_name','user_details.mother_name','user_details.birth_date','user_details.religion','user_details.sex','user_details.marital_status','user_details.nationality','user_details.NID','user_details.passport_no','user_details.passport_issue_date','user_details.secondary_email','users.cell as primary_cell','users.email as primary_email')->first();
         //$data->birth_date=date('Y-m-d',strtotime($data->birth_date));
-        $secondary_cells=SecondaryCell::where('primary_cell',$data->primary_cell)->get(['secondary_cell']);
-        return response()->json(['data'=>$data,'secondary_cells'=>$secondary_cells]);
+        
+        return response()->json(['data'=>$data]);
     }
 }

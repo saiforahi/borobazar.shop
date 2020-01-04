@@ -34,7 +34,7 @@
                    <div class="profile-area">
                        <div class="profile-inner">
                            <div class="profile-name">
-                              <a href="{{route('profile')}}"><h4 class="p-name">{{ ucfirst(trans(Auth::user()->name.' '.Auth::user()->user_details->last_name))}}</h4></a>
+                              <a href="{{route('profile')}}"><h4 class="p-name">{{ strtoupper(Auth::user()->name.' '.Auth::user()->user_details->last_name)}}</h4></a>
                            </div>
                            
                            <div class="cover-thumb">

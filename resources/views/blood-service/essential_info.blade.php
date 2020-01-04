@@ -68,7 +68,7 @@
                    <div class="col-md-12">
                        <div class="box-activity">
                            <div class="cimg">
-                               <img width="75" height="75" src="{{ asset('img/blood.svg') }}">
+                               <img width="75" height="75" src="{{ asset('img/blood-drop.svg') }}">
                            </div>
                            <div class="ctitle">
                                <h5>রক্ত দেয়ার উপকারিতা:</h5>

@@ -8,19 +8,19 @@ const searchAppRoot = new Vue({
     },
     mounted() {
         if(window.login_errors!=undefined){
-            swal("দুঃখিত",'অনুগ্রহ করে সঠিক তথ্য দিন','error');
+            swal("দুঃখিত",'অনুগ্রহ করে সঠিক তথ্য দিন','error',{button: "ওকে"});
         }
         if(window.blood_success!=undefined){
-            swal("সম্পন্ন!",window.blood_success,'success');
+            swal("সম্পন্ন!",window.blood_success,'success',{button: "ওকে"});
         }
         if(window.password_change_success!=undefined){
-            swal("সম্পন্ন!",window.password_change_success,'success')
+            swal("সম্পন্ন!",window.password_change_success,'success',{button: "ওকে"});
         }
         if(window.AccountCreatedMessage!=undefined)
         {
             swal("স্বাগতম",window.AccountCreatedMessage,'success',{
                 button: "ওকে"
-            })
+            });
         }
     },
     methods:{
@@ -34,20 +34,28 @@ const requestList = new Vue({
     el: '#request-list-root'
 });
 
-const notificationView = new Vue({
+const navbarView = new Vue({
     el: '#navbarSupportedContent',
     data(){
         return{
             total_unread:'',
-            blood_request:[]
+            total_unread_messages:'',
+            blood_request:[],
+            chat_allowed:false
         }
     },
     methods:{
         setData(data){
             this.total_unread=data;
         },
+        set_total_unread_messages(data){
+            this.total_unread_messages=data;
+        },
         setModalData(data){
             this.blood_request=data;
+        },
+        setChatBox(data){
+            this.chat_allowed=true;
         }
     }
 });
@@ -72,4 +80,31 @@ const personalPaymentDetailsView=new Vue({
 });
 const chatboxView=new Vue({
     el: '#chatbox',
+    data(){
+        return{
+            allowed:false
+        }
+    },
+    mounted(){
+        axios.get('/api/message/show/'+10).then(response=>{
+            //console.log(response.data);
+            })
+            .catch(error=> {
+                
+            console.log(error);
+        });
+    }
 });
+
+const ownRequestsView=new Vue({
+    el: '#own-request-list',
+    data(){
+        return{
+           
+        }
+    },
+    methods:{
+        
+    }
+});
+

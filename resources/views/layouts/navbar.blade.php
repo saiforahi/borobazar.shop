@@ -28,8 +28,8 @@
                                     <li>
                                         <a href="#" onclick="showMenu()" class="whyborobazar">গ্রহীতার অনুরোধ</a>
                                         <div id="grohitarmenu" class="dropdown-content">
-                                            <a href="{{ route('blood_request') }}" target="_blank"><i class="mt-1 fa fa-file-o"></i>নতুন অনুরোধ</a>
-                                            <a href="#"><i class="mt-1 fa fa-list"></i>আমার অনুরোধ সমূহ</a>
+                                            <a href="{{ route('blood_request') }}" target="_blank"><i class="mt-1 fa fa-plus"></i>নতুন অনুরোধ</a>
+                                            <a href="{{ route('submitted_requests') }}" target="_blank"><i class="mt-1 fa fa-list"></i>আমার অনুরোধ সমূহ</a>
                                         </div>
                                         
                                     </li>
@@ -40,9 +40,9 @@
                                     @auth
                                     <li>
                                         <div class="header-account" onclick="myFunction()">
-                                            <i class="bsquare fa fa-user-o"></i>  {{ ucfirst(trans(Auth::user()->name)) }}
+                                            <i class="bsquare fa fa-user-o"></i>  {{strtoupper(Auth::user()->name)}}
                                             <div id="demo" class="dropdown-content">
-                                                <a href="{{ route('profile') }}"><i class="mt-1 fa fa-user"></i>আমার অ্যাকাউন্ট</a>
+                                                <a href="{{ route('profile') }}"><i class="mt-1 fa fa-user-o"></i>আমার অ্যাকাউন্ট</a>
                                                 <a href="#"><i class="mt-1 fa fa-cog"></i>সেটিংস</a>
                                                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="mt-1 fa fa-power-off"></i>লগআউট</a>
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -51,12 +51,17 @@
                                             </div>
                                         </div>
                                     </li>
-                                        
-                                    <li class="header-cart dropdown default-dropdown" id="notification-vue">
+                                    <!--li class="header-cart dropdown default-dropdown">
+                                        <nav-messages-badge :notification_number="total_unread_messages"></nav-messages-badge>
+                                        <nav-messages @user_click="setChatBox" @new_arrival="set_total_unread_messages"></nav-messages>
+                                    </li-->  
+                                    
+                                    <li class="header-cart dropdown default-dropdown">
                                         <notification-icon :notification_number="total_unread"></notification-icon>
                                         <notification-panel @user_click="setModalData" @new_arrival="setData"></notification-panel>
                                         <notification-modal :quick_view_data="blood_request"></notification-modal>
                                     </li>
+                                    
                                     @endauth
 
                                     @guest

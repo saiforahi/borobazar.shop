@@ -25,7 +25,7 @@
                     <tbody>
                         <tr>
                             <th>নামঃ</th>
-                            <td>{{donator.name}}</td>
+                            <td>{{donator.first_name}} {{donator.last_name}}</td>
                         </tr>
                         <tr>
                             <th>রক্তের গ্রুপঃ</th>
@@ -48,13 +48,14 @@
                 <div class="text-area">
                     <button type="button" class="btn-getinvite1" id="textbutton"><i class="fa fa-envelope-o"></i> টেক্সট করুন </button>
                     <b-popover
+                        :show.sync="allowed"
                         :target="`textbutton`"
                         :placement="'bottom'"
                         title=  "জরুরী রক্তের প্রয়োজন"
                         triggers="click"
                         container= null
-                    ><form action="" class="form-group"><textarea type="text" class="form-control2" placeholder="" name="text"></textarea>
-                    <button type="button" class="btn-getinvite1">পাঠান</button>
+                    ><form action="" class="form-group"><textarea v-model="message" type="text" class="form-control2" placeholder="" name="text"></textarea>
+                    <button @click="sendMessage" type="button" class="btn-getinvite1">পাঠান</button>
                     </form>
                     </b-popover>
                 </div>
@@ -78,13 +79,48 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
 
 export default {
+    data(){
+        return{
+            allowed:true,
+            message:''
+        }
+    },
     props:['donator'],
     methods: {
         hidemodal() {
-        document.getElementById('donator-modal').style.display='none';
-      },
+            document.getElementById('donator-modal').style.display='none';
+        },
+
+        sendMessage(){
+            this.allowed=false;
+            swal('দুঃখিত','বড়বাজার বার্তা সেবা সাময়িকভাবে প্রক্রিয়াধীন রয়েছে',{button:'ওকে'});
+            /*if(this.message!='' && this.message!=undefined && this.message!=null && window.auth_user.id!=this.donator.id){
+                axios.post('api/message/send',{
+                    from:window.auth_user.id,
+                    to:this.donator.id,
+                    message:this.message,
+                }).then(response=>{
+                    if(response.statusText=='OK'){
+                        this.message='';
+                        this.allowed=false;
+                        console.log(response.data);
+                        swal('Sent!','Message sent successfuly','success');
+                    }
+                }).catch( error=>{
+                    console.log(error);
+                })
+            }
+            else if(window.auth_user.id==this.donator.id){
+                swal('Sorry','This is not a funbox','error');
+            }
+            else{
+                swal('Dukkhito','Empty message','warning');
+            }
+            */
+        }
     },
 }
 </script>

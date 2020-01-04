@@ -26,6 +26,9 @@ Route::middleware('auth:api')->get('matchedBloodrequests/{size}','BloodRequestCo
 Route::middleware('auth:api')->get('notifications/{size}','BloodRequestController@getNotifications');
 Route::middleware('auth:api')->get('newNotification/{blood_request_id}','BloodRequestController@getNewNotification');
 Route::middleware('auth:api')->get('notifications/markread/{notification_id}/{size}','NotificationController@markNotificationAsRead');
+Route::middleware('auth:api')->prefix('blood_request_notifications')->group(function(){
+  Route::post('markallread','BloodRequestController@markallread');
+});
 Route::get('randomdonars','DonationController@getRandomDonars');
 
 Route::middleware('auth:api')->post('try','UserController@update_secondary_cells');
@@ -35,10 +38,17 @@ Route::middleware('auth:api')->prefix('user')->group(function () {
   Route::get('show_details','UserController@show_user_details');
 });
 
-Route::prefix('message')->group(function(){
-  Route::middleware('auth:api')->post('send','MessageController@sendMessage');
-  Route::middleware('auth:api')->post('show','MessageController@showMessages');
-  Route::middleware('auth:api')->post('new','MessageController@newMessage');
+Route::middleware('auth:api')->prefix('message')->group(function(){
+  Route::post('send','MessageController@sendMessage');
+  Route::get('show/{size}','MessageController@getMessages');
+  Route::post('new/{message_id}','MessageController@newMessage');
+  Route::post('markread','MessageController@mark_message_as_read');
+});
+
+Route::middleware('auth:api')->prefix('blood_requests')->group(function(){
+  Route::get('getmyrequests/{size}','BloodRequestController@my_requests');
+  Route::post('delete_my_request','BloodRequestController@delete_request');
+  //Route::get('getmyrequests/old','BloodRequestController@my_requests');
 });
 
 

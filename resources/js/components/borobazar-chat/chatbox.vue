@@ -2,9 +2,9 @@
     <section class="chat-box">
         <div class="container">
             <div class="row">
-                <div class="chatbox chatbox22 chatbox--tray">
+                <div class="chatbox chatbox22 chatbox--tray" >
                     <div id="title" class="chatbox__title" >
-                        <h5><a href="javascript:void()">মেসেজ করুন</a></h5>
+                        <h5><a href="javascript:void()">{{to.name}}</a></h5>
                         <button class="chatbox__title__tray">
                             <span></span>
                         </button>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="panel-footer">
                         <div class="input-group">
-                            <input id="btn-input" type="text" class="form-control2 input-sm chat_set_height" placeholder="বার্তা লিখুন . . . " tabindex="0" dir="ltr" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" contenteditable="true">
+                            <input v-model="newMessage" @keyup.enter="send" id="btn-input" type="text" class="form-control2 input-sm chat_set_height" placeholder="বার্তা লিখুন . . . " tabindex="0" dir="ltr" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" contenteditable="true">
                         </div>
                     </div>
                 </div>
@@ -65,30 +65,55 @@
 <script>
 export default {
     name:'chatbox',
+    props:['conversation','chat_allowed'],
     data(){
         return{
-            messages:[]
+            newMessage:'',
+            messages:[],
+            from:{
+                id:'',
+                name:'Saif',
+                sex:''
+            },
+            to:{
+                id:'',
+                name:'Punno',
+                sex:''
+            }
         }
     },
 
     methods:{
         toggleOnClick(){
             //document.getElementById("title").classList.toggle("chatbox--tray");
+        },
+
+        send(){
+            if(this.newMessage!='' && this.newMessage!=undefined && this.newMessage!=null){
+                axios.post('api/message/send',{
+                    message:this.newMessage,
+                    to:2
+                }).then(response => {
+                    //console.log(response.data)
+                }).catch(error=> {
+                    //console.log(error);
+                });
+            }
         }
     },
 
     created(){
-        if(window.auth_user!=null){
+        /*if(window.auth_user!=null){
             Echo.private('App.User.'+window.auth_user.id)
             .notification((notification) => {
-                var type=notification.type;
-                if(type.replace('/'," ")=='App Notifications MessageNotification'){
-                    console.log(notification.type);
+                console.log(notification);
+                if(notification.type=='App\\Notifications\\BloodMessageNotification'){
+                    console.log('type '+notification.type);
                 }
             });
         }
         
-        /*Echo.channel('my-channel.')
+        Echo.channel('my-channel.')
             .listen('.my-event', function(data) {
                 alert(JSON.stringify(data));
         });*/

@@ -31,13 +31,14 @@
                             <option value="রাজশাহী">রাজশাহী</option>
                             <option value="রংপুর">রংপুর</option>
                             <option value="সিলেট">সিলেট</option>
+                            <option value="খুলনা">খুলনা</option>
                         </select>
                         <select class="form-control0 search-blood" id="presentDistrict" name="presentDistrict" v-model="selectedDistrict" @change="onChangeDistrict($event)">
                             <option value="-1" selected>জেলা</option>
                             <option v-for="district in districts" v-bind:key="district.id" :value="district.id">{{ district.bengali_name }}</option>
                         </select>
                         <select class="form-control0 search-blood" id="" name="" v-model="selectedSubdistrict">
-                            <option value="-1" selected>উপজেলা</option>
+                            <option value="-1" selected>উপজেলা/থানা</option>
                             <option v-for="subdistrict in subdistricts" v-bind:key="subdistrict" >{{ subdistrict}}</option>
                         </select> 
                         <button class="search-btn" type="submit" href="#viewDiv">
@@ -72,7 +73,7 @@ export default {
         },
         selectedDivision: function(){
             //on changing division this statement will be executed
-            axios.get('api/districts/'+this.selectedDivision).then(response=>{
+            axios.get('/api/districts/'+this.selectedDivision).then(response=>{
             this.districts=response.data;
             });
             this.selectedDistrict=-1;
@@ -81,7 +82,7 @@ export default {
     },
     methods:{
         onChangeDistrict(event) {    
-            axios.get('api/subdistricts/'+event.target.value)
+            axios.get('/api/subdistricts/'+event.target.value)
             .then(response => {
                 this.subdistricts = response.data;
                 this.selectedSubdistrict=-1;
@@ -96,13 +97,13 @@ export default {
             if(window.auth_user!=null)
             {
                 this.$Progress.start()
-                axios.get('api/donators/'+this.selectedDistrict+'/'+this.bloodGroup).then(response=>{
+                axios.get('/api/donators/'+this.selectedDistrict+'/'+this.bloodGroup).then(response=>{
                 if(response.data.data.length>0){
                     this.$emit('new_result',response.data);
                 }
                 else{
                     swal("দুঃখিত",'এই মুহূর্তে কোন রক্তদানকারী নেই','warning',{
-                        button: "OK"
+                        button:"ওকে"
                     });
                 }
                 this.$Progress.finish()

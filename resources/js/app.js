@@ -25,11 +25,10 @@ Vue.use(Popover);
 Vue.use(VueProgressBar, {
     color: 'rgb(143, 255, 199)',
     failedColor: 'red',
-    height: '15px'
+    height: '50px'
   })
 
 Vue.use(VueSession);
-
 
 /**
  * The following block of code may be used to automatically register your
@@ -58,6 +57,10 @@ Vue.component('personal-training', require('./components/profile-components/pers
 Vue.component('personal-skills', require('./components/profile-components/personal-skills.vue').default);
 Vue.component('personal-payment-details', require('./components/profile-components/personal-payment-details.vue').default);
 Vue.component('borobazar-chatbox', require('./components/borobazar-chat/chatbox.vue').default);
+Vue.component('nav-messages-badge', require('./components/nav_messages_badge.vue').default);
+Vue.component('nav-messages', require('./components/nav_messages.vue').default);
+Vue.component('submitted-blood-requests', require('./components/BloodService/submitted_blood_requests.vue').default);
+Vue.component('old-requests', require('./components/BloodService/old_requests.vue').default);
 
 
 

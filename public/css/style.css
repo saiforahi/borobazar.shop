@@ -16,6 +16,8 @@ time, mark, audio, video {
 	border: 0;
 	vertical-align: baseline;
     font-family: 'SolaimanLipi', serif;
+    text-decoration: none!important;
+    user-select: none
 }
 html {
   scroll-behavior: smooth;
@@ -891,6 +893,10 @@ p.p-text {
 .blog-pagination .page-item {
     border: none;
 }
+.page-link:focus {
+    outline: none;
+    box-shadow: none;
+}
 .page-link {
     position: relative;
     display: block;
@@ -913,6 +919,8 @@ p.p-text {
     color: #fff;
     background-color: forestgreen;
     border-color: #228b22;
+    outline: none;
+    box-shadow: none;
 }
 /*.header-btns-icon i {
     border: 1px solid #ededed;
@@ -1379,8 +1387,7 @@ span.psw {
 .leftside.col-lg-4 {
     background-color: #2e3192;
     color: #fff;
-    /* border-top-left-radius: 5px; */
-    /* border-bottom-left-radius: 5px; */
+    border-top-left-radius: 5px;  border-bottom-left-radius: 5px;
     height: auto;
     width: 300px;
     margin: 0 auto;
@@ -1391,9 +1398,10 @@ span.psw {
     text-align: left;
     margin-top: 34px;
 }
-.leftside p {
+.leftside p.mpara {
     font-size: 14px;
     padding: 1em 0;
+    text-align: justify;
 }
 
 /* Modal Content/Box */
@@ -1405,7 +1413,6 @@ span.psw {
     border: none;
     min-width: 300px;
     padding: 0 0.5em;
-    overflow: hidden;
 }
 /*@media only screen and (min-width: 768px){
 
@@ -1843,7 +1850,7 @@ select.input.search-categories {
 }
 .header-cart .header-btns-icon .count {
     position: absolute;
-    /* right: 0; */
+    left: 40px;
     top: -9px;
     width: 18px;
     height: 18px;
@@ -2142,8 +2149,10 @@ strong.text-uppercase {
   opacity: 1;
 }
 
-
-
+/*old-req*/
+.old-disabled {
+    opacity: .3;
+}
 
 
 
@@ -2153,6 +2162,9 @@ strong.text-uppercase {
 /*end services-page area*/
 
 /*hot deal are*/
+.hot-deal-inner.recent-item {
+    padding-top: 3em;
+}
 .hot-deal-inner h4:before {
     content: "";
     height: 2px;
@@ -3287,7 +3299,7 @@ button.btn-getinvite1 {
 button:focus {
     outline: none;
 }
-button.btn-getinvite1:hover{
+button.btn-getinvite1:hover {
     background: forestgreen;
     color: #fff;
 }
@@ -3641,11 +3653,6 @@ section.related-product-area h4 {
 /*categories area*/
 section.main-categories {
     padding: 100px 0px;
-}
-a {
-    color: #007bff;
-    text-decoration: none !important;
-    background-color: transparent;
 }
 .products-inner.col-lg-3 h4 {
     text-align: center;
@@ -4595,13 +4602,11 @@ h5.btitle {
     border-top-right-radius: calc(.3rem - 1px);
     text-align: center;
     color: #2e3192;
-    font-family: auto;
 }
 .popover-body {
     padding: .5rem .75rem;
     font-size: 14px;
     color: forestgreen;
-    font-family: sans-serif;
 }
 .text-area {
     padding: 1em 0;
@@ -5376,6 +5381,17 @@ input.form-control2, .bloodreq-form-area .bloodreq-form input.form-control2, .bl
     /* margin-bottom: .5em; */
     color: #2e3192;
 }
+input.form-control3 {
+    border: 1px solid #ededed;
+    padding: 7px;
+    height: 45px;
+    width: 100%;
+    font-size: 14px;
+    background-color: transparent;
+    margin-top: 0;
+    margin-bottom: .5em;
+    color: #2e3192;
+}
 .register-area.pt-5.pb-5 .register-inner,
 .secuquest {
    margin: auto;
@@ -5453,7 +5469,7 @@ h4.title {
 }
 .brtb {
     border-top: 1px solid forestgreen;
-    margin: 1em 0;
+    margin: 1em 0 0;
 }
 /*chat box*/
 .chatbox {
@@ -5833,7 +5849,6 @@ select.form-control0.search-tutor {
         width: 100px;
     }
 }
-
 /*scroll indicator area*/
 .header {
   position: fixed;
@@ -6586,9 +6601,9 @@ strong.chat_time {
 }
 
 ::-webkit-scrollbar-thumb {
-  margin: 2px;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.2);
+    margin: 2px;
+    border-radius: 10px;
+    background: rgb(34, 139, 34);
 }
 /*Element state*/
 
@@ -6786,24 +6801,8 @@ strong.chat_time {
 
 /*End Live Chat area*/
 
-/*swl modal*/
-
-.swal-icon.swal-icon--error {
-    border-color: #228b22;
-    -webkit-animation: animateErrorIcon .5s;
-    animation: animateErrorIcon .5s;
-}
-.swal-icon--error__line {
-    position: absolute;
-    height: 5px;
-    width: 47px;
-    background-color: #2e3192;
-    display: block;
-    top: 37px;
-    border-radius: 2px;
-}
-
 /*bb-allserv*/
+
 .bb-allserv {
     cursor: pointer;
     user-select: none;

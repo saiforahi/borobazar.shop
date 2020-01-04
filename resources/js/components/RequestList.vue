@@ -10,8 +10,8 @@
 					<span class="text-uppercase">সর্ট বাই:</span>
 					<select class="input">
 						<option value="0">পজিশন</option>
-						<option value="0">তারিখ</option>
-						<option value="0">নাম</option>
+						<option value="0">রক্ত গ্রহণের তারিখ</option>
+						<option value="0">রক্ত গ্রহণের স্থান</option>
 					</select>
 				    <a href="#" class="main-btn icon-btn"><i class="fa fa-arrow-down"></i></a>
 				</div>
@@ -64,8 +64,8 @@
         <div class="overflow-auto" v-if="allowed===true">
             <b-pagination
                 v-model="currentPage"
-                :total-rows="rows"
-                :per-page="per_page"
+                :total-rows="laravelData.total"
+                :per-page="laravelData.per_page"
                 class="mt-4"
                 align="center"
                 aria-controls="viewDiv"
@@ -97,8 +97,8 @@
                 allowed:false,
                 allowedDiv:[false,false,false],
                 laravelData:{},
-                currentPage:'',
-                rows:'',
+                currentPage:1,
+                
                 per_page:10,
             }
         },
@@ -107,6 +107,7 @@
             currentPage: function () {
                 axios.get(this.laravelData.path+'?page='+this.currentPage).then(response=>{
                     this.laravelData=response.data;
+                    
                     })
                     .catch(function (error) {
                         //console.log(error);
@@ -114,10 +115,9 @@
             },
             //
             per_page:function(){
-                axios.get('api/matchedBloodrequests/'+this.per_page).then(response=>{
+                axios.get('/api/matchedBloodrequests/'+this.per_page).then(response=>{
                     this.laravelData=response.data;
-                    this.currentPage=this.laravelData.current_page;
-                    this.rows=this.laravelData.total;
+                    
                     })
                     .catch(function (error) {
                         //console.log(error);
@@ -126,10 +126,9 @@
         },
         mounted() {
             if(window.auth_user!=null){
-                    axios.get('api/matchedBloodrequests/'+this.per_page+'?api_token='+window.auth_user.api_token).then(response=>{
+                    axios.get('/api/matchedBloodrequests/'+this.per_page).then(response=>{
                         this.laravelData=response.data;
-                        this.currentPage=this.laravelData.current_page;
-                        this.rows=this.laravelData.total;
+                        this.currentPage=this.laravelData.currentPage;
                         if(response.data.data.length>0)
                         {
                             this.allowed=!this.allowed;

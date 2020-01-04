@@ -18,7 +18,7 @@
         <donar-search @new_result="setNewResult"></donar-search>
         <donar-search-result :result="channelData"></donar-search-result>
     </div>
-       
+    
 @endsection
 
 @section('js-part')

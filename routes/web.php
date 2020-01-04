@@ -25,4 +25,5 @@ Route::get('profile','PagesController@showProfile')->name('profile')->middleware
 Route::get('secureques','PagesController@showQuestions')->name('resetQuestions');
 Route::post('secureques','PagesController@submit_answers')->name('submit_answers')->middleware('verify.answers');
 Route::post('resetpassword/{cell}','PagesController@passwordReset')->name('password_reset');
+Route::get('blood/submitted_requests','PagesController@showMyRequests')->name('submitted_requests')->middleware('auth');
 

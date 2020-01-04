@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Events\BloodRequestEvent;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 class BloodRequestController extends Controller
 {
@@ -149,15 +150,64 @@ class BloodRequestController extends Controller
 
     //
     public function getNotifications($size){
-        $notifications=Auth::user()->notifications->sortBy('data.donation_date')->take($size);
-        $unreadNotifications=Auth::user()->unreadNotifications;
+        $notifications=Auth::user()->notifications->where('type','App\\Notifications\\BloodRequestNotification')->sortBy('data.donation_date')->take($size);
+        $unreadNotifications=Auth::user()->unreadNotifications->where('type','App\\Notifications\\BloodRequestNotification');
         $result=$unreadNotifications->merge($notifications);
-        $total_unread=Auth::user()->unreadNotifications->count();
+        $total_unread=Auth::user()->unreadNotifications->where('type','App\\Notifications\\BloodRequestNotification')->count();
+
+        //$extra_notification = Auth::user()->notifications->where('type', 'App\Notifications\BloodRequestNotification')->sortBy('data.donation_date')->take($size+1);
         return response()->json(['notifications'=>$result,'total_unread'=>$total_unread]);
     }
 
     public function getNewNotification($blood_request_id){
         return Auth::user()->notifications->where('data.blood_request_id',$blood_request_id)->first(); // returning notification
+    }
+
+    public function markallread(Request $request){
+        Auth::user()->notifications->where('type','App\\Notifications\\BloodRequestNotification')->markAsRead();
+        $notifications=Auth::user()->notifications->where('type','App\\Notifications\\BloodRequestNotification')->sortBy('data.donation_date')->take($request->size);
+        $total_unread=Auth::user()->unreadNotifications->where('type','App\\Notifications\\BloodRequestNotification')->count();
+
+        //$extra_notification = Auth::user()->notifications->where('type', 'App\Notifications\BloodRequestNotification')->sortBy('data.donation_date')->take($size+1);
+        return response()->json(['notifications'=>$notifications,'total_unread'=>$total_unread]);
+    }
+
+    public function my_requests(Request $request,$size){
+        $today=date('Y-m-d');
+        
+        $new_request_list=BloodRequest::where('submitted_by',Auth::user()->id)->where('donation_date','>=',$today)
+                    ->join('blood_groups','blood_groups.id','=','blood_requests.blood_group')
+                    ->join('users','users.id','=','blood_requests.submitted_by')
+                    ->join('districts','blood_requests.district_id','=','districts.id')
+                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.created_at','blood_requests.updated_at')
+                    ->get();
+        $old_request_list=BloodRequest::where('submitted_by',Auth::user()->id)->where('donation_date','<',$today)
+                    ->join('blood_groups','blood_groups.id','=','blood_requests.blood_group')
+                    ->join('users','users.id','=','blood_requests.submitted_by')
+                    ->join('districts','blood_requests.district_id','=','districts.id')
+                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.created_at','blood_requests.updated_at')
+                    ->paginate($size);
+        return response()->json(['new_requests'=>$new_request_list,'old_requests'=>$old_request_list]);
+    }
+
+    public function delete_request(Request $request){
+        DB::table('notifications')->where('type','App\\Notifications\\BloodRequestNotification')->where('data','LIKE','%"blood_request_id":"'.$request->id.'"%')->delete();
+        BloodRequest::where('blood_request_id',$request->id)->delete();
+        $today=date('Y-m-d');
+        
+        $new_request_list=BloodRequest::where('submitted_by',Auth::user()->id)->where('donation_date','>=',$today)
+                    ->join('blood_groups','blood_groups.id','=','blood_requests.blood_group')
+                    ->join('users','users.id','=','blood_requests.submitted_by')
+                    ->join('districts','blood_requests.district_id','=','districts.id')
+                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.created_at','blood_requests.updated_at')
+                    ->get();
+        $old_request_list=BloodRequest::where('submitted_by',Auth::user()->id)->where('donation_date','<',$today)
+                    ->join('blood_groups','blood_groups.id','=','blood_requests.blood_group')
+                    ->join('users','users.id','=','blood_requests.submitted_by')
+                    ->join('districts','blood_requests.district_id','=','districts.id')
+                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.created_at','blood_requests.updated_at')
+                    ->paginate($request->size);
+        return response()->json(['new_requests'=>$new_request_list,'old_requests'=>$old_request_list]);
     }
     
 }

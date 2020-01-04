@@ -14,7 +14,6 @@
         </div>
     </div>
 </section>
-
 <section class="blood-donar-area">
     <div class="container-fluid" id="request-list-root">
         <request-list></request-list>

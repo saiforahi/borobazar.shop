@@ -22,7 +22,7 @@ class CreateUserDetailsTable extends Migration
             $table->string('mother_name')->nullable();
             $table->date('birth_date')->nullable();
             $table->string('sex')->nullable();
-            $table->string('relegion')->nullable();
+            $table->string('religion')->nullable();
             $table->string('marital_status')->nullable();
             $table->string('nationality')->nullable();
             $table->string('NID')->unique()->nullable();
@@ -31,6 +31,7 @@ class CreateUserDetailsTable extends Migration
             $table->string('district_id')->nullable();
             $table->string('subdistrict_id')->nullable();
             $table->string('secondary_email')->nullable();
+            $table->text('secondary_cells')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

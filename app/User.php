@@ -55,7 +55,7 @@ class User extends Authenticatable
         return $this->hasOne(Donar::class,'donar_id','id');
     }
 
-    public function secondary_cells(){
-        return $this->hasMany(SecondaryCell::class,'primary_cell','cell');
+    public function messages(){
+        return $this->hasMany(Message::class,'from','id');
     }
 }
