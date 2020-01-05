@@ -93,7 +93,8 @@ i.hn-3.fa.fa-arrow-right {
 .bg {
     background-image: url(img/bg.svg);
     background-size: cover;
-    /* opacity: .8; */
+    /* opacity: .8;
+    background-color: #fff; */
 }
 a.whyborobazar:hover {
     color: forestgreen;
@@ -379,6 +380,8 @@ section.bnavigationbar {
 .navbar-light .navbar-toggler {
     color: #2e3192;
     border-color: forestgreen;
+    margin-bottom: .5em;
+    border-radius: inherit;
 }
 h2.main-hl2 {
     font-weight: 600;
@@ -1354,7 +1357,10 @@ button:hover {
     position: relative;
     padding: .5em 0;
 }
-
+img.iavatar {
+    width: 100%;
+    /* padding-top: 2em; */
+}
 img.avatar {
     width: 18%;
     border-radius: 50%;
@@ -1396,7 +1402,7 @@ span.psw {
     font-size: 28px;
     padding: .5em 0;
     text-align: left;
-    margin-top: 34px;
+    margin-top: 1em;
 }
 .leftside p.mpara {
     font-size: 14px;
@@ -1553,6 +1559,7 @@ h4.footerhl {
 h3.footerhl {
     color: forestgreen;
     font-size: 14px;
+    padding-bottom: .5em;
 }
 h4.footerhl:before {
     content: "";
@@ -1749,7 +1756,6 @@ a.logo {
     display: inline-block;
     padding: 15px 0px;
     max-width: 400px;
-    margin-left: 45px;
 }
 .input {
     width: 100%;
@@ -2114,9 +2120,10 @@ strong.text-uppercase {
 
 /* Tooltip container */
 .tooltip {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
     opacity: 1;
+    z-index: 0;
 }
 .tooltip .tooltiptext {
     visibility: hidden;
@@ -2527,7 +2534,7 @@ h4.hotheadln {
 }
 .from-blog-item .f-blog-text h6 {
     font-size: 14px;
-    color: forestgreen;
+    color: #2e3192;
     font-family: "Poppins", sans-serif;
     font-weight: 300;
 }
@@ -4540,11 +4547,13 @@ table.bldreq-list th {
     font-size: 14px;
     color: #2e3192;
     padding: .25em;
+    width: 33%;
 }
 table.bldreq-list td {
     font-size: 14px;
     color: forestgreen;
     text-align: left;
+    width: 48%;
 }
 .bldreq-list tbody tr:nth-child(even) {
     background-color: #ededed;
@@ -5424,6 +5433,55 @@ input.form-control3 {
 section#bloodInfo {
     padding: 100px 0;
 }
+h2.bld-title {
+    font-size: 24px;
+    color: #228b22;
+    font-weight: 300;
+    text-align: center;
+    padding-bottom: 1em;
+}
+.row.column-0, .column-1, .column-2, .column-3 {
+    padding-bottom: 3em;
+}
+.bloodinfotitle h4 {
+    font-size: 28px;
+    color: #228b22;
+    padding-bottom: .5em;
+}
+h4.bld-title:before {
+    content: "";
+    height: 2px;
+    background: #2e3192;
+    position: absolute;
+    top: 33px;
+    width: 33%;
+}
+.bloodinfotitle p {
+    font-size: 14px;
+    color: #2e3192;
+    font-weight: 400;
+    text-align: justify;
+    margin-bottom: 1em;
+}
+.bloodinfotitle .bld-table, .bld-th, .bld-td {
+    border: 1px solid #ededed;
+    padding: .5em;
+    color: forestgreen;
+}
+th.bld-th {
+    font-size: 14px;
+    color: #2e3192;
+}
+td.bld-td {
+    font-size: 14px;
+    /* text-align: center; */
+}
+ul.bld-ul li {
+    font-size: 14px;
+    color: forestgreen;
+    padding-bottom: .5em;
+}
+
 /*Error page area*/
 section.error-area {
     padding: 100px 0;
@@ -6816,6 +6874,27 @@ strong.chat_time {
 }
 
 
-
-
-
+/*parallax*/
+.bgimg-1 {
+    
+    background-image: url(img/slide-3.png);
+        min-height: 100%;
+}
+.bgimg-2 {
+    
+    background-image: url(img/slide-2.png);
+        min-height: 100%;
+}
+.bgimg-3 {
+    
+    background-image: url(img/slide-4.png);
+        min-height: 100%;
+}
+.bgimg-1, .bgimg-2, .bgimg-3 {
+    position: relative;
+    /*opacity: 0.65;*/
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

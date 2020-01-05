@@ -87,9 +87,7 @@ class LoginController extends Controller
     }
     */
     public function login(Request $request){
-        $credentials = $request->only('cell', 'password');
-
-        if (!Auth::attempt($credentials)) {
+        if (!Auth::attempt(['cell' => $request->cell, 'password' => $request->password], $request->remember)) {
             return back()->withErrors(['error'=>'অনুগ্রহ করে সঠিক তথ্য দিন']);
         }
         // Authentication passed...

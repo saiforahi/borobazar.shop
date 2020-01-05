@@ -11,26 +11,6 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     //
-    protected function update_secondary_cells(Request $data){
-        $secondary_cells=SecondaryCell::where('user_id',Auth::user()->id)->get();
-        if(sizeof($secondary_cells)<=0){
-            $new_cell1=new SecondaryCell;
-            $new_cell1->user_id=Auth::user()->id;
-            $new_cell1->secondary_cell=$data->cell1;
-            $new_cell1->save();
-            dd($new_cell1->secondary_cell);
-        }
-        elseif(sizeof($secondary_cells)==1){
-            SecondaryCell::where('secondary_cell',$secondary_cells[0]->secondary_cell)->where('user_id',Auth::user()->id)->first()->forceFill([
-                'secondary_cell' =>$data->cell1,
-            ])->save();
-        }
-        elseif(sizeof($secondary_cells)==2){
-            SecondaryCell::where('secondary_cell',$secondary_cells[0]->secondary_cell)->where('user_id',Auth::user()->id)->first()->forceFill([
-                'secondary_cell' =>$data->cell1,
-            ])->save();
-        }
-    }
     protected function validator(array $data)
     {
         $messages = [
@@ -76,22 +56,22 @@ class UserController extends Controller
         $user_details->nationality=$request->input('nationality');
         $user_details->NID=$request->input('NID');
         $user_details->passport_no=$request->input('passport');
-        /*$user_details->passport_issue_date= $request->input('passport_issue_date');
-        $user_details->user->cell=$request->input('cell1');
-        $user_details->user->email=$request->input('primary_email');
-        
-        SecondaryCell::where('primary_cell',Auth::user()->cell)->forceFill([
-            'secondary'
-        ])->save();*/
+        $user_details->passport_issue_date= $request->input('passport_issue_date');
+        $user_details->secondary_email=$request->secondary_email;
         $user_details->save();
+        $user_details=UserDetails::where('user_id',Auth::user()->id)->first();
+        $user_details->forceFill([
+            'secondary_cells->secondary_1'=>$request->cell2,
+            'secondary_cells->secondary_2'=>$request->cell3,
+        ])->save();
         User::where('id',Auth::user()->id)->first()->forceFill([
             'name' => $request->input('first_name'),
             ])->save();
-        return $user_details;
+        return response()->json(['user_details'=>$user_details,'primary_cell'=>Auth::user()->cell]);
     }
 
     public function show_user_details(){
-        $data=UserDetails::join('users','users.id','=','user_details.user_id')->where('user_id',Auth::user()->id)->select('user_details.first_name','user_details.last_name','user_details.father_name','user_details.mother_name','user_details.birth_date','user_details.religion','user_details.sex','user_details.marital_status','user_details.nationality','user_details.NID','user_details.passport_no','user_details.passport_issue_date','user_details.secondary_email','users.cell as primary_cell','users.email as primary_email')->first();
+        $data=UserDetails::join('users','users.id','=','user_details.user_id')->where('user_id',Auth::user()->id)->select('user_details.first_name','user_details.last_name','user_details.father_name','user_details.mother_name','user_details.birth_date','user_details.religion','user_details.sex','user_details.marital_status','user_details.nationality','user_details.NID','user_details.passport_no','user_details.passport_issue_date','user_details.secondary_email','user_details.secondary_cells','users.cell as primary_cell','users.email as primary_email')->first();
         //$data->birth_date=date('Y-m-d',strtotime($data->birth_date));
         
         return response()->json(['data'=>$data]);

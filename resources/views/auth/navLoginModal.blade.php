@@ -26,7 +26,7 @@
           
           <div class="rem">
               <label class="fntc">
-                  <input class="userrem" type="checkbox" checked="" name="remember">মনে রাখুন
+                  <input class="userrem" type="checkbox" checked="checked" name="remember">মনে রাখুন
               </label>
               <a href="{{ route('resetQuestions') }}" class="pwd"> পাসওয়ার্ড ভুলে গেছেন?</a>
           </div>

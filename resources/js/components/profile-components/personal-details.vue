@@ -161,9 +161,10 @@ export default {
             this.nationality=response.data.data.nationality;
             this.NID=response.data.data.NID;
             this.passport=response.data.data.passport_no;
-            /*this.passport_issue_date=response.data.passport_issue_date;*/
-            
-            
+            this.passport_issue_date=new Date(response.data.data.passport_issue_date).toISOString().slice(0,10);
+            this.cell2=JSON.parse(response.data.data.secondary_cells).secondary_1;
+            this.cell3=JSON.parse(response.data.data.secondary_cells).secondary_2;
+            this.secondary_email=response.data.data.secondary_email;
         })
         .catch(function (error) {
             //console.log(error);
@@ -185,25 +186,30 @@ export default {
                 nationality:this.nationality,
                 NID:this.NID,
                 passport:this.passport,
-                /*passport_issue_date:this.passport_issue_date,
+                passport_issue_date:this.passport_issue_date,
                 cell2:this.cell2,
                 cell3:this.cell3,
-                secondary_email:this.secondary_email*/
+                secondary_email:this.secondary_email
             })
             .then(response=> {
                 if(response.statusText=='OK'){
+                    
                     this.disabled=1;
-                    this.first_name=response.data.first_name;
-                    this.last_name=response.data.last_name;
-                    this.father_name=response.data.father_name;
-                    this.birth_date=new Date(response.data.birth_date).toISOString().slice(0,10);
-                    this.sex=response.data.sex;
-                    this.religion=response.data.religion;
-                    this.primary_cell=response.data.cell;
-                    this.marital_status=response.data.marital_status;
-                    this.nationality=response.data.nationality;
-                    this.NID=response.data.NID;
-                    this.passport=response.data.passport_no;
+                    this.first_name=response.data.user_details.first_name;
+                    this.last_name=response.data.user_details.last_name;
+                    this.father_name=response.data.user_details.father_name;
+                    this.birth_date=new Date(response.data.user_details.birth_date).toISOString().slice(0,10);
+                    this.sex=response.data.user_details.sex;
+                    this.religion=response.data.user_details.religion;
+                    this.primary_cell=response.data.primary_cell;
+                    this.marital_status=response.data.user_details.marital_status;
+                    this.nationality=response.data.user_details.nationality;
+                    this.NID=response.data.user_details.NID;
+                    this.passport=response.data.user_details.passport_no;
+                    this.passport_issue_date=new Date(response.data.user_details.passport_issue_date).toISOString().slice(0,10);
+                    this.cell2=JSON.parse(response.data.user_details.secondary_cells).secondary_1;
+                    this.cell3=JSON.parse(response.data.user_details.secondary_cells).secondary_2;
+                    this.secondary_email=response.data.user_details.secondary_email;
                     swal("Great",'Information updated successfully','success',{
                     button: "OK"
                 });
@@ -234,6 +240,29 @@ export default {
         birth_date: function(){
             if(this.birth_date=="1970-01-01"){
                 this.birth_date=''
+            }
+        },
+        passport_issue_date: function(){
+            /*if(this.passport==''||this.passport==null||this.passport==undefined){
+                swal('Sorry','We need to know your passport number first','warning',{button:"ওকে"});
+            }*/
+            if(this.passport_issue_date=="1970-01-01"){
+                this.passport_issue_date=''
+            }
+        },
+        cell3:function(){
+            if(this.cell3==null||this.cell3=='null'){
+                this.cell3=''
+            }
+        },
+        cell2:function(){
+            if(this.cell2==null||this.cell2=='null'){
+                this.cell2=''
+            }
+        },
+        secondary_email:function(){
+            if(this.secondary_email==null||this.secondary_email=='null'){
+                this.secondary_email=''
             }
         }
     }
