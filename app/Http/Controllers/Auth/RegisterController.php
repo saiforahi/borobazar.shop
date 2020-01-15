@@ -105,8 +105,29 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function register(Request $request)
-   {
+    public function main_registration(Request $request){
+        $emailOrNot=$request->username->validate(['username']);
+        $messages=[
+            'name.required' => 'We need to know your name',
+            'cell.unique' => 'This phone number is already registered!',
+            'confirmed' => ':attribute does not match',
+        ];
+        $rules=[
+            'name' => 'required|string|max:255',
+            'cell' => 'required|string|max:11|unique:users',
+            'presentDistrict' => 'required|string',
+            'password' =>'required|string|min:8|confirmed'
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$messages);
+        if ($validator->fails())  {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        else{
+
+        }
+    }
+    public function register(Request $request){
         $messages = [
             'name.required' => 'We need to know your name',
             'cell.unique' => 'This phone number is already registered!',
@@ -138,5 +159,5 @@ class RegisterController extends Controller
             }
             return redirect('/')->with(['AccountCreatedMessage'=>' বড়বাজারে সংযুক্ত হওয়ার জন্য আপনাকে ধন্যবাদ']);
         }
-   }
+    }
 }

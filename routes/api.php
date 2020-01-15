@@ -36,6 +36,8 @@ Route::middleware('auth:api')->post('try','UserController@update_secondary_cells
 Route::middleware('auth:api')->prefix('user')->group(function () {
   Route::post('update_details','UserController@update_user_details');
   Route::get('show_details','UserController@show_user_details');
+  Route::get('show_address','UserController@show_user_address');
+  Route::post('update_address','UserController@update_user_address');
 });
 
 Route::middleware('auth:api')->prefix('message')->group(function(){

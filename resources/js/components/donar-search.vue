@@ -39,7 +39,7 @@
                         </select>
                         <select class="form-control0 search-blood" id="" name="" v-model="selectedSubdistrict">
                             <option value="-1" selected>উপজেলা/থানা</option>
-                            <option v-for="subdistrict in subdistricts" v-bind:key="subdistrict" >{{ subdistrict}}</option>
+                            <option v-for="subdistrict in subdistricts" v-bind:key="subdistrict.id" :value="subdistrict.id" >{{ subdistrict.bengali_name}}</option>
                         </select> 
                         <button class="search-btn" type="submit" href="#viewDiv">
                             <i id="demo" class="fa fa-search"></i>
@@ -74,7 +74,7 @@ export default {
         selectedDivision: function(){
             //on changing division this statement will be executed
             axios.get('/api/districts/'+this.selectedDivision).then(response=>{
-            this.districts=response.data;
+                this.districts=response.data;
             });
             this.selectedDistrict=-1;
             this.selectedSubdistrict=-1;
@@ -86,6 +86,7 @@ export default {
             .then(response => {
                 this.subdistricts = response.data;
                 this.selectedSubdistrict=-1;
+                console.log(response.data)
             }).catch(function (error) {
             // handle error
             //console.log(error);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\District;
+use App\SubDistrict;
 use Illuminate\Support\Facades\DB;
 
 class DonationController extends Controller
@@ -16,7 +17,8 @@ class DonationController extends Controller
     public function getsubdistricts($district_id)
     {
         #$subdistricts=SubDistrict::where('district_name',$district)->get();
-        $subdistricts=District::find($district_id)->subdistricts()->get()->pluck('bengali_name');
+        #$subdistricts=District::find($district_id)->subdistricts()->get()->pluck('bengali_name');
+        $subdistricts=SubDistrict::where('district_id',$district_id)->get();
         return $subdistricts;
     }
 

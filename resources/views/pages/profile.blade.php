@@ -1,16 +1,6 @@
 @extends('layouts.main')
 @section('content')
 
-<div class="iconbar-area">
-    <ul class="iconbar-inner">
-        <a href="#" data-toggle="tooltip" title="রক্ত দান রেজিষ্ট্রেশন"><li><img width="20" height="auto" src="img/blood-drop.svg"></li></a>
-        <a href="#" data-toggle="tooltip" title="গৃহশিক্ষক রেজিষ্ট্রেশন"><li><img width="20" height="auto" src="img/graduate-student-avatar.svg"></li></a>
-        <a href="#" data-toggle="tooltip" title="উকিল রেজিষ্ট্রেশন"><li><img width="20" height="auto" src="img/lawyer.svg"></li></a>
-        <a href="#" data-toggle="tooltip" title="হোম সার্ভিস রেজিষ্ট্রেশন"><li><img width="20" height="auto" src="img/home-services.svg"></li></a>
-        <a href="#" data-toggle="tooltip" title=" রেজিষ্ট্রেশন"><li><img width="20" height="auto" src="img/blood-drop.svg"></li></a>
-    </ul>
-</div>
-
 <section class="solid-title-area">
     <div class="container-fluid text-center bg pt-5 pb-5">
         <div class="container">
@@ -36,49 +26,6 @@
                            <div class="profile-name">
                               <a href="{{route('profile')}}"><h4 class="p-name">{{ strtoupper(Auth::user()->name.' '.Auth::user()->user_details->last_name)}}</h4></a>
                            </div>
-                           
-                           <div class="cover-thumb">
-                                <img class="responsive" src="img/cover-photo-820by312.svg" title="কভার ফটো">
-                                <div class="c-upload-area dropdown">
-                                    <i class="fa fa-camera"></i>
-                                    <button type="button" class="u-btn dropdown-toggle" data-toggle="modal" data-target="#coverPhoto">কভার ফটো আপডেট</button>
-                                    <!--<ul class="dropdown-menu">
-                                    <li><a href="#">...</a></li>
-                                    <li><a href="#"><input type="file" name="আপলোড করুন"></a></li>
-                                    <li><a href="#">...</a></li>
-                                    </ul>-->
-                                </div>
-                               <!-- Modal -->
-                                <div id="coverPhoto" class="modal fade" role="dialog">
-                                    <div class="modal-dialog cph">
-                                        <!-- Modal content-->
-                                        <div class="modal-content-cph">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">কভার ফটো পরিবর্তন</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Some text in the modal.</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn-getinvite1" data-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-upload-area">
-                                <a href="#"><i class="fa fa-camera"></i> <button type="upload" class="u-btn">আপডেট</button></a>
-                            </div>
-                            <div class="img-thumb">
-                                @if(Auth::user()->user_details->sex=='male')
-                                <img width="180" height="180" src="{{asset('img/male-user.svg')}}" title="প্রোফাইল ফটো">
-                                @elseif(Auth::user()->user_details->sex=='female')
-                                <img width="180" height="180" src="img/female-user.svg" title="প্রোফাইল ফটো">
-                                @else
-                                <img width="180" height="180" src="img/login-avatar.png" title="প্রোফাইল ফটো">
-                                @endif
-                            </div>
                         </div>
                     </div>
                 </div>

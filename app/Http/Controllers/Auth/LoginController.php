@@ -87,7 +87,18 @@ class LoginController extends Controller
     }
     */
     public function login(Request $request){
-        if (!Auth::attempt(['cell' => $request->cell, 'password' => $request->password], $request->remember)) {
+        if($request->remember==true){
+            if (!Auth::attempt(['cell' => $request->cell, 'password' => $request->password], $request->remember)) {
+                return back()->withErrors(['error'=>'অনুগ্রহ করে সঠিক তথ্য দিন']);
+            }
+            // Authentication passed...
+            $new_token = Hash::make(Str::random(80));
+            Auth::user()->forceFill([
+                'api_token' => $new_token,
+            ])->save();
+            return redirect()->intended('/');
+        }
+        if (!Auth::attempt(['cell' => $request->cell, 'password' => $request->password])) {
             return back()->withErrors(['error'=>'অনুগ্রহ করে সঠিক তথ্য দিন']);
         }
         // Authentication passed...

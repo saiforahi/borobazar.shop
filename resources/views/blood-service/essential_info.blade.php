@@ -181,7 +181,7 @@
                     <div class="column-4 box-activity">
                         <div class="col-md-12">
                           <div class="cimg">
-                             <img width="75" height="75" src="http://borobazar.nfoyc.org/img/blood-drop.svg">
+                          <img width="75" height="75" src="{{asset('img/blood-drop.svg')}}">
                          </div>
                                 <div class="bloodinfotitle ctitle">
                                     <h5 class="bld-title">রক্ত দেয়ার উপকারিতাঃ</h5>

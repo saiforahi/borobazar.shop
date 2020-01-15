@@ -1256,7 +1256,10 @@ input.input-text:focus ~ .username{
     transition: 0.2s ease all;
     color: #2e3192;
 }
-.form-a {
+.form-a, .form-b {
+	font-size: 14px;
+    color: forestgreen;
+    margin-bottom: .5em;
     /* position: absolute; */
     /* width: 88%; */
 }
@@ -2844,7 +2847,7 @@ form.track-form,
 lebel {
     font-size: 14px;
     color: forestgreen;
-    /*display: inline-block;*/
+    display: inline-block;
     margin-bottom: 0.5rem;
 }
 form.track-form .form-group input {
@@ -3810,6 +3813,33 @@ button#viewBtn {
 
 
 /*register page*/
+p.trmdpcp a {
+    color: #2e3192;
+}
+p.trmdpcp a:hover {
+    color: #228b22;
+}
+.social-media-reg {
+    padding: 25px 0;
+}
+span.orn {
+    font-size: 18px;
+    position: absolute;
+    top: -6px;
+    background-color: #fff;
+    width: 60px;
+    text-align: center;
+    transform: translate(-30px, 10px);
+    color: #2e3192;
+}
+.field-icon {
+    float: right;
+    margin-top: -30px;
+    position: relative;
+    z-index: 2;
+    margin-right: .5em;
+	opacity: .5;
+}
 .bloodreg-inner .already, .register-inner .already {
     color: #2e3192;
     font-size: 12px;
@@ -4517,6 +4547,8 @@ select.form-control0.search-blood {
     border-collapse: collapse;
     outline: none;
     width: 75px;
+    -moz-appearance: none;
+    border: 1px solid #ededed;
 }
 @media only screen and (min-width: 768px){
 
@@ -4695,6 +4727,20 @@ h5.btitle {
 
 
 /*account area*/
+.view-mode select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent url(example.png) no-repeat right center;
+    padding: 2px 30px 2px 2px;
+    border: none;
+}
+form.view-mode input, form.view-mode input:focus, form.view-mode select, form.view-mode textarea {
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    pointer-events: none;
+}
 .iconbar-area {
     top: 60%;
     left: 0px;
@@ -4747,10 +4793,10 @@ ul.iconbar-inner li {
     
 }
 .profile-area .profile-inner .profile-name .p-name {
-    position: absolute;
-    bottom: 20px;
-    left: 230px;
-    color: #fff;
+    /* position: absolute; */
+    /* bottom: 20px; */
+    /* left: 230px; */
+    color: FORESTGREEN;
     width: 100%;
 }
 .profile-area .profile-inner .c-upload-area .u-btn {
@@ -4982,6 +5028,7 @@ a.nav-link.active::before {
     font-size: 14px;
     margin-top: 1.5rem;
     opacity: .8;
+    font-family: 'SolaimanLipi', serif, fontAwesome;
 }
 button.accordion:before {
   content: '\f067'; /* Unicode character for "plus" sign (+) */
@@ -5092,12 +5139,12 @@ select.form-control2, .bloodreg-area.pt-5.pb-5 .bloodreg-inner .bloodreg-form se
 
 
 
-#formButton {
+#formButton, #formBtn1, #formBtn2, #formBtn3 {
   display: block;
   margin-right: auto;
   margin-left: auto;
 }
-#form1 {
+#form1, #form2, #form3, #form4 {
 
 display:none;
 
@@ -6898,3 +6945,90 @@ strong.chat_time {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+/*Mobile-navbar area*/
+/* The side navigation menu */
+.mobilenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1111;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    padding: 60px 0;
+    transition: 0.5s;
+    overscroll-behavior: none;
+}
+h1.mn-title {
+    position: absolute;
+    top: 1em;
+    left: .5em;
+    font-size: 24px;
+    color: #2e3192;
+    font-weight: normal;
+}
+h1.mn-title:before {
+    content: "";
+    background: forestgreen;
+    height: 2px;
+    width: 50%;
+    position: absolute;
+    top: 30px;
+    left: 0;
+}
+/* The navigation menu links */
+.mobilemenu i {
+    position: absolute;
+    top: 32px;
+    right: 30px;
+    z-index: 111;
+}
+.mobilenav a {
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #2e3192;
+    display: block;
+    transition: 0.3s;
+}
+.mobilenav li {
+    background-color: #ededed;
+    padding: .5em 8px;
+    font-size: 18px;
+    color: #228b22;
+}
+
+/* When you mouse over the navigation links, change their color */
+.mobilenav a:hover {
+    color: #228b22;
+}
+
+/* Position and style the close button (top right corner) */
+.mobilenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 36px;
+    /* margin-left: 50px; */
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (min-width: 640px) {
+    .mobilemenu {
+        display: block;
+    }
+    @media screen and (max-width: 3040px) {
+    .mobilemenu {
+        display: none;
+    }
+    }
+}
+
+/* End Mobile-navbar area*/

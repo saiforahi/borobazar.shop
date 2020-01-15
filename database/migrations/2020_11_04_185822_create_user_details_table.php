@@ -32,6 +32,8 @@ class CreateUserDetailsTable extends Migration
             $table->string('subdistrict_id')->nullable();
             $table->string('secondary_email')->nullable();
             $table->text('secondary_cells')->nullable();
+            $table->text('present_address')->nullable();
+            $table->text('permanent_address')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

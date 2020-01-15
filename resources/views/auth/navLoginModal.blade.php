@@ -9,15 +9,15 @@
       </div>
       <div class="leftside col-lg-8">
           <div class="imgcontainer">
-            <img src="img/login-avatar.png" alt="Avatar" class="avatar">
+          <img src="{{asset('img/login-avatar.png')}}" alt="Avatar" class="avatar">
           </div>
           <div class="form-a form-group">
             <lebel class="username">মোবাইল</lebel>
-            <input class="input-text" type="text" placeholder="+880" name="cell" required>
+            <input class="input-text" type="text" placeholder="" name="cell" required>
           </div>
           <div class="form-b form-group">
             <lebel class="username">পাসওয়ার্ড</lebel>
-              <input class="input-text" type="password" placeholder="1234567890" name="password" required>
+              <input class="input-text" type="password" placeholder="" name="password" required>
           </div>
           
           <div class="form-btn">
@@ -26,7 +26,7 @@
           
           <div class="rem">
               <label class="fntc">
-                  <input class="userrem" type="checkbox" checked="checked" name="remember">মনে রাখুন
+                  <input class="userrem" type="checkbox" checked="checked" name="remember" id="remember_me_input">মনে রাখুন
               </label>
               <a href="{{ route('resetQuestions') }}" class="pwd"> পাসওয়ার্ড ভুলে গেছেন?</a>
           </div>
@@ -40,4 +40,12 @@
   </form> 
 </div>
 </div>
+<script>
+  var checkboxes = document.getElementsByTagName('input');
+  
+  for (var i=0; i<checkboxes.length; i++)  {
+    if (checkboxes[i].type == 'checkbox')   {
+      checkboxes[i].checked = false;
+    }
+  }</script>
     <!--End login modal area -->

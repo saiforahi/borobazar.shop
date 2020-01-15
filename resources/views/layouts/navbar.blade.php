@@ -101,13 +101,11 @@
         function myFunction() {
             document.getElementById("demo").classList.toggle("open");
         }
-
         function showMenu(){
             document.getElementById("grohitarmenu").classList.toggle("open");
         }
         
     </script>
      <!--end notification bar.-->
-   
 </section>
 <!--End Navigator area -->

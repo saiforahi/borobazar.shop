@@ -34,7 +34,7 @@
       <!--Navigator area -->
       @include('layouts.navbar')
       @yield('content')
-      @include('layouts.main-footer')
+      @include('layouts.footer')
       
       <!-- Optional JavaScript -->
       <script src="{{ asset('js/app.js') }}" defer></script>
