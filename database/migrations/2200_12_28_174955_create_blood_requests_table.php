@@ -23,14 +23,16 @@ class CreateBloodRequestsTable extends Migration
             $table->string('quantity');
             $table->string('patient_age')->nullable();
             $table->string('district_id');
+            $table->string('subdistrict_id')->nullable();
             $table->string('donation_place');
             $table->date('donation_date');
             $table->string('about_patient')->nullable();
+            $table->text('accepted_by')->nullable();
             $table->timestamps();
 
             $table->foreign('district_id')->references('id')->on('districts')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('blood_group')->references('id')->on('blood_groups')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('submitted_by')->references('donar_id')->on('donars')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('submitted_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

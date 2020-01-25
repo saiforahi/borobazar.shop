@@ -19,9 +19,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register','AuthController@register')->name('apiregister');
 Route::post('login','AuthController@login')->name('apilogin');
 
-Route::get('districts/{division}','DonationController@getdistricts');
-Route::get('subdistricts/{district_id}','DonationController@getsubdistricts');
-Route::middleware('auth:api')->get('donators/{district}/{bloodGroup}','DonationController@getDonators');
+Route::get('blood_groups','DonationController@getBloodGroups');  //blood_group fetcher
+Route::get('districts/{division}','DonationController@getdistricts');  //district fetcher
+Route::get('subdistricts/{district_id}','DonationController@getsubdistricts');  //subdistrict fetcher
+
+Route::get('donators/{district}/{bloodGroup}','DonationController@getDonators')->middleware('auth:api');
 Route::middleware('auth:api')->get('matchedBloodrequests/{size}','BloodRequestController@getRequests');
 Route::middleware('auth:api')->get('notifications/{size}','BloodRequestController@getNotifications');
 Route::middleware('auth:api')->get('newNotification/{blood_request_id}','BloodRequestController@getNewNotification');
@@ -38,6 +40,8 @@ Route::middleware('auth:api')->prefix('user')->group(function () {
   Route::get('show_details','UserController@show_user_details');
   Route::get('show_address','UserController@show_user_address');
   Route::post('update_address','UserController@update_user_address');
+  Route::get('show_donar_info','UserController@show_donar_info');
+  Route::post('update_donar_info','UserController@update_donar_info');
 });
 
 Route::middleware('auth:api')->prefix('message')->group(function(){

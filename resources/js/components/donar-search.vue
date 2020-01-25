@@ -4,7 +4,7 @@
             <vue-progress-bar></vue-progress-bar>
             <div class="search-area">
                 <div class="blood-inner">
-					<img width="60" height="auto" src="img/blood-drop.svg">
+					<img width="60" height="auto" src="/img/blood-drop.svg">
 					<h4 class="blood-title">রক্ত দান</h4>
 					<p>.....</p>
 				</div>
@@ -86,7 +86,6 @@ export default {
             .then(response => {
                 this.subdistricts = response.data;
                 this.selectedSubdistrict=-1;
-                console.log(response.data)
             }).catch(function (error) {
             // handle error
             //console.log(error);

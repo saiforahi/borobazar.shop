@@ -58,4 +58,20 @@ class User extends Authenticatable
     public function messages(){
         return $this->hasMany(Message::class,'from','id');
     }
+
+    public function present_address(){
+        return $this->hasOne(PresentAddress::class,'user_id','id');
+    }
+
+    public function permanent_address(){
+        return $this->hasOne(PermanentAddress::class,'user_id','id');
+    }
+
+    public function submitted_donar_reviews(){
+        return $this->hasMany(DonarReviews::class,'given_by','id');
+    }
+
+    public function DonarReviews(){
+        return $this->hasMany(DonarReviews::class,'user_id','id');
+    }
 }

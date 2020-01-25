@@ -30,7 +30,7 @@ class BloodRequestListener implements ShouldQueue
      */
     public function handle(BloodRequestEvent $event)
     {
-        $lastDonationDate = date('Y-m-d', strtotime('-3 month'));
+        $lastDonationDate = date('Y-m-d', strtotime('-4 month'));
         $users = User::whereHas('donars', function (Builder $query) use($lastDonationDate,$event) {
             $query->where('blood_group',$event->blood_request->blood_group)->where('last_donation_date','<=',$lastDonationDate);
         })->where('id','!=',$event->user->id)->get();

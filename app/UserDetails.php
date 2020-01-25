@@ -15,14 +15,10 @@ class UserDetails extends Model
         'birth_date' => 'date:Y-m-d'
     ];
     protected $fillable = [
-        'user_id','first_name','district_id'
+        'user_id','first_name','last_name'
     ];
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');
-    }
-
-    public function district(){
-        return $this->belongsTo(District::class,'district_id','id');
     }
 
     

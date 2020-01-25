@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.blood')
 @section('content')
 <section class="solid-title-area">
     <div class="container-fluid text-center bg pt-5 pb-5">

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.blood')
 @section('content')
 <section class="solid-title-area">
     <div class="container-fluid text-center bg pt-5 pb-5">
@@ -169,7 +169,7 @@
                            <textarea class="form-control2" id="message" name="patientDetails" placeholder="রোগীর সমস্যা সম্পর্কে সংক্ষিপ্ত লিখুন..."></textarea>
                        </div>
                        <div class="form-group col-lg-12">
-                       <button type="submit" class="btn-getinvite" id="subMit">অনুরোধ পাঠান</button>
+                       <button type="submit" value="submit" class="btn-getinvite" id="subMit">অনুরোধ পাঠান</button>
                        </div>
                    </form>
                </div>

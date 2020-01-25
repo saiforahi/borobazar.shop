@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\UserDetails;
+use App\Donar;
 use App\District;
 use App\SubDistrict;
+use App\PresentAddress;
+use App\BloodGroup;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use DB;
@@ -58,7 +61,86 @@ class UserController extends Controller
             
         ],$messages);
     }
+    public function show_donar_info(Request $request){
+        $donar_info;
+        $donar_info['firstName']=Auth::user()->user_details->first_name;
+        $donar_info['lastName']=Auth::user()->user_details->last_name;
+        if(Auth::user()->donars===null){
+            return response()->json(['registered'=>false,'donar_info'->$donar_info]);
+        }
+        
+        if(Auth::user()->cell===null){
+            $donar_info['hasCell']=false;
+        }
+        else{
+            $donar_info['hasCell']=true;
+        }
+        $donar_info['bloodGroup']=Auth::user()->donars->blood_group;
+        $donar_info['lastDonationDate']=Auth::user()->donars->last_donation_date;
+        $donar_info['organizationName']=Auth::user()->donars->blood_organization;
+        $donar_info['presentDistrict']=Auth::user()->present_address->district;
+        return response()->json(['registered'=>true,'donar_info'=>$donar_info]);
+    }
+    public function update_donar_info(Request $request){
+        $messages=[
+            'lastDonationDate.before' => 'choose correct date',
+            'cell.max' => 'Wrong phone number',
+            'cell.unique' => 'Already exists'
+        ];
 
+        $rules=[
+            'cell' => 'sometimes|string|max:11|unique:users,cell',
+            'lastDonationDate'=>'required|date|before:tomorrow',
+            'bloodGroup' => 'required|numeric',
+            'organizationName' => 'sometimes|nullable|string|max:255',
+            'presentDistrict' => 'required|string'
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$messages);
+        if($validator->fails()){
+            return response()->json(['errors'=>$validator->errors()]);
+        }
+        else{
+            $response;
+            if(Auth::user()->donars===null && $request->cell!==null && $request->cell!=''){
+                $donar= Donar::create([
+                        'donar_id'=> Auth::user()->id,
+                        'blood_group' => $request->bloodGroup,
+                        'blood_organization' =>$request->organizationName,
+                        'last_donation_date' => $request->lastDonationDate
+                    ]);
+                if($request->cell!==null){
+                    Auth::user()->forceFill([
+                        'cell' => $request->cell,
+                    ])->save();
+                    $response['cell']=Auth::user()->cell;
+                }
+                else{
+
+                }
+                $response['bloodGroup']=$donar->blood_group;
+                $response['organizationName']=$donar->blood_organization;
+                $response['lastDonationDate']=$donar->last_donation_date;
+            }
+            else{
+                $donar=Donar::where('donar_id',Auth::user()->id)->first();
+                $donar->blood_group=$request->bloodGroup;
+                $donar->blood_organization=$request->organizationName;
+                $donar->last_donation_date=$request->lastDonationDate;
+                $donar->save();
+
+                $response['bloodGroup']=$donar->blood_group;
+                $response['organizationName']=$donar->blood_organization;
+                $response['lastDonationDate']=$donar->last_donation_date;
+            }
+            
+            $present_address=PresentAddress::where('user_id',Auth::user()->id)->first();
+            $present_address->district=$request->presentDistrict;
+            $present_address->save();
+            $response['presentDistrict']=$present_address->district;
+            return response()->json(['result'=>$response]);
+        }
+    }
     public function update_user_details(Request $request){
         $validate=$this->validator($request->all());
         if($validate->fails()){

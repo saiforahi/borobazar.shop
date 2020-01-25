@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.blood')
 @section('content')
     @include('auth.navLoginModal')
         
@@ -22,24 +22,12 @@
 @endsection
 
 @section('js-part')
-<script type="text/javascript"> 
-    // A $( document ).ready() block.
-        $( document ).ready(function() {
-            if (document.cookie.indexOf('visited=true') == -1 && window.auth_user==undefined){
-                var lifetime = 1000*60*45;
-                var expires = new Date((new Date()).valueOf() + lifetime);
-                document.cookie = "visited=true;expires=" + expires.toUTCString();
-                setTimeout(function(){
-                    $('#loginModalBlade').modal({show:true});
-                },10000); // 1000ms = 1 second
-            }
-        });     
-    </script>
+
     
-    <script type="text/javascript">
+<script type="text/javascript">
     $(function () {
-            $('[data-toggle="popover"]').popover()
-        })
-    </script>
+        $('[data-toggle="popover"]').popover()
+    })
+</script>
 @stop
 

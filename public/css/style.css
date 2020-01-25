@@ -91,7 +91,7 @@ i.hn-3.fa.fa-arrow-right {
     border-top: 1px solid #2e3192;
 }
 .bg {
-    background-image: url(img/bg.svg);
+    background-image: url("/img/bg.svg");
     background-size: cover;
     /* opacity: .8;
     background-color: #fff; */
@@ -882,7 +882,7 @@ p.p-text {
     font-size: 12px;
 }
 .blood-pagination {
-    padding-top: 100px;
+    padding: 100px 0;
 }
 .blog-pagination {
     padding-top: 25px;
@@ -1393,13 +1393,20 @@ span.psw {
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   padding-top: 60px;
 }
-.leftside.col-lg-4 {
+.leftside {
     background-color: #2e3192;
     color: #fff;
     border-top-left-radius: 5px;  border-bottom-left-radius: 5px;
     height: auto;
-    width: 300px;
+    width: 40%;
     margin: 0 auto;
+    padding: 0 1em;
+}
+.rightside {
+    height: auto;
+    width: 60%;
+    margin: 0 auto;
+    padding: 0 1em;
 }
 .leftside h4 {
     font-size: 28px;
@@ -1423,6 +1430,55 @@ span.psw {
     min-width: 300px;
     padding: 0 0.5em;
 }
+form.modal-content.m-revw {
+    width: 60%;
+}
+.m-revw-left {
+    width: 60%;
+    border-right: 1px solid #ededed;
+    padding: 0 1em;
+}
+.m-revw-right {
+    width: 40%;
+    padding: 0 1em;
+}
+.revw-user {
+    text-align: left;
+    border-top: 1px solid #ededed;
+    padding: .5em 0;
+}
+.revw-user:last-child {
+    border-bottom: 1px solid #ededed;
+}
+.revw-user span {
+    font-size: 14px;
+    color: forestgreen;
+}
+.revw-user p {
+    font-size: 14px;
+    color: #2e3192;
+}
+.revw-inner {
+    max-height: 400px;
+    overflow-x: auto;
+    overscroll-behavior: none;
+}
+.revw-pannel h4:before {
+    content: "";
+    background: #2e3192;
+    height: 2px;
+    width: 11%;
+    position: absolute;
+    top: 0;
+    transform: translate(0px, 40px);
+}
+.s-rating {
+    font-size: 14px;
+    float: right;
+    padding-right: .5em;
+}
+
+
 /*@media only screen and (min-width: 768px){
 
     .modal-content {
@@ -1463,6 +1519,7 @@ label b {
     color: #2e3192;
     font-size: 24px;
     font-weight: bold;
+    z-index: 1111111;
 }
 
 .close:hover, .close:focus {
@@ -2552,6 +2609,18 @@ h4.hotheadln {
     /* width: 22px; */
     /* height: 22px; */
     border-radius: 50%;
+    /* background: #cca92c; */
+    cursor: pointer;
+    /* box-shadow: 0 0 0 rgba(46,49,146, 0.4); */
+    animation: pulse 2s infinite;
+    -webkit-animation: pulse 2s infinite;
+}
+.pulse-square {
+    /* margin: 100px; */
+    display: inline-block;
+    /* width: 22px; */
+    /* height: 22px; */
+    /*border-radius: 50%;/*
     /* background: #cca92c; */
     cursor: pointer;
     /* box-shadow: 0 0 0 rgba(46,49,146, 0.4); */
@@ -4723,9 +4792,20 @@ h5.btitle {
   opacity: 1;
 }
 /*end popup-form*/
-
-
-
+.donor-prf {
+    padding: 1em 0;
+}
+.donor-prf img {
+    width: 45px;
+    height: 45px;
+    float: left;
+    border: 1px solid #ededed;
+    border-radius: 50%;
+}
+.donor-prf img:hover {
+    background-color: #ededed;
+    transition: all ease .5s;
+}
 /*account area*/
 .view-mode select {
     -moz-appearance: none;
@@ -5571,6 +5651,12 @@ h4.title {
     padding: 1em 0;
     color: #2e3192;
     font-size: 20px;
+}
+.m-revw-right h4 {
+    font-size: 18px;
+    text-align: left;
+    color: #228b22;
+    padding: 1em 0;
 }
 .brtb {
     border-top: 1px solid forestgreen;
@@ -7032,3 +7118,91 @@ h1.mn-title:before {
 }
 
 /* End Mobile-navbar area*/
+
+
+
+/*toggle switch*/
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: red;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #228b22;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+/*Text glowing*/
+.glow {
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #e60073, 0 0 4px #e60073, 0 0 5px #e60073, 0 0 6px #e60073, 0 0 14px #e60073;
+  }
+  
+  to {
+    text-shadow: 0 0 2px #fff, 0 0 3px #ff4da6, 0 0 4px #ff4da6, 0 0 5px #ff4da6, 0 0 6px #ff4da6, 0 0 7px #ff4da6, 0 0 14px #ff4da6;
+  }
+}

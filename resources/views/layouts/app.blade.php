@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>বড়বাজার অনলাইন শপিং মাকের্টপ্লেস</title>
-    <link rel="shortcut icon" href="{{ asset('img/logo.png') }}">
+    <link rel="icon" href="{{ asset('img/logo-fav.ico') }}">
     <!--script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script-->
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mirazmac/bengali-webfont-cdn@master/solaimanlipi/style.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.css')}}">
+    <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
       <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/extra_style.css') }}">
@@ -31,21 +33,20 @@
   </head>
   <body>
       @include('auth.navLoginModal')
-      @include('layouts.topNav')
       <!--Navigator area -->
-      @include('layouts.navbar')
+      @include('layouts.topNav')
+      @include('layouts.mainNavbar')
+      @yield('jquery-part')
       @yield('content')
-      
-      @include('layouts.footer')
+      @include('layouts.main-footer')
       <!-- Optional JavaScript -->
       <script src="{{ asset('js/app.js') }}" defer></script>
       <script src="{{ asset('js/views.js') }}" defer></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <!--script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-       <div id="chatbox"><borobazar-chatbox></borobazar-chatbox></div>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-      <script src="{{ asset('js/bootstrap.min.js') }}"></script-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+      <script src="{{asset('js/owl.carousel.js')}}"></script>
       <script>
       
         function openForm() {
@@ -60,6 +61,41 @@
         }   
       </script>
       <script>
+        var toggler = document.getElementsByClassName("caret");
+         var i;
+     
+         for (i = 0; i < toggler.length; i++) {
+           toggler[i].addEventListener("click", function() {
+           this.parentElement.querySelector(".nested").classList.toggle("active");
+           this.classList.toggle("caret-down");
+           });
+         }
+       </script>
+       
+<!--mobile menu accordion-->
+<script>
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      /* Toggle between adding and removing the "active" class,
+      to highlight the button that controls the panel */
+      this.classList.toggle("active");
+
+      /* Toggle between hiding and showing the active panel */
+      var panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  }
+</script>
+<!--/ end owl Carousel-->
+<!--/ end sidebar-->
+      <!--script>
         (function($) {
           $(document).ready(function() {
               var $chatbox = $('.chatbox'),
@@ -79,7 +115,8 @@
               
           });
       })(jQuery);
-      </script>      
+      </script-->
+      @yield('js-part')
   </body>
-  @yield('js-part')
+  
 </html>

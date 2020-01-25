@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\BloodRequest;
 use App\User;
+use App\Donar;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -29,13 +31,23 @@ class PagesController extends Controller
         return back();
         
     }
-    public function bloodDonation(Request $request) //function for route 'home' and '/'
+    public function show_home(Request $request) //function for route 'home' and '/'
     {
         VisitLog::save();
+        return view('home');
+    }
+    public function bloodDonation(Request $request) //function for route 'home' and '/'
+    {
         return view('blood-service.blood-donation');
     }
 
-
+    public function donar_info(){
+        return view('blood-service.donar_info');
+    }
+    public function show_dash(Request $request){
+        VisitLog::save();
+        return view('dashboard');
+    }
 
     public function showBloodRequestSubmit(Request $request)
     {

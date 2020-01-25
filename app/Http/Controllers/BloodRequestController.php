@@ -97,9 +97,8 @@ class BloodRequestController extends Controller
         {
             $this->create_request($request->all(),$blood_request_id);
             $newRequest=BloodRequest::where('blood_request_id',$blood_request_id)->first();
-            $user=User::where('id',Auth::user()->id)->first();
-            event(new BloodRequestEvent($newRequest,$user));
-            return redirect('/')->with(['success'=>'অনুরোধ সম্পন্ন হয়েছে']);
+            event(new BloodRequestEvent($newRequest,Auth::user()));
+            return redirect()->route('blood-donation')->with(['success'=>'অনুরোধ সম্পন্ন হয়েছে']);
         }
     }
 

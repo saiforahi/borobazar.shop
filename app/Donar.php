@@ -29,7 +29,6 @@ class Donar extends Model
     {
         return $this->hasMany(BloodRequest::class,'submitted_by','donar_id'); //donar has many blood requests
     }
-
     /*public function receivesBroadcastNotificationsOn()
     {
         return 'donars.'.$this->donar_cell;

@@ -77,6 +77,8 @@ export default {
                 this.laravelData=response.data;
                 this.allowed ='yes';
             }
+        }).catch(error=>{
+            console.log(error)
         });
     },
     methods:{

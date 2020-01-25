@@ -17,8 +17,8 @@
                         </div>
                     @endif
                    <div class="col-lg-12 form-group">
-                       <label for="cell">মোবাইল*</label>
-                       <input type="text" class="form-control2" placeholder="" id="cell" name="cell">
+                       <label for="username">ইমেইল / মোবাইল*</label>
+                       <input type="text" class="form-control2" placeholder="" id="username" name="username">
                    </div>
                    <div class="col-lg-12 form-group">
                        <label for="password">পাসওয়ার্ড*</label>

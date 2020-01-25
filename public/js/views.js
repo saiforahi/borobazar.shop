@@ -60,6 +60,32 @@ const navbarView = new Vue({
     }
 });
 
+const mainNavbarView = new Vue({
+    el: '#mainNavBarView',
+    data(){
+        return{
+            total_unread:'',
+            total_unread_messages:'',
+            blood_request:[],
+            chat_allowed:false
+        }
+    },
+    methods:{
+        setData(data){
+            this.total_unread=data;
+        },
+        set_total_unread_messages(data){
+            this.total_unread_messages=data;
+        },
+        setModalData(data){
+            this.blood_request=data;
+        },
+        setChatBox(data){
+            this.chat_allowed=true;
+        }
+    }
+});
+
 const personalDetailsView=new Vue({
     el: '#detailsView'
 });
@@ -108,3 +134,71 @@ const ownRequestsView=new Vue({
     }
 });
 
+const donarInfoView=new Vue({
+    el: '#donar_info_view',
+    data(){
+        return{
+           
+        }
+    },
+    methods:{
+        
+    }
+});
+
+const loginModal_view=new Vue({
+    el: '#loginModal',
+    data(){
+        return{
+            password: '',
+            passwordFieldType: 'password',
+        }
+    },
+    methods:{
+        switchVisibility_password(){
+            if(document.getElementById('switch_password').className=='fa fa-fw fa-eye-slash field-icon toggle-password'){
+                document.getElementById('switch_password').className='fa fa-fw field-icon toggle-password fa-eye'
+            }
+            else{
+                document.getElementById('switch_password').className='fa fa-fw fa-eye-slash field-icon toggle-password'
+            }
+            this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
+        },
+    }
+});
+
+const registrationView=new Vue({
+    el: '#registration_page',
+    data(){
+        return{
+            password: '',
+            confirmed_password:'',
+            passwordFieldType: 'password',
+            confirmed_passwordFieldType: 'password',
+            autoExpand:false
+        }
+    },
+    mounted(){
+        
+    },
+    methods:{
+        switchVisibility_password(){
+            if(document.getElementById('switch_password').className=='fa fa-fw fa-eye-slash field-icon toggle-password'){
+                document.getElementById('switch_password').className='fa fa-fw field-icon toggle-password fa-eye'
+            }
+            else{
+                document.getElementById('switch_password').className='fa fa-fw fa-eye-slash field-icon toggle-password'
+            }
+            this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
+        },
+        switchVisibility_confirm(){
+            if(document.getElementById('switch_confirm').className=='fa fa-fw fa-eye-slash field-icon toggle-password'){
+                document.getElementById('switch_confirm').className='fa fa-fw field-icon toggle-password fa-eye'
+            }
+            else{
+                document.getElementById('switch_confirm').className='fa fa-fw fa-eye-slash field-icon toggle-password'
+            }
+            this.confirmed_passwordFieldType = this.confirmed_passwordFieldType === 'password' ? 'text' : 'password'
+        }
+    }
+});
