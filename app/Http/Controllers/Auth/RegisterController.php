@@ -178,7 +178,7 @@ class RegisterController extends Controller
             $presentAddress=$this->create_present_address($request->only('presentDistrict'),$user->id);
             $donar=$this->create_donar($request->only('bloodGroup','presentDistrict','lastDonationDate','organizationName'),$user->id);
             Auth::login($user);
-            $previousRequests=BloodRequest::where('blood_group',$donar->blood_group)->get();
+            $previousRequests=BloodRequest::where('blood_group',$donar->blood_group)->where('completed','false')->where('district_id',$presentAddress->district)->get();
             
             foreach ($previousRequests as $previousRequest){
                 Auth::user()->notify(new BloodRequestNotification($previousRequest));

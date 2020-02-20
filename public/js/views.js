@@ -126,10 +126,27 @@ const ownRequestsView=new Vue({
     el: '#own-request-list',
     data(){
         return{
-           
+            donarModalData:{},
+            responsed_donars:[],
+            selected_request:'',
         }
     },
+    watch:{
+
+    },
     methods:{
+        set_donar_modal_data(data){
+            this.donarModalData=data;
+           
+        },
+        set_responsed_donars(data){
+            this.responsed_donars=data;
+           
+        },
+
+        set_selected_request(data){
+            this.selected_request=data;
+        },
         
     }
 });

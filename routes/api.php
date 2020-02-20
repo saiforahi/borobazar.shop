@@ -54,7 +54,14 @@ Route::middleware('auth:api')->prefix('message')->group(function(){
 Route::middleware('auth:api')->prefix('blood_requests')->group(function(){
   Route::get('getmyrequests/{size}','BloodRequestController@my_requests');
   Route::post('delete_my_request','BloodRequestController@delete_request');
+  Route::post('send_my_response','DonationController@send_response');
+  Route::get('responsed_donars/{blood_request_id}','BloodRequestController@getResponsedDonars');
+  Route::post('mark_as_completed','BloodRequestController@mark_as_completed');
   //Route::get('getmyrequests/old','BloodRequestController@my_requests');
+});
+
+Route::middleware('auth:api')->prefix('blood_service')->group(function(){
+  Route::get('show_donar_details/{id}','UserController@show_donar_details');
 });
 
 

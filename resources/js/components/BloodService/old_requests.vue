@@ -3,6 +3,21 @@
         <div class="donar-inner product product-single">
             <table class="bldreq-list">
                 <tbody>
+                    <tr>
+                        <th>রক্ত পেয়ে থাকলে সুইচ অফ করুন</th>
+                        <td>
+                            <label class="switch">
+                                <input :disabled="request.completed=='true'" type="checkbox" v-model="completed" @change="mark_blood_request(completed)" :id="request.blood_request_id">
+                                <span class="slider"></span>
+                                
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <table class="bldreq-list">
+                <tbody>
                 <tr>
                     <th>রোগীর নামঃ</th>
                     <td>{{ request.patient_name }}</td>
@@ -49,20 +64,33 @@
                 </tr>
                 </tbody>
             </table>
+            <hr>
+            <div class="donor-prf">
+                <div v-for="donar in responsed_donars" v-bind:key="donar.id" class="form-group img-thumb" :title="getDonarName(donar.name,donar.last_name)" @click="show_modal(donar)">
+                    <img v-if="donar.sex=='male'" src="/img/male-user.svg">
+                    <img v-else-if="donar.sex=='female'" src="/img/female-user.svg">
+                    <img v-else src="/img/login-avatar.png">
+                </div>
+                
+            </div>
             <!--div onclick="document.getElementById('id02').style.display='block'" style="width:auto;"-->
             <div onclick="document.getElementById('confirmation_modal').style.display='block'" style="width:auto;">
                 <button class="main-btn quick-view" @click="delete_request(request.blood_request_id)"><i class="fa fa-trash"></i> মুছে ফেলুন</button>
             </div>
         </div>
+        
     </div>
 </template>
 
 <script>
+import swal from 'sweetalert';
     export default {
         name:'bloodRequest',
         data(){
             return{
-                allowed:'no'
+                allowed:'no',
+                responsed_donars:[],
+                completed:false
             }
         },
         props: ['request'],
@@ -70,18 +98,57 @@
             if(this.request!=null)
             {
                 this.allowed='yes';
+                if(this.request.completed=='true'){
+                    this.completed=true;
+                }
             }
+            axios.get('/api/blood_requests/responsed_donars/'+this.request.blood_request_id).then(response=>{
+                this.responsed_donars=response.data.donars;
+            }).catch(error=>{
+
+            })
         },
         watch:{
             request:function(){
                 //let today=new Date().getTime();
                 //console.log(today-new Date(this.request.donation_date).getTime());
                 //document.getElementById("request_card").className += " old-disabled";
+            },
+
+            closed:function(){
+                this.completed=false;
             }
         },
         methods:{
             delete_request(id){
                 this.$emit('request_to_delete',id);
+            },
+
+            getDonarName(name,last_name){
+                if(last_name===null){
+                    return name;
+                }
+                return name+' '+last_name;
+            },
+
+            show_modal(data){
+                
+                axios.get('/api/blood_service/show_donar_details/'+data.id).then(response=>{
+                    this.$emit('donar_modal_data',response.data.donar);
+                    document.getElementById('donator-modal').style.display='block'; //opening modal 
+                });
+            },
+
+            mark_blood_request(data){
+                if(data==true){
+                    this.$emit('donars',this.responsed_donars);
+                    this.$emit('request_id',this.request.blood_request_id);
+                    document.getElementById('complete_request').style.display='block';
+                }
+                else{
+                   
+                    
+                }
             }
         }
     }

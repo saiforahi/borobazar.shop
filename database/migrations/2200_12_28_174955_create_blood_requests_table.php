@@ -27,7 +27,8 @@ class CreateBloodRequestsTable extends Migration
             $table->string('donation_place');
             $table->date('donation_date');
             $table->string('about_patient')->nullable();
-            $table->text('accepted_by')->nullable();
+            $table->text('donated_by')->nullable();
+            $table->string('completed')->nullable()->default('false');
             $table->timestamps();
 
             $table->foreign('district_id')->references('id')->on('districts')->onUpdate('cascade')->onDelete('cascade');

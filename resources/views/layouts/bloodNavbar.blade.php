@@ -40,7 +40,7 @@
                                     @auth
                                     <li>
                                         <div class="header-account" onclick="document.getElementById('demo').classList.toggle('open')">
-                                            <i class="bsquare fa fa-user-o"></i>  {{strtoupper(Auth::user()->name)}}
+                                            <i class="bsquare fa fa-user-o"></i> {{strtoupper(Auth::user()->name)}}
                                             <div id="demo" class="dropdown-content">
                                                 <a href="{{ route('profile') }}"><i class="mt-1 fa fa-user-o"></i>আমার অ্যাকাউন্ট</a>
                                                 <a href="#"><i class="mt-1 fa fa-cog"></i>সেটিংস</a>

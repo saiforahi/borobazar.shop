@@ -4,7 +4,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content animate">
                 <div class="modal-header">
-                    <h4 class="n_title" id="noti_title">নটিফিকেশন</h4>
+                    <h4 class="n_title" id="noti_title">অনুরোধ</h4>
                     <span @click="hidemodal" class="close" title="Close">&times;</span>
                 </div>
                 <div class="modal-body">

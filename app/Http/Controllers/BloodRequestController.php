@@ -9,6 +9,7 @@ use App\Events\BloodRequestEvent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\DonarResponse;
 class BloodRequestController extends Controller
 {
     /**
@@ -16,14 +17,31 @@ class BloodRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getRequests($size){   
-       $request_list=BloodRequest::where('submitted_by','!=',Auth::user()->id)->where('blood_group',Auth::user()->donars->blood_group)->where('district_id',Auth::user()->donars->district_id)
+    public function getRequests($size){ 
+        $request_list=BloodRequest::where('submitted_by','!=',Auth::user()->id)->where('blood_group',Auth::user()->donars->blood_group)->where('district_id',Auth::user()->present_addresses->district)
                     ->join('blood_groups','blood_groups.id','=','blood_requests.blood_group')
                     ->join('users','users.id','=','blood_requests.submitted_by')
                     ->join('districts','blood_requests.district_id','=','districts.id')
-                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.created_at','blood_requests.updated_at')
+                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.completed','blood_requests.created_at','blood_requests.updated_at')
                     ->paginate($size);
         return $request_list;
+    }
+
+    public function getResponsedDonars($blood_request_id){
+        $responsed;
+        if(DonarResponse::where('blood_request_id',$blood_request_id)->where('donar_id',Auth::user()->donars->donar_id)->count()>0)
+        {
+            $responsed=true;
+        }
+        else{
+            $responsed=false;
+        }
+        $responsed_donars= DonarResponse::where('blood_request_id',$blood_request_id)->
+            join('donars','donars.donar_id','=','donar_responses.donar_id')->
+            join('users','users.id','=','donar_responses.donar_id')->
+            join('user_details','user_details.user_id','=','donar_responses.donar_id')->
+            select('users.id','users.name','user_details.last_name','users.cell','user_details.sex','donars.last_donation_date')->get();
+        return response()->json(['donars'=>$responsed_donars,'responsed'=>$responsed]);
     }
 
     /**
@@ -149,10 +167,10 @@ class BloodRequestController extends Controller
 
     //
     public function getNotifications($size){
-        $notifications=Auth::user()->notifications->where('type','App\\Notifications\\BloodRequestNotification')->sortBy('data.donation_date')->take($size);
-        $unreadNotifications=Auth::user()->unreadNotifications->where('type','App\\Notifications\\BloodRequestNotification');
+        $notifications=Auth::user()->notifications->sortBy('created_at')->take($size);
+        $unreadNotifications=Auth::user()->unreadNotifications;
         $result=$unreadNotifications->merge($notifications);
-        $total_unread=Auth::user()->unreadNotifications->where('type','App\\Notifications\\BloodRequestNotification')->count();
+        $total_unread=Auth::user()->unreadNotifications->count();
 
         //$extra_notification = Auth::user()->notifications->where('type', 'App\Notifications\BloodRequestNotification')->sortBy('data.donation_date')->take($size+1);
         return response()->json(['notifications'=>$result,'total_unread'=>$total_unread]);
@@ -163,9 +181,9 @@ class BloodRequestController extends Controller
     }
 
     public function markallread(Request $request){
-        Auth::user()->notifications->where('type','App\\Notifications\\BloodRequestNotification')->markAsRead();
-        $notifications=Auth::user()->notifications->where('type','App\\Notifications\\BloodRequestNotification')->sortBy('data.donation_date')->take($request->size);
-        $total_unread=Auth::user()->unreadNotifications->where('type','App\\Notifications\\BloodRequestNotification')->count();
+        Auth::user()->notifications->markAsRead();
+        $notifications=Auth::user()->notifications->sortBy('created_at')->take($request->size);
+        $total_unread=Auth::user()->unreadNotifications->count();
 
         //$extra_notification = Auth::user()->notifications->where('type', 'App\Notifications\BloodRequestNotification')->sortBy('data.donation_date')->take($size+1);
         return response()->json(['notifications'=>$notifications,'total_unread'=>$total_unread]);
@@ -178,13 +196,13 @@ class BloodRequestController extends Controller
                     ->join('blood_groups','blood_groups.id','=','blood_requests.blood_group')
                     ->join('users','users.id','=','blood_requests.submitted_by')
                     ->join('districts','blood_requests.district_id','=','districts.id')
-                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.created_at','blood_requests.updated_at')
+                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.completed','blood_requests.created_at','blood_requests.updated_at')
                     ->get();
         $old_request_list=BloodRequest::where('submitted_by',Auth::user()->id)->where('donation_date','<',$today)
                     ->join('blood_groups','blood_groups.id','=','blood_requests.blood_group')
                     ->join('users','users.id','=','blood_requests.submitted_by')
                     ->join('districts','blood_requests.district_id','=','districts.id')
-                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.created_at','blood_requests.updated_at')
+                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.completed','blood_requests.created_at','blood_requests.updated_at')
                     ->paginate($size);
         return response()->json(['new_requests'=>$new_request_list,'old_requests'=>$old_request_list]);
     }
@@ -198,15 +216,24 @@ class BloodRequestController extends Controller
                     ->join('blood_groups','blood_groups.id','=','blood_requests.blood_group')
                     ->join('users','users.id','=','blood_requests.submitted_by')
                     ->join('districts','blood_requests.district_id','=','districts.id')
-                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.created_at','blood_requests.updated_at')
+                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.completed','blood_requests.created_at','blood_requests.updated_at')
                     ->get();
         $old_request_list=BloodRequest::where('submitted_by',Auth::user()->id)->where('donation_date','<',$today)
                     ->join('blood_groups','blood_groups.id','=','blood_requests.blood_group')
                     ->join('users','users.id','=','blood_requests.submitted_by')
                     ->join('districts','blood_requests.district_id','=','districts.id')
-                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.created_at','blood_requests.updated_at')
+                    ->select('blood_requests.blood_request_id','blood_requests.patient_name','users.name as submittedby','blood_requests.relation_with_patient','blood_requests.contact_no','blood_groups.bangla as blood_group','quantity','blood_requests.patient_age','districts.bengali_name as district_name','blood_requests.donation_place','blood_requests.donation_date','blood_requests.about_patient','blood_requests.completed','blood_requests.created_at','blood_requests.updated_at')
                     ->paginate($request->size);
+        
         return response()->json(['new_requests'=>$new_request_list,'old_requests'=>$old_request_list]);
+    }
+
+    public function mark_as_completed(Request $request){
+        BloodRequest::where('blood_request_id',$request->blood_request_id)->first()->forceFill([
+            'donated_by'=>$request->donars,
+            'completed'=>'true',
+        ])->save();
+        return response()->json(['completed'=>'completed']);
     }
     
 }

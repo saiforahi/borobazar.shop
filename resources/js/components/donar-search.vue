@@ -91,6 +91,9 @@ export default {
             //console.log(error);
             });
         },
+        reload(){
+            window.location.href=''
+        },
         // whenever search button get pressed, this function will run
         setData()
         {

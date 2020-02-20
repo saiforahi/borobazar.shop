@@ -61,6 +61,7 @@ class BloodRequestNotification extends Notification implements ShouldQueue
      */
     public function toDatabase($notifiable)
     {
+        $sender=User::where('id',$this->blood_request->submitted_by)->select('name')->first();
         return [
             'blood_request_id'=> $this->blood_request->blood_request_id,
             'submitted_by' => User::where('id',$this->blood_request->submitted_by)->select('id','name','email','cell')->first(),
@@ -69,7 +70,7 @@ class BloodRequestNotification extends Notification implements ShouldQueue
             'contact_no' => $this->blood_request->contact_no,
             'donation_date'=> $this->blood_request->donation_date->format('d-M-Y'),
             'donation_place' => $this->blood_request->donation_place,
-            'message' => $this->blood_request->submitted_by." ".$this->blood_request->donation_place." হতে ".$this->blood_request->quantity." ব্যাগ রক্তের জন্য অনুরোধ করেছেন",
+            'message' => $sender->name." ".$this->blood_request->donation_place." হতে ".$this->blood_request->quantity." ব্যাগ রক্তের জন্য অনুরোধ করেছেন",
         ];
     }
 
@@ -80,6 +81,7 @@ class BloodRequestNotification extends Notification implements ShouldQueue
     * @return BroadcastMessage
     */
     public function toBroadcast($notifiable){
+        $sender=User::where('id',$this->blood_request->submitted_by)->select('name')->first();
         return new BroadcastMessage([
             'blood_request_id'=> $this->blood_request->blood_request_id,
             'submitted_by' => User::where('id',$this->blood_request->submitted_by)->select('id','name','email','cell')->first(),
@@ -88,7 +90,7 @@ class BloodRequestNotification extends Notification implements ShouldQueue
             'contact_no' => $this->blood_request->contact_no,
             'donation_date'=> $this->blood_request->donation_date->format('d-M-Y'),
             'donation_place' => $this->blood_request->donation_place,
-            'message' => $this->blood_request->submitted_by." ".$this->blood_request->donation_place." হতে ".$this->blood_request->quantity." ব্যাগ রক্তের জন্য অনুরোধ করেছেন",
+            'message' => $sender->name." ".$this->blood_request->donation_place." হতে ".$this->blood_request->quantity." ব্যাগ রক্তের জন্য অনুরোধ করেছেন",
         ]);
     }
 }

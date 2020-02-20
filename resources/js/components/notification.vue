@@ -21,10 +21,10 @@
                                 <i class="fa fa-bell-o"></i>
                             </div>
                             <div class="n_text" style="width:auto;">
-                                <a href="#"><span>{{ item.data.submitted_by.name }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
+                                <a href="#"><span>{{item.data.message}}</span></a>
                                 <div class="n_timloc">
-                                    <span class="n_time">{{item.data.donation_date}}</span>
-                                    <span class="n_locate">{{item.data.donation_place}}</span>
+                                    <span v-if="item.created_at!==undefined" class="n_time">{{new Date(item.created_at).toLocaleDateString()}}</span>
+                                    <span class="n_locate">{{new Date(item.created_at).toLocaleTimeString()}}</span>
                                 </div>
                             </div>   
                         </li>   
@@ -33,10 +33,10 @@
                                 <i class="fa fa-bell-o"></i>
                             </div>
                             <div class="n_text" style="width:auto;">
-                                <a href="#"><span>{{ item.data.submitted_by.name }} {{ item.data.donation_place }} হতে {{ item.data.quantity }} ব্যাগ রক্তের জন্য অনুরোধ করেছেন</span></a>
+                                <a href="#"><span>{{item.data.message}}</span></a>
                                 <div class="n_timloc">
-                                    <span class="n_time">{{item.data.donation_date}}</span>
-                                    <span class="n_locate">{{item.data.donation_place}}</span>
+                                    <span v-if="item.created_at!==undefined" class="n_time">{{new Date(item.created_at).toLocaleDateString()}}</span>
+                                    <span class="n_locate">{{new Date(item.created_at).toLocaleTimeString()}}</span>
                                 </div>
                             </div>   
                         </li>                              
@@ -109,17 +109,15 @@ export default {
         if(window.auth_user!=null){
             Echo.private('App.User.'+window.auth_user.id)
             .notification((notification) => {
-                if(notification.type=='App\\Notifications\\BloodRequestNotification'){
-                    axios.get('/api/newNotification/'+notification.blood_request_id).then(response=>{
-                        this.laravelData.unshift(response.data);
-                        this.total_unread_notifications+=1;
-                        this.per_page=this.laravelData.length;
-                        new Audio('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3').play();
-                    })
-                    .catch(function (error) {
-                    //console.log(error);
-                    });
-                }
+                axios.get('/api/newNotification/'+notification.blood_request_id).then(response=>{
+                    this.laravelData.unshift(response.data);
+                    this.total_unread_notifications+=1;
+                    this.per_page=this.laravelData.length;
+                    new Audio('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3').play();
+                })
+                .catch(function (error) {
+                //console.log(error);
+                });
                 
             });
         }

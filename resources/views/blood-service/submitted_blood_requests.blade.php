@@ -16,7 +16,9 @@
 </section>
 <section class="blood-donar-area">
     <div class="container-fluid" id="own-request-list">
-        <submitted-blood-requests></submitted-blood-requests>
+        <submitted-blood-requests @blood_request_id="set_selected_request" @click_complete_request="set_responsed_donars" @modal_data="set_donar_modal_data"></submitted-blood-requests>
+        <donator-modal :donator="donarModalData" ></donator-modal>
+        <complete-request :donars="responsed_donars" :request_id="selected_request"></complete-request>
     </div>
 </section>
 

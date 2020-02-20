@@ -32,6 +32,9 @@
                         </template>
                     </b-pagination>
                 </div>
+                <br>
+                <br>
+                <br>
                 <donator-modal :donator="modalData" ></donator-modal>
             </div>
         </div>

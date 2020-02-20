@@ -18,7 +18,7 @@ class BloodRequest extends Model
         'donation_date' => 'date:d-M-Y'
     ];
 
-    public function user(){
-        return $this->belongsTo(Donar::class,'donar_id','submitted_by');
+    public function users(){
+        return $this->belongsTo(User::class,'id','submitted_by');
     }
 }

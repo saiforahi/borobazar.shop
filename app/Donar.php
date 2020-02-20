@@ -21,7 +21,7 @@ class Donar extends Model
         'donar_id','blood_group','district_id','blood_organization','last_donation_date',
     ];
 
-    public function user(){
+    public function users(){
         return $this->belongsTo(User::class,'id','donar_id');
     }
 

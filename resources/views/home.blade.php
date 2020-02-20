@@ -12,27 +12,27 @@
                 </div>
                 
                 <div class="single-product-sildes">
-                    <img src="img/wc-bg2.svg" class="owl-img-responsive">
+                    <img src="{{asset('img/wc-bg2.svg')}}" class="owl-img-responsive">
                     <div class="caption">
 
                     </div>
                 </div>
                  
                 <div class="single-product-sildes">
-                    <img src="img/wc-bg3.svg" class="owl-img-responsive">
+                    <img src="{{asset('img/wc-bg3.svg')}}" class="owl-img-responsive">
                     <div class="caption">
 
                     </div>
                 </div>
                 
                 <div class="single-product-sildes">
-                    <img src="img/wc-bg4.svg" class="owl-img-responsive">
+                    <img src="{{asset('img/wc-bg4.svg')}}" class="owl-img-responsive">
                     <div class="caption">
 
                     </div>
                 </div>
                 <div class="single-product-sildes">
-                    <img src="img/wc-bg5.svg" class="owl-img-responsive">
+                    <img src="{{asset('img/wc-bg5.svg')}}" class="owl-img-responsive">
                     <div class="caption">
                     </div>
                 </div>
@@ -191,14 +191,7 @@
     }
 </script>
 
- <!--sidebar-->
- <script type="text/javascript">
-    $('.btn').on("click", function(){
-        $('.btn').toggleClass('btnc');
-        $('.main-menu').toggleClass('side');
-    });
-    </script>
-    <!--/ end sidebar-->
+ 
     
     <!--scroll indicator-->
     <script>
@@ -227,4 +220,61 @@
             }
         });     
     </script>
+
+<script>
+    var toggler = document.getElementsByClassName("caret");
+     var i;
+ 
+     for (i = 0; i < toggler.length; i++) {
+       toggler[i].addEventListener("click", function() {
+       this.parentElement.querySelector(".nested").classList.toggle("active");
+       this.classList.toggle("caret-down");
+       });
+     }
+   </script>
+ <!--sidebar-->
+ <script type="text/javascript">
+    $('.btn').on("click", function(){
+      $('.btn').toggleClass('btnc');
+      $('.main-menu').toggleClass('side');
+    });
+  </script>
+  <!-- owl Carousel -->     
+<script>
+var owl = $('.owl-carousel');
+    owl.owlCarousel({
+        items:1,
+        loop:true,
+        margin:10,
+        autoplay:true,
+        autoplayTimeout:3000,
+        autoplayHoverPause:true
+    });
+    $('.play').on('click',function(){
+    owl.trigger('play.owl.autoplay',[3000])
+    })
+    $('.stop').on('click',function(){
+    owl.trigger('stop.owl.autoplay')
+    })
+</script>
+<!--/ end owl Carousel-->
+<!-- owl Carousel -->     
+<script>
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
+        items:3,
+        loop:true,
+        margin:10,
+        autoplay:true,
+        autoplayTimeout:3000,
+        autoplayHoverPause:true
+    });
+    $('.play').on('click',function(){
+        owl.trigger('play.owl.autoplay',[3000])
+    })
+    $('.stop').on('click',function(){
+        owl.trigger('stop.owl.autoplay')
+    })
+</script>
+
 @endsection

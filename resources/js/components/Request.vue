@@ -49,6 +49,26 @@
                 </tr>
                 </tbody>
             </table>
+            <hr>           
+            <table class="bldreq-list">
+                <tbody>
+                <tr>
+                    <th>রক্ত দানে ইচ্ছে প্রকাশ করতে চাইলে চেকবক্স চাপুন</th>
+                    <td><input type="checkbox" v-model="donar_response" class="" @change="send_response(donar_response)"></td>
+                </tr>
+                </tbody>
+            </table>  
+            <hr>
+                         
+            <div  class="donor-prf">
+                <div v-for="donar in responsed_donars" v-bind:key="donar.id" class="form-group img-thumb" :title="getDonarName(donar.name,donar.last_name)">
+                    <img v-if="donar.sex=='male'" src="/img/male-user.svg">
+                    <img v-else-if="donar.sex=='female'" src="/img/female-user.svg">
+                    <img v-else src="/img/login-avatar.png">
+                </div>
+                
+            </div>
+            
         </div>
     </div>
 </template>
@@ -58,7 +78,10 @@
         name:'bloodRequest',
         data(){
             return{
-                allowed:'no'
+                allowed:'no',
+                donar_response:false,
+                modalData:{},
+                responsed_donars:[]
             }
         },
         props: ['request'],
@@ -67,12 +90,40 @@
             {
                 this.allowed='yes';
             }
+            axios.get('/api/blood_requests/responsed_donars/'+this.request.blood_request_id).then(response=>{
+                    this.responsed_donars=response.data.donars;
+                    if(response.data.responsed==true){
+                        this.donar_response=true;
+                    }
+                }).catch(error=>{
+
+                })
         },
         watch:{
             request:function(){
                 //let today=new Date().getTime();
                 //console.log(today-new Date(this.request.donation_date).getTime());
                 //document.getElementById("request_card").className += " old-disabled";
+            }
+        },
+
+        methods:{
+            send_response(donar_response){
+                axios.post('/api/blood_requests/send_my_response',{
+                    blood_request_id:this.request.blood_request_id,
+                    response:this.donar_response
+                }).then(response=>{
+                    this.responsed_donars=response.data.donars;
+                }).catch(error=>{
+
+                })
+            },
+
+            getDonarName(name,last_name){
+                if(last_name===null){
+                    return name;
+                }
+                return name+' '+last_name;
             }
         }
     }

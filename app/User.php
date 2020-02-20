@@ -59,11 +59,11 @@ class User extends Authenticatable
         return $this->hasMany(Message::class,'from','id');
     }
 
-    public function present_address(){
+    public function present_addresses(){
         return $this->hasOne(PresentAddress::class,'user_id','id');
     }
 
-    public function permanent_address(){
+    public function permanent_addresses(){
         return $this->hasOne(PermanentAddress::class,'user_id','id');
     }
 

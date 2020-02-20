@@ -18,7 +18,8 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        'App\Events\BloodRequestEvent' => ['App\Listeners\BloodRequestListener',],
+        'App\Events\BloodRequestEvent' => ['App\Listeners\BloodRequestListener'],
+        'App\Events\BloodRequestResponseEvent' => ['App\Listeners\BloodRequestResponseListener'],
         'Illuminate\Notifications\Events\NotificationSent' => [
             'App\Listeners\LogNotification',
         ],

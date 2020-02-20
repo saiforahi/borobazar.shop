@@ -32,7 +32,7 @@
         </div>
         <div class="bogra-area pt-5">
             <div class="row text-center" id="viewDiv">
-                <old-requests v-for="request in new_requests" :request="request" v-bind:key="request.blood_request_id" @request_to_delete="set_request_to_delete_id"></old-requests>
+                <old-requests :closed="scompleted" @request_id="set_channel_request_id" @donars="set_channel_donars" @donar_modal_data="set_channelData" v-for="request in new_requests" :request="request" v-bind:key="request.blood_request_id" @request_to_delete="set_request_to_delete_id"></old-requests>
             </div>
         </div>
 
@@ -41,7 +41,7 @@
         </div>
         <div class="bogra-area pt-5">
             <div class="row text-center">
-                <old-requests v-for="request in old_requests.data" :request="request" v-bind:key="request.blood_request_id" @request_to_delete="set_request_to_delete_id"></old-requests>
+                <old-requests :closed="scompleted" @request_id="set_channel_request_id" @donars="set_channel_donars" @donar_modal_data="set_channelData" v-for="request in old_requests.data" :request="request" v-bind:key="request.blood_request_id" @request_to_delete="set_request_to_delete_id"></old-requests>
             </div>
         </div>
         
@@ -95,13 +95,13 @@ export default {
             },
             per_page:10,
             currentPage:1,
-            requestToDelete:''
+            requestToDelete:'',
         }
     },
     watch:{
         currentPage: function () {
             axios.get(this.old_requests.path+'?page='+this.currentPage).then(response=>{
-                this.old_requests=response.data.old_requests;
+                    this.old_requests=response.data.old_requests;
                 })
                 .catch(function (error) {
                     //console.log(error);
@@ -115,9 +115,11 @@ export default {
                 .catch(function (error) {
                     //console.log(error);
             });
-        }
+        },
+        
     },
     mounted(){
+       
         axios.get('/api/blood_requests/getmyrequests/'+this.per_page).then(response=>{
             this.new_requests=response.data.new_requests;
             this.old_requests=response.data.old_requests;
@@ -129,6 +131,12 @@ export default {
     },
 
     methods:{
+        set_channelData(data){
+            this.$emit('modal_data',data)
+        },
+        set_channel_request_id(data){
+            this.$emit('blood_request_id',data)
+        },
         delete_request(){
            
             axios.post('/api/blood_requests/delete_my_request',{
@@ -150,6 +158,9 @@ export default {
         },
         set_request_to_delete_id(data){
             this.requestToDelete=data;
+        },
+        set_channel_donars(data){
+            this.$emit('click_complete_request',data)
         }
     }
 }

@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 use App\District;
 use App\SubDistrict;
 use Illuminate\Support\Facades\DB;
+use App\Events\BloodRequestResponseEvent;
 use App\BloodGroup;
-
+use App\DonarResponse;
+use App\BloodRequest;
+use Illuminate\Http\Request;
+use Auth;
 class DonationController extends Controller
 {
 
@@ -57,5 +61,41 @@ class DonationController extends Controller
 
     public function getBloodGroups(){
         return BloodGroup::all();
+    }
+
+    public function send_response(Request $request){
+        
+
+        if($request->response==true){
+            if(!DonarResponse::where('blood_request_id',$request->blood_request_id)->where('donar_id',Auth::user()->donars->donar_id)->exists())
+            {
+                $donar_response=DonarResponse::create([
+                    'donar_id'=>Auth::user()->donars->donar_id,
+                    'blood_request_id'=>$request->blood_request_id
+                ]);
+                
+                $responsed_donars= DonarResponse::where('blood_request_id',$request->blood_request_id)->
+                    join('donars','donars.donar_id','=','donar_responses.donar_id')->
+                    join('users','users.id','=','donar_responses.donar_id')->
+                    join('user_details','user_details.user_id','=','donar_responses.donar_id')->
+                    select('users.id','users.name','user_details.last_name','users.cell','donars.last_donation_date','user_details.sex')->get();
+                
+                    $blood_request=BloodRequest::where('blood_request_id',$request->blood_request_id)->first();
+
+                event(new BloodRequestResponseEvent($blood_request,Auth::user(),true));    
+                return response()->json(['donars'=>$responsed_donars]);
+            }
+        }
+        else{
+            DonarResponse::where('blood_request_id',$request->blood_request_id)->where('donar_id',Auth::user()->donars->donar_id)->delete();
+            $responsed_donars= DonarResponse::where('blood_request_id',$request->blood_request_id)->
+                join('donars','donars.donar_id','=','donar_responses.donar_id')->
+                join('users','users.id','=','donar_responses.donar_id')->
+                join('user_details','user_details.user_id','=','donar_responses.donar_id')->
+                select('users.id','users.name','user_details.last_name','users.cell','donars.last_donation_date','user_details.sex')->get();
+            
+            return response()->json(['donars'=>$responsed_donars]);
+        }
+        
     }
 }

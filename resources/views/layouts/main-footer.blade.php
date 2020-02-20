@@ -66,18 +66,18 @@
                     </div>
                     </div>
                 </div>
-        <div class="container-fluid">
-            <div class="container pt-2">
-                <div class="row">
-                    <div class="col-md-4 navbar-brand2 blogoc">
-                            <img width="45" class="pulse footerhl" src="{{asset('img/logo.png')}}">
-                            <img width="150" class="pdr-12" src="{{asset('img/borobazar.png')}}">
-                        <div class="top-header-middle2">
-                        <h6 class="info">কোন পরামর্শ, প্রশ্ন ও অভিযোগের জন্য যোগাযোগ করুন</h6>
-                    <h6 class="info">বড়বাজার, মালতিনগর, বগুড়া ৫৮০০।</h6>
-                    <h6 class="info"><i class="fa fa-phone"></i> +৮৮০ ১৬১১ ৯৭৫ ৮৬১</h6>
-                    <a class="asdf" href="#"><h6 class="info"><i class="fa fa-envelope"></i>borobazar.shop@gmail.com</h6></a>
-                </div>
+                <div class="container-fluid">
+                    <div class="container pt-2">
+                        <div class="row">
+                            <div class="col-md-4 navbar-brand2 blogoc">
+                                    <img width="45" class="pulse footerhl" src="{{asset('img/logo.png')}}">
+                                    <img width="150" class="pdr-12" src="{{asset('img/borobazar.png')}}">
+                                <div class="top-header-middle2">
+                                <h6 class="info">কোন পরামর্শ, প্রশ্ন ও অভিযোগের জন্য যোগাযোগ করুন</h6>
+                            <h6 class="info">বড়বাজার, মালতিনগর, বগুড়া ৫৮০০।</h6>
+                            <h6 class="info"><i class="fa fa-phone"></i> +৮৮০ ১৬১১ ৯৭৫ ৮৬১</h6>
+                            <a class="asdf" href="#"><h6 class="info"><i class="fa fa-envelope"></i>borobazar.shop@gmail.com</h6></a>
+                        </div>
                     </div>
                     <div class="col-md-2">
                         <h3 class="footerhl">মূল্য পরিশোধ পদ্ধতি</h3>

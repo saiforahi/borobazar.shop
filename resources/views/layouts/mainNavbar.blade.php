@@ -671,7 +671,7 @@
                         
                         <!--navbar area -->
                         <nav class="navbar navbar-expand-lg navbar-light">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><!--<span class="navbar-toggler-icon"></span>--><span class="fa fa-bars"></span></button>
+                            <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavBarView" aria-controls="mainNavBarView" aria-expanded="false" aria-label="Toggle navigation"><!--<span class="navbar-toggler-icon"></span>--><span class="fa fa-bars"></span></button>
                             <div class="collapse navbar-collapse" id="mainNavBarView">
                                 <ul class="middle navbar-nav mr-auto">
                                     @if(Route::current()->getName()=='home')
@@ -711,8 +711,8 @@
                                     @endif
                                     @auth
                                     <li>
-                                        <div class="header-account">
-                                            <i class="bsquare fa fa-user-o" onclick="document.getElementById('Ademo').classList.toggle('open');"> {{strtoupper(Auth::user()->name)}}</i>
+                                        <div class="header-account" onclick="document.getElementById('Ademo').classList.toggle('open');">
+                                            <i class="bsquare fa fa-user-o"></i> {{strtoupper(Auth::user()->name)}}
                                             <div id="Ademo" class="dropdown-content">
                                                 <a href="{{ route('profile') }}"><i class="mt-1 fa fa-user-o"></i>আমার অ্যাকাউন্ট</a>
                                                 <a href="#"><i class="mt-1 fa fa-heart-o"></i>পছন্দ তালিকা</a>
@@ -756,9 +756,9 @@
                                     @endif
                                     @endguest 
                                     @auth
-                                    <li onclick="document.getElementById('bb-demo').classList.toggle('open');">
+                                    <li id="app_list" onclick="document.getElementById('bb-demo').classList.toggle('open');">
                                         <div class="bb-allserv">
-                                            <img src="img/apps.svg" width="20">
+                                            <img src="{{asset('img/apps.svg')}}" width="20">
                                             <div id="bb-demo" class="mega dropdown-content">
                                                 <ul class="allserv-item">
                                                     <li class="dropdown default-dropdown" title="রক্তদান">
@@ -1942,9 +1942,7 @@
                 </div>
                 @endif
                 @endauth
-
-
             </div>
         </section>
-
+        
     

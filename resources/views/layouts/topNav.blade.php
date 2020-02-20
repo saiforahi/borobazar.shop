@@ -6,7 +6,10 @@
         <div class="col-lg-3">
           @if(Route::current()->getName()!='dashboard')
           <span class="headline">আপনি কি বড়বাজার মাকের্টপ্লেস খুঁজছেন?<a href="{{route('dashboard')}}" class="headline2">ইহা এখানে<i class="hn-3 fa fa-arrow-right"></i></a></span>
+          @else
+          <span class="headline">বড়বাজারে আপনাকে স্বাগতম।<a href="{{route('home')}}" class="headline2">বড়বাজারে ফিরে যান।<i class="hn-3 fa fa-arrow-right"></i></a></span>
           @endif
+
         </div>
         
         

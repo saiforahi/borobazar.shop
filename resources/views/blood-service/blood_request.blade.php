@@ -17,7 +17,7 @@
 <section class="bloodreq-area pt-5 pb-5">
     <div class="container-fluid">
        <div class="container">
-           <div class="bloodreq-form-area pt-5 pb-5">
+           <div class="bloodreq-inner pt-5 pb-5">
                <h4>নিচের তথ্যাবলি পূরণ করুন</h4>
                <div class="blood-form-inner">
                     @if ($errors->any())
@@ -55,6 +55,7 @@
                                 <option value="নানা">নানা</option>
                                 <option value="নানী">নানী</option>
                                 <option value="বন্ধু">বন্ধু</option>
+                                <option value="নিজ">নিজ</option>
                            </select>
                        </div>
                        <div class="form-group col-lg-4">

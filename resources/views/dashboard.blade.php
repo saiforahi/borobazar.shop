@@ -1,9 +1,7 @@
 @extends('layouts.app')
-@section('jquery-part')
-    
-@endsection
 @section('content')
-    <!--carosul Section-->    
+    <!--carosul Section-->
+       
  <section  class="carosul">
     <div class="container">
         <div class="row">
@@ -30,31 +28,31 @@
         <div class="row">
 
          <div class="col-md-1">
-         <div class="tooltip services-inner">
-             <a href="{{route('blood-donation')}}"><img src="{{asset('img/blood-drop.svg')}}"></a>
-          <span class="tooltiptext">রক্তদান</span>
-          </div>
+            <div class="tooltip services-inner">
+                <a href="{{route('blood-donation')}}"><img src="{{asset('/img/blood-drop.svg')}}"></a>
+                <span class="tooltiptext">রক্তদান</span>
+            </div>
         </div>
             
           <div class="col-md-1">
-          <div class="tooltip services-inner">
-             <a href="#"><img src="img/graduate-student-avatar.svg"></a>
-          <span class="tooltiptext">গৃহশিক্ষক</span>
-          </div>
+            <div class="tooltip services-inner">
+                <a href="#"><img src="{{asset('/img/graduate-student-avatar.svg')}}"></a>
+                <span class="tooltiptext">গৃহশিক্ষক</span>
+            </div>
         </div>
             
           <div class="col-md-1">
-          <div class="tooltip services-inner">
-             <a href="#"><img src="img/home-services.svg"></a>
-          <span class="tooltiptext">হোম সেবা</span>
-          </div>
+            <div class="tooltip services-inner">
+                <a href="#"><img src="{{asset('/img/home-services.svg')}}"></a>
+                <span class="tooltiptext">হোম সেবা</span>
+            </div>
         </div>
             
-            <div class="col-md-1">
-          <div class="tooltip services-inner">
-             <a href="#"><img src="img/lawyer.svg"></a>
-          <span class="tooltiptext">আইন সেবা</span>
-          </div>
+        <div class="col-md-1">
+            <div class="tooltip services-inner">
+                <a href="#"><img src="{{asset('/img/lawyer.svg')}}"></a>
+                <span class="tooltiptext">আইন সেবা</span>
+            </div>
         </div>
             
          <!-- <div class="col-md-1">
@@ -474,29 +472,17 @@ function carousel() {
 </script-->
  <!--/ end owl Carousel-->
  
-<script>
- var toggler = document.getElementsByClassName("caret");
-    var i;
-
-    for (i = 0; i < toggler.length; i++) {
-      toggler[i].addEventListener("click", function() {
-        this.parentElement.querySelector(".nested").classList.toggle("active");
-        this.classList.toggle("caret-down");
-      });
-    }
-</script>
+ <script>
+    var toggler = document.getElementsByClassName("caret");
+     var i;
  
- 
- <!--sidebar-->
- <script type="text/javascript">
-    $('.btn').on("click", function(){
-        $('.btn').toggleClass('btnc');
-        $('.main-menu').toggleClass('side');
-    });
- </script>
- <!--/ end sidebar-->
-
-
+     for (i = 0; i < toggler.length; i++) {
+       toggler[i].addEventListener("click", function() {
+       this.parentElement.querySelector(".nested").classList.toggle("active");
+       this.classList.toggle("caret-down");
+       });
+     }
+   </script>
  <!--sidebar-->
  <script type="text/javascript">
     $('.btn').on("click", function(){
@@ -507,38 +493,38 @@ function carousel() {
   <!-- owl Carousel -->     
 <script>
 var owl = $('.owl-carousel');
-owl.owlCarousel({
-  items:1,
-  loop:true,
-  margin:10,
-  autoplay:true,
-  autoplayTimeout:3000,
-  autoplayHoverPause:true
-});
-$('.play').on('click',function(){
-  owl.trigger('play.owl.autoplay',[3000])
-})
-$('.stop').on('click',function(){
-  owl.trigger('stop.owl.autoplay')
-})
+    owl.owlCarousel({
+        items:1,
+        loop:true,
+        margin:10,
+        autoplay:true,
+        autoplayTimeout:3000,
+        autoplayHoverPause:true
+    });
+    $('.play').on('click',function(){
+    owl.trigger('play.owl.autoplay',[3000])
+    })
+    $('.stop').on('click',function(){
+    owl.trigger('stop.owl.autoplay')
+    })
 </script>
 <!--/ end owl Carousel-->
 <!-- owl Carousel -->     
 <script>
-var owl = $('.owl-carousel');
-owl.owlCarousel({
-  items:3,
-  loop:true,
-  margin:10,
-  autoplay:true,
-  autoplayTimeout:3000,
-  autoplayHoverPause:true
-});
-$('.play').on('click',function(){
-  owl.trigger('play.owl.autoplay',[3000])
-})
-$('.stop').on('click',function(){
-  owl.trigger('stop.owl.autoplay')
-})
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
+        items:3,
+        loop:true,
+        margin:10,
+        autoplay:true,
+        autoplayTimeout:3000,
+        autoplayHoverPause:true
+    });
+    $('.play').on('click',function(){
+    owl.trigger('play.owl.autoplay',[3000])
+    })
+    $('.stop').on('click',function(){
+    owl.trigger('stop.owl.autoplay')
+    })
 </script>
 @endsection
