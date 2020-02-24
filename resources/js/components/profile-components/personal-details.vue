@@ -1,7 +1,7 @@
 <template>
     <div class="personal-details">
         <div class="edit-tools">
-            <button v-if="disabled==1" class="btn-getinvite1" @click="edit_mode"><i class="fa fa-pencil"></i> এডিট</button>
+            <i v-if="disabled==1" @click="edit_mode" class="fa fa-pencil"></i>
         </div>
         <form class="row view-mode" id="details_form">                             
             <div class="col-md-6">

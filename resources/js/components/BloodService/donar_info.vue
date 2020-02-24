@@ -203,7 +203,6 @@ export default {
                     presentDistrict: this.presentDistrict,
                     organizationName: this.organizationName
                 }).then(response => {
-                    console.log(response.data)
                     if(response.data.errors!=null){
                         this.handleError(response.data.errors)
                     }
@@ -213,13 +212,13 @@ export default {
                         this.presentDistrict=response.data.result.presentDistrict;
                         this.lastDonationDate=new Date(response.data.result.lastDonationDate).toISOString().slice(0,10);
                         this.organizationName=response.data.result.organizationName;
+                        this.errors.lastDonationDate=false;
+                        this.errors.presentDistrict=false;
+                        this.errors.cell=false;
+                        this.errors.bloodGroup=false;
                         swal("সম্পন্ন",'আপনার তথ্যাবলী সংরক্ষন করা হয়েছে','success',{
                             button:"ওকে"
                         });
-                        errors.lastDonationDate=false;
-                        errors.presentDistrict=false;
-                        errors.cell=false;
-                        errors.bloodGroup=false;
                     }
                 
                 }).catch( error => {

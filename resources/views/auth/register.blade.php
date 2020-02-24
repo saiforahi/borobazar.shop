@@ -268,6 +268,8 @@
             
         }
     </script>
+    
+    <!--end showhide-->
     <script>
         $(function() {
           $('input[name="lastDonationDate"]').daterangepicker({
@@ -280,8 +282,6 @@
           });
         });
     </script>
-    <!--end showhide-->
-
     <script>
         //search-district
      $(function(){ $('.search-select').comboSelect() });
