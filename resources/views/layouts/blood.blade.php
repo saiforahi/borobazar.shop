@@ -41,6 +41,7 @@
         @yield('content')
         
         @include('layouts.main-footer')
+        @include('layouts.footer')
         <!-- Optional JavaScript -->
         
         <script src="{{ asset('js/views.js') }}" defer></script>

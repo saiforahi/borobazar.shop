@@ -218,6 +218,8 @@ export default {
                         this.errors.bloodGroup=false;
                         swal("সম্পন্ন",'আপনার তথ্যাবলী সংরক্ষন করা হয়েছে','success',{
                             button:"ওকে"
+                        }).then(()=>{
+                            window.location.href="home"
                         });
                     }
                 
