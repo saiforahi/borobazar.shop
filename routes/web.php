@@ -33,3 +33,8 @@ Route::middleware('auth')->prefix('blood_donation')->group(function(){
     Route::post('submit_request','BloodRequestController@store')->name('submit_blood_request');
     Route::get('donar_info','PagesController@donar_info')->name('donar_info');
 });
+
+Route::prefix('tutor_service')->group(function(){
+    Route::get('home','PagesController@tutorHome')->name('tutor-home');
+    Route::get('registration','PagesController@tutorRegistration')->name('tutor-register');
+});

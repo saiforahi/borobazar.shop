@@ -37,9 +37,7 @@
         @include('layouts.topNav')
         @include('layouts.bloodNavbar')
         <!--Navigator area -->
-        
         @yield('content')
-        
         @include('layouts.main-footer')
         @include('layouts.footer')
         <!-- Optional JavaScript -->

@@ -74,4 +74,11 @@ class PagesController extends Controller
     public function showMyRequests(){
         return view('blood-service.submitted_blood_requests');
     }
+
+    public function tutorHome(){
+        return view('home-tutor.tutor_home');
+    }
+    public function tutorRegistration(){
+        return view('home-tutor.tutor_register');
+    }
 }

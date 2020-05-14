@@ -71,7 +71,7 @@
                                                         <a href="{{route('blood-donation')}}"><img src="/img/blood-drop.svg"></a>
                                                     </li>
                                                     <li class="dropdown default-dropdown" title="গৃহশিক্ষক">
-                                                        <a href="categories-list/Services/Tutor/tutor.html"><img src="/img/graduate-student-avatar.svg"></a>
+                                                        <a href="{{route('tutor-home')}}"><img src="/img/graduate-student-avatar.svg"></a>
                                                     </li>
                                                     <li class="dropdown default-dropdown" title="হোম সেবা">
                                                         <a href="categories-list/Services/To-let/to-let.html"><img src="/img/home-address.svg"></a>
@@ -123,11 +123,11 @@
                                     @if(Route::current()->getName()!='donar_info')
                                         @if(Auth::user()->donars===null)
                                         <li>
-                                            <a href="{{route('donar_info')}}" class="whyborobazar"><h6 class="title glow">নিবন্ধন করুন</h6></a>
+                                            <a href="{{route('donar_info')}}" class="whyborobazar"><i class="bsquare fa fa-user-plus pulse-square" title="নিবন্ধন করুন"></i></a>
                                         </li>
                                         @else
                                         <li>
-                                            <a href="{{route('donar_info')}}" class="whyborobazar"><h6 class="title glow">আপডেট করুন</h6></a>
+                                            <a href="{{route('donar_info')}}" class="whyborobazar"><i class="bsquare fa fa-user-plus pulse-square" title="আপডেট করুন"></i></a>
                                         </li>
                                         @endif
                                     @endif

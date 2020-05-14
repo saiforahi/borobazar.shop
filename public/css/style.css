@@ -85,6 +85,12 @@ p.headline {
     font-size: 11px;
     color: #2e3192;
 }
+.bloodreg-inner h4.t-title {
+    padding: 1em 0;
+    color: #2e3192;
+    font-size: 20px;
+    font-family: 'hind siliguri';
+}
 i.hn-3.fa.fa-arrow-right {
     margin-left: 4px;
     font-size: 8px;
@@ -122,9 +128,6 @@ h2.main-hl0 {
     font-size: 24px;
     box-shadow: 0px 6px 30px 0px rgba(158,129,114,0.2);
     line-height: 45px;
-}
-.border-bt {
-   /* border-bottom: 1px solid #f8f0ea;*/
 }
 /* Centered text */
 .centered {

@@ -36,7 +36,7 @@
             
           <div class="col-md-1">
             <div class="tooltip services-inner">
-                <a href="#"><img src="{{asset('/img/graduate-student-avatar.svg')}}"></a>
+                <a href="{{route('tutor-home')}}"><img src="{{asset('/img/graduate-student-avatar.svg')}}"></a>
                 <span class="tooltiptext">গৃহশিক্ষক</span>
             </div>
         </div>

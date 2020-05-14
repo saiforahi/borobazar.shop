@@ -740,13 +740,11 @@
                                         <i class="bsquare fa fa-user-o"></i>
                                         <a class="text-uppercase whyborobazar" href="{{ route('register') }}">নিবন্ধন</a> 
                                     </li>
-                                    
                                     @elseif(Request::path() == 'register')
                                     <li>
                                         <i class="bsquare fa fa-user-o"></i>
                                         <a class="text-uppercase whyborobazar" href="{{route('login')}}">লগইন</a> 
                                     </li>
-
                                     @else
                                     <li>
                                         <i class="bsquare fa fa-user-o"></i>
@@ -765,7 +763,7 @@
                                                         <a href="{{route('blood-donation')}}"><img src="img/blood-drop.svg"></a>
                                                     </li>
                                                     <li class="dropdown default-dropdown" title="গৃহশিক্ষক">
-                                                        <a href="categories-list/Services/Tutor/tutor.html"><img src="img/graduate-student-avatar.svg"></a>
+                                                        <a href="{{route('tutor-home')}}"><img src="img/graduate-student-avatar.svg"></a>
                                                     </li>
                                                     <li class="dropdown default-dropdown" title="হোম সেবা">
                                                         <a href="categories-list/Services/To-let/to-let.html"><img src="img/home-address.svg"></a>

@@ -64,6 +64,10 @@ Route::middleware('auth:api')->prefix('blood_service')->group(function(){
   Route::get('show_donar_details/{id}','UserController@show_donar_details');
 });
 
+Route::middleware('auth:api')->prefix('tutor_service')->group(function(){
+  Route::get('show_tutor_details/{id}','TutorController@show_details');
+});
+
 
 /*
 Vue.prototype.$http = Axios;

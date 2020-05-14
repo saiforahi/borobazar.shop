@@ -14,7 +14,7 @@ export default {
     },
     props:['wantsToBeDonar'],
     mounted(){
-        console.log(this.wantsToBeDonar);
+        //console.log(this.wantsToBeDonar);
     },
     methods:{
         showHidebldreg(){

@@ -64,6 +64,9 @@ Vue.component('old-requests', require('./components/BloodService/old_requests.vu
 Vue.component('registration-page', require('./components/registration.vue').default);
 Vue.component('donar-info', require('./components/BloodService/donar_info.vue').default);
 Vue.component('complete-request', require('./components/BloodService/complete_request.vue').default);
+Vue.component('tutor-search', require('./components/TutorService/tutor_search.vue').default);
+Vue.component('tutor-search-result', require('./components/TutorService/tutor-search-result.vue').default);
+Vue.component('tutor-registration', require('./components/TutorService/tutor-registration.vue').default);
 //mini views
 Vue.component('wants-to-be-donar', require('./components/miniViews/wantsToBeDonar.vue').default);
 

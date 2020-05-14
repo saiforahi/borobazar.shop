@@ -219,3 +219,27 @@ const registrationView=new Vue({
         }
     }
 });
+
+const TutorSearch=new Vue({
+    el: '#tutor_search',
+    data(){
+        return{
+           
+        }
+    },
+    methods:{
+        
+    }
+});
+
+const TutorRegister=new Vue({
+    el: '#tutor_registration',
+    data(){
+        return{
+           
+        }
+    },
+    methods:{
+        
+    }
+});
